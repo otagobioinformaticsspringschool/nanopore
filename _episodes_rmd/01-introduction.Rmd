@@ -1,0 +1,543 @@
+---
+source: Rmd
+title       : Nanopore - session 1
+teaching: 10
+exercises: 10
+
+
+
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("01-")
+```
+
+
+
+
+
+
+
+
+
+
+## What is this module about?
+
+ - Long-read sequencing with the Oxford Nanopore Technology platform.
+ - WHY?
+    - recent technology advances have led to a surge in popularly for this platform.
+    - Huge scope for really exciting (and low cost) science
+    - Concepts and skills learned here are transferable to other sequencing technologies.
+ - WHAT?
+    - Genome assembly
+    - RNA-seq
+    - Variant identification (single base & structural)
+    - Base modification (e.g., methylation)
+    - Metagenomics
+
+
+## Technology – NextGenSeq
+
+ - Over the past decade, the “Next Generation” of sequencing technologies has emerged.
+ - Currently three “major” players in the field:
+   - Illumina
+   - Pacific Biosciences
+   - Oxford Nanopore
+
+
+
+## Illumina sequencer family: 2022
+
+<center>
+<img src="png1/illumina-2022.png" height="410">
+</center>
+
+### http://www.illumina.com
+
+
+
+## PacBio Sequel II
+
+
+
+ - Up to 10 hours per run 
+ - Median read length of ~50Kbp 
+ - Longest reads exceeding 175Kbp
+ - Generates up to 160 Gbp per run
+
+
+
+<center><img src="png1/sequel.jpg" height="400"></center>
+
+### http://www.pacb.com/products-and-services/pacbio-systems/sequel/
+
+
+## Oxford Nanopore - the MinION
+
+### http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724
+
+
+
+ - It's a USB stick sequencer!!
+ - Rough specs (2014)
+   - 6-8 hour run time
+   - sequence per run: ~110Mbp
+   - average read length: 5,400bp
+   - reads up to 10kbp
+   
+ - 2022 specs: 
+   - can run for up to 72 hours
+   - Max yield per run: 50Gbp
+   - Max read length recorded: >4Mbp
+
+
+
+<!-- <center><img src="png1/minion2.png" height="200"></center> -->
+<center><img src="png1/minion.png" height="200"></center>
+<center><img src="png1/nanopore-animation.gif" height="170"></center>
+
+### https://nanoporetech.com
+
+
+
+## Oxford Nanopore (2022)
+
+<!-- <center><img src="png1/oxnano1.png" height="180"></center> -->
+<!-- <center><img src="png1/oxnano3_update.png" height="280"></center> -->
+
+<center><img src="png1/oxnano_2022.png" height="400"></center>
+
+### https://nanoporetech.com/products/specifications
+
+
+
+## A brief aside: Nanopore and COVID
+
+ - In New Zealand, nanopore technology is being used at ESR to sequence COVID genomes (roughly 30Kbp long): can sequence the entire genome as a single read!
+
+ - The genomics and bioinformatics setup at ESR has been a big factor in NZ's ability to rapidly connect new COVID infections to known cases.
+
+### https://twitter.com/esrnewzealand/status/1296308546582142978
+
+
+
+<center><img src="png1/jacinda_joep.png" height="250"></center>
+
+
+
+<center><img src="png1/that_shirt.png" height="250"></center>
+
+
+
+
+## The MinION Mk1B
+
+ - The MinION Mk1B is the current version of ONT's original sequencer.
+ - Connects to a computer via USB.
+
+<img src="png1/minion-usb.png" height="350">
+
+### https://nanoporetech.com/products/minion
+
+
+<BR><BR><BR><BR>
+<img src="png1/minion-mk1b.png" height="180">
+
+
+
+## The MinION Mk1C
+
+ - The MinION Mk1C provides a truly portable sequencing option, with built in compute and touchscreen.
+ - For the price, however, the hardware is not particularly impressive.
+ 
+
+<BR><BR><BR>
+<img src="png1/minion-mk1c.png" height="200">
+
+### https://nanoporetech.com/products/minion
+
+
+<img src="png1/mk1c-spec-top.png" height="350">
+
+
+
+## The GridION
+
+ - The GridION offers a "medium-throughput" option for Nanopore-based sequencing: 
+ can run up to five flowcells at once.
+ - The MinION (Mk1B and Mk1C) and GridION use the same flow cells
+ - The Otago Genomics Facility has one of these.
+
+<center><img src="png1/gridion.png" height="300"></center>
+
+### https://nanoporetech.com/products/gridion
+
+
+
+## The Flongle
+
+ - The Flongle uses an adapter to allow a smaller (and cheaper) flow cell to be used in the MinION and GridION devices.
+ - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
+ - There are rumors that it is hard to get good data out of it...
+ 
+<center><img src="png1/flongle.png" height="250"></center>
+
+### https://nanoporetech.com/products/flongle
+
+
+
+## PromethION
+
+ - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
+
+
+
+<img src="png1/promethion48.jpg" height="350">
+
+### https://nanoporetech.com/products/promethion
+
+
+
+<BR>
+<img src="png1/promethion-flowcell.jpg" height="250">
+
+---
+
+## Coming soon: the P2
+
+<center><img src="png1/p2.png" height="350"></center>
+
+Smaller device (standalone or connect to host computer) that can run Promethion flow cells.
+
+### https://nanoporetech.com/products/p2
+
+
+
+
+## MinION flowcell characteristics
+
+ - MinION flowcells typically have ~1200-1800 active pores (ONT guarantees at least 800 active pores).
+ - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*)
+ - BUT: pores are not constantly active, and can become blocked during the run 
+ 
+### * https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell
+
+
+
+## Nanopore technology
+
+<center><img src="png1/nanopore.png" height="490"></center>
+### https://nanoporetech.com/how-it-works
+
+
+
+## Nanopore technology
+
+ - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
+
+<center><img src="png1/sequencing-animated_0.gif" height="350"></center>
+
+### https://nanoporetech.com/how-it-works
+
+
+
+## Nanopore movies
+
+ - https://nanoporetech.com/products/minion
+ - https://nanoporetech.com/how-it-works
+
+
+
+## Technological advances...
+
+ - Since its introduction, nanopore sequencing has seen a number of improvements.
+ - The initial product was slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
+ - Incremental improvements have led to major advances in both speed and accuracy.
+
+ 
+
+## 2D sequencing (prior to 2017)
+
+ - Hairpin-based approach provided natural error detection methodology:
+   - Link DNA strands with a hairpin adapter.
+   - Sequence template strand followed by complement.
+   - Basecall and compare sequences to produce consensus.
+
+<center><img src="png1/nanopore-2d-reads.png" height="250"></center>
+
+### Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). https://doi.org/10.1186/s13059-016-1103-0
+
+
+
+## What happened to 2D reads?
+
+<center><img src="png1/2d-reads.png" height="450"></center>
+
+### https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528
+
+
+
+## The hairpin lawsuit...
+
+ - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
+
+<center><img src="png1/europe-lawsuit.png" height="300"></center>
+
+### https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe
+
+ 
+
+## 1D$^2$ sequencing
+
+ - In 2017 ONT announed the new 1D$^2$ chemistry
+ - Showed higher accuracy that 1D (and SAID it was better than 2D)
+ - It didn't last long... 
+ 
+<center><img src="png1/1D2-accuracy.png" height="250"></center>
+
+ - Video at link below:
+
+### https://nanoporetech.com/about-us/news/1d-squared-kit-available-store-boost-accuracy-simple-prep
+
+
+
+## Pore imporvements: the R10 pore
+
+ - ONT introduced the new R10 pore in 2019 (previous was R9.4.1).
+ - Main differences were *longer barrel* and *dual reader head:* gave improved resolution of homopolymer runs.
+
+<center><img src="png1/r10-pore.png" height="300"></center>
+
+### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
+
+
+
+## R10.3 vs R9.4.1 performance 
+
+ - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
+
+<center><img src="png1/r10.3-results.png" height="350"></center>
+
+### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
+
+
+
+## Q20+: the return of 2D reads...
+
+- The previous ONT products are "Q10" (we'll discuss this soon), meaning that the error rate is roughly 1 incorrect base call per 10 bases (that's high!)
+- The new "Q20+" products are now available  - moves to less than 1 error per 100 bases (a little more respectable, but still well below short-read technologies like Illumina).
+- Upgrade includes a return to the "2D" approach.
+
+<center><img src="png1/lawsuit2020.png" height="180"></center>
+
+### https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI
+
+
+
+## Making improvements
+
+<center><img src="png1/ont-screening.png" height="400"></center>
+
+### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
+
+
+
+## Q20+ and Kit 14
+
+<center><img src="png1/ont-q20.png" height="480"></center>
+
+
+### https://nanoporetech.com/q20plus-chemistry
+
+
+
+## Nanopore accuracy
+
+<center><img src="png1/ont-accuracy.png" height="350"></center>
+
+### https://nanoporetech.com/accuracy
+
+
+
+## Duplex (and simplex) accuracy
+
+<center><img src="png1/ont-duplex-q30.png" height="380"></center>
+
+What aren't they telling us about those duplex reads...? `r emo::ji('grin')`
+
+https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
+
+
+
+## Coming... sometime - the Mk1D
+
+<center><img src="png1/ont-mk1d.png" height="400"></center>
+
+### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
+### https://nanoporetech.com/products/minion-mk1d
+
+
+
+
+## FAST5 / HDF5 data
+
+ - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially 500GB of files for a 72 hour MinION run.
+ - The electrical trace data is saved as ".fast5", which utises the HDF5 file format:
+ 
+"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
+
+### https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5
+
+
+
+## Nanopore workflow
+
+<center><img src="png1/nanopore-workflow.png" height="180"></center>
+
+ - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
+ - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+
+### https://nanoporetech.com/nanopore-sequencing-data-analysis
+
+
+
+## Basecalling: `guppy`
+
+ - `guppy` is a neural network based basecaller.
+    - analyses the electrical trace data and predicts base 
+    - it is GPU-aware, and can basecall in real time 
+    - can also call base modifications (e.g., 5mC, 6mA)
+    - high accuracy mode (slower) and super-high accuracy mode (even slower) can improve basecalls post-sequencing
+ - The software is provided by ONT, and the source code is available via a developer agreement.
+ - MANY other machine learning basecallers have been proposed.
+ - Output is the standard "FASTQ" format for sequence data.
+
+
+
+<BR><BR><BR><BR><BR><BR>
+# Recap: sequence data
+
+
+
+## Assessing sequence quality: phred scores
+
+<center><img src="png1/phred.png" height="450"></center>
+
+### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
+
+
+
+## Assessing seqeunce quality: phred scores
+
+<center><img src="png1/phred2.png" height="300"></center>
+
+Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
+ - Quality score of 38 becomes 38+33=71: “G” 
+
+### http://en.wikipedia.org/wiki/Phred_quality_score
+
+
+ 
+<img src="png1/asciitable.png" height="600">
+
+
+
+<center><img src="png1/phredtrace.png" height="550"></center>
+
+### http://en.wikipedia.org/wiki/Phred_quality_score
+
+
+
+## Sequence data format
+
+ - The FASTQ format allows the storage of both sequence and quality information for each read.
+ - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
+
+
+
+## Fastq format 
+
+
+
+<img src="png1/fastq1.png" height="420">
+
+### http://en.wikipedia.org/wiki/FASTQ_format
+
+*** =right
+ - Line 1: '@' character followed by sequence identifier and optional description.
+ - Line 2: base calls.
+ - Line 3: '+' character, ptionally followed by the same sequence identifier (and description) again.
+ - Line 4: quality scores
+
+
+
+## Fastq format
+
+<img src="png1/fastq2.png" height="475">
+
+### http://en.wikipedia.org/wiki/FASTQ_format
+
+
+
+## Quality Assessment
+
+ - The information in the FASTQ file can be used to assess the read quality.
+ - A number of tools are available on the unix/linux command line, and/or within R for manipulating FASTQ data.
+
+
+
+## Sequence alignment
+
+ - If a “reference” genome exists for the organism you are sequencing, reads can be “aligned” to the reference.
+ - This involves finding the place in the reference genome that each read matches to.
+ - Due to high sequence similarity within members of the same species, most reads should map to the reference.
+
+
+
+## Tools for generating alignments
+
+ - There are MANY software packages available for aligning data from next generation sequencing experiments.
+ - The two "original" short read aligners were:
+    - BWA: http://bio-bwa.sourceforge.net
+    - Bowtie: http://bowtie-bio.sourceforge.net
+ - More recently MANY more "aligners" have been developed
+ - For long-read data, ONT provides the Minimap2 aligner (but there are also a number of other options).
+
+
+
+## Alignment formats
+
+ - SAM (Sequence Alignment/Map) format has become the _de facto_ standard for storing alignment data.
+ - BAM is a binary version of SAM allowing more efficient storage.
+
+<center><img src="png1/samtools.png" height="370"></center>
+
+
+
+## SAMtools
+
+ - SAMtools provides a command line interface for manipulation of SAM/BAM formatted data.
+ - Open source and multi-platform (R package available: Rsamtools).
+ - Able to:
+   - Extract reads from specific genomic region 
+   - Operate on remote files
+   - Much more….
+
+
+### http://samtools.sourceforge.net/
+
+
+
+## More Nanopore: London Calling 2022
+
+<center><img src="png1/lc22.png" height="300"></center>
+
+ - Online conference held in May 2022
+ - Talk videos available online
+ - LOTS of really cool announcements and research applications
+
+### https://nanoporetech.com/lc22
+
+
+
