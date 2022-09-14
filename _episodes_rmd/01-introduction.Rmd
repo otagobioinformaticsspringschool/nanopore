@@ -1,10 +1,17 @@
 ---
-source: Rmd
-title       : Nanopore - session 1
+
+title: "Nanopore - session 1"
 teaching: 10
 exercises: 10
-
-
+questions:
+- "How to write a lesson using RMarkdown?"
+objectives:
+- "Explain how to use RMarkdown with the new lesson template."
+- "Demonstrate how to include pieces of code, figures, and challenges."
+keypoints:
+- "Edit the .Rmd files not the .md files"
+- "Run `make serve` to knit documents and preview lesson website locally"
+source: Rmd
 
 ---
 
@@ -12,14 +19,6 @@ exercises: 10
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
 ```
-
-
-
-
-
-
-
-
 
 
 ## What is this module about?
@@ -364,7 +363,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 <center><img src="png1/ont-duplex-q30.png" height="380"></center>
 
-What aren't they telling us about those duplex reads...? `r emo::ji('grin')`
+What aren't they telling us about those duplex reads...? 
 
 https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
 
