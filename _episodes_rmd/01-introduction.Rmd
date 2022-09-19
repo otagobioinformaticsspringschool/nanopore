@@ -16,6 +16,7 @@ source: Rmd
 ---
 
 ```{r, include=FALSE}
+library(here)
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
 ```
@@ -36,6 +37,8 @@ knitr_fig_path("01-")
     - Metagenomics
 
 
+Moving from short to long read technologies.
+
 ## Technology – NextGenSeq
 
  - Over the past decade, the “Next Generation” of sequencing technologies has emerged.
@@ -48,11 +51,14 @@ knitr_fig_path("01-")
 
 ## Illumina sequencer family: 2022
 
-<center>
-<img src="png1/illumina-2022.png" height="410">
-</center>
+Illumina has been the most popular sequencing technology of the decade for short read sequencing.
 
-### http://www.illumina.com
+```{r, out.align = "center", echo = FALSE}
+knitr::include_graphics("../fig/01-illumina-2022.png")
+```
+
+
+[http://www.illumina.com](http://www.illumina.com)
 
 
 
@@ -65,11 +71,23 @@ knitr_fig_path("01-")
  - Longest reads exceeding 175Kbp
  - Generates up to 160 Gbp per run
 
+```{r, out.align="center", echo = FALSE}
+knitr::include_graphics("../fig/01-sequel.jpg")
+```
 
 
-<center><img src="png1/sequel.jpg" height="400"></center>
 
 ### http://www.pacb.com/products-and-services/pacbio-systems/sequel/
+
+
+## Oxford Nanopore (2022)
+
+<!-- <center><img src="png1/oxnano1.png" height="180"></center> -->
+<!-- <center><img src="png1/oxnano3_update.png" height="280"></center> -->
+
+```{r, echo=FALSE, out.align="center", out.height=400}
+knitr::include_graphics("../fig/01-oxnano_2022.png")
+```
 
 
 ## Oxford Nanopore - the MinION
@@ -90,24 +108,24 @@ knitr_fig_path("01-")
    - Max yield per run: 50Gbp
    - Max read length recorded: >4Mbp
 
+```{r, out.align="center", echo = FALSE, out.height=200}
+knitr::include_graphics("../fig/01-minion.png")
+```
+
+```{r, out.align="center", echo = FALSE}
+knitr::include_graphics("../fig/01-nanopore-animation.gif")
+```
 
 
-<!-- <center><img src="png1/minion2.png" height="200"></center> -->
-<center><img src="png1/minion.png" height="200"></center>
-<center><img src="png1/nanopore-animation.gif" height="170"></center>
 
-### https://nanoporetech.com
+[https://nanoporetech.com](https://nanoporetech.com)
 
 
 
-## Oxford Nanopore (2022)
 
-<!-- <center><img src="png1/oxnano1.png" height="180"></center> -->
-<!-- <center><img src="png1/oxnano3_update.png" height="280"></center> -->
 
-<center><img src="png1/oxnano_2022.png" height="400"></center>
 
-### https://nanoporetech.com/products/specifications
+[https://nanoporetech.com/products/specifications](https://nanoporetech.com/products/specifications)
 
 
 
@@ -119,13 +137,15 @@ knitr_fig_path("01-")
 
 ### https://twitter.com/esrnewzealand/status/1296308546582142978
 
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-jacinda_joep.png")
+```
+
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-that_shirt.png")
+```
 
 
-<center><img src="png1/jacinda_joep.png" height="250"></center>
-
-
-
-<center><img src="png1/that_shirt.png" height="250"></center>
 
 
 
@@ -135,15 +155,20 @@ knitr_fig_path("01-")
  - The MinION Mk1B is the current version of ONT's original sequencer.
  - Connects to a computer via USB.
 
-<img src="png1/minion-usb.png" height="350">
+```{r, echo=FALSE, out.align="center"}
+knitr::include_graphics("../fig/01-minion-usb.png")
+```
 
-### https://nanoporetech.com/products/minion
+
+[https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
 
 <BR><BR><BR><BR>
-<img src="png1/minion-mk1b.png" height="180">
 
 
+```{r, echo=FALSE, out.align="center", out.height=180}
+knitr::include_graphics("../fig/01-minion-mk1b.png")
+```
 
 ## The MinION Mk1C
 
@@ -152,14 +177,19 @@ knitr_fig_path("01-")
  
 
 <BR><BR><BR>
-<img src="png1/minion-mk1c.png" height="200">
+```{r, echo=FALSE, out.align="center", out.height=200}
+knitr::include_graphics("../fig/01-minion-mk1c.png")
+```
+
+
 
 ### https://nanoporetech.com/products/minion
 
 
-<img src="png1/mk1c-spec-top.png" height="350">
 
-
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-mk1c-spec-top.png")
+```
 
 ## The GridION
 
@@ -168,9 +198,13 @@ knitr_fig_path("01-")
  - The MinION (Mk1B and Mk1C) and GridION use the same flow cells
  - The Otago Genomics Facility has one of these.
 
-<center><img src="png1/gridion.png" height="300"></center>
 
-### https://nanoporetech.com/products/gridion
+
+```{r, echo=FALSE, out.align="center", out.height=300}
+knitr::include_graphics("../fig/01-gridion.png")
+```
+
+[https://nanoporetech.com/products/gridion](https://nanoporetech.com/products/gridion)
 
 
 
@@ -180,9 +214,13 @@ knitr_fig_path("01-")
  - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
  - There are rumors that it is hard to get good data out of it...
  
-<center><img src="png1/flongle.png" height="250"></center>
 
-### https://nanoporetech.com/products/flongle
+
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-flongle.png")
+```
+
+[https://nanoporetech.com/products/flongle](https://nanoporetech.com/products/flongle)
 
 
 
@@ -192,20 +230,33 @@ knitr_fig_path("01-")
 
 
 
-<img src="png1/promethion48.jpg" height="350">
+
+
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-promethion48.jpg")
+```
 
 ### https://nanoporetech.com/products/promethion
 
 
 
 <BR>
-<img src="png1/promethion-flowcell.jpg" height="250">
 
----
+
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-promethion-flowcell.jpg")
+```
+
+
 
 ## Coming soon: the P2
 
-<center><img src="png1/p2.png" height="350"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-p2.png")
+```
+
 
 Smaller device (standalone or connect to host computer) that can run Promethion flow cells.
 
@@ -226,7 +277,13 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## Nanopore technology
 
-<center><img src="png1/nanopore.png" height="490"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=490}
+knitr::include_graphics("../fig/01-nanopore.png")
+```
+
+
 ### https://nanoporetech.com/how-it-works
 
 
@@ -235,9 +292,13 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
 
-<center><img src="png1/sequencing-animated_0.gif" height="350"></center>
 
-### https://nanoporetech.com/how-it-works
+
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-sequencing-animated_0.gif")
+```
+
+[https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
 
 
@@ -263,7 +324,12 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
    - Sequence template strand followed by complement.
    - Basecall and compare sequences to produce consensus.
 
-<center><img src="png1/nanopore-2d-reads.png" height="250"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-nanopore-2d-reads.png")
+```
+
 
 ### Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). https://doi.org/10.1186/s13059-016-1103-0
 
@@ -271,7 +337,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## What happened to 2D reads?
 
-<center><img src="png1/2d-reads.png" height="450"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=450}
+knitr::include_graphics("../fig/01-2d-reads.png")
+```
 
 ### https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528
 
@@ -281,7 +351,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
-<center><img src="png1/europe-lawsuit.png" height="300"></center>
+
+```{r, echo=FALSE, out.align="center", out.height=300}
+knitr::include_graphics("../fig/01-europe-lawsuit.png")
+```
+
 
 ### https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe
 
@@ -292,8 +366,12 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
  - In 2017 ONT announed the new 1D$^2$ chemistry
  - Showed higher accuracy that 1D (and SAID it was better than 2D)
  - It didn't last long... 
- 
-<center><img src="png1/1D2-accuracy.png" height="250"></center>
+
+
+
+```{r, echo=FALSE, out.align="center", out.height=250}
+knitr::include_graphics("../fig/01-D2-accuracy.png")
+```
 
  - Video at link below:
 
@@ -306,7 +384,12 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
  - ONT introduced the new R10 pore in 2019 (previous was R9.4.1).
  - Main differences were *longer barrel* and *dual reader head:* gave improved resolution of homopolymer runs.
 
-<center><img src="png1/r10-pore.png" height="300"></center>
+
+
+
+```{r, echo=FALSE, out.align="center", out.height=300}
+knitr::include_graphics("../fig/01-r10-pore.png")
+```
 
 ### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
 
@@ -316,7 +399,12 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
 
-<center><img src="png1/r10.3-results.png" height="350"></center>
+
+
+
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-r10.3-results.png")
+```
 
 ### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
 
@@ -328,7 +416,12 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 - The new "Q20+" products are now available  - moves to less than 1 error per 100 bases (a little more respectable, but still well below short-read technologies like Illumina).
 - Upgrade includes a return to the "2D" approach.
 
-<center><img src="png1/lawsuit2020.png" height="180"></center>
+
+
+
+```{r, echo=FALSE, out.align="center", out.height=180}
+knitr::include_graphics("../fig/01-lawsuit2020.png")
+```
 
 ### https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI
 
@@ -336,7 +429,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## Making improvements
 
-<center><img src="png1/ont-screening.png" height="400"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=400}
+knitr::include_graphics("../fig/01-ont-screening.png")
+```
 
 ### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
 
@@ -344,8 +441,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## Q20+ and Kit 14
 
-<center><img src="png1/ont-q20.png" height="480"></center>
 
+
+```{r, echo=FALSE, out.align="center", out.height=480}
+knitr::include_graphics("../fig/01-ont-q20.png")
+```
 
 ### https://nanoporetech.com/q20plus-chemistry
 
@@ -353,7 +453,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## Nanopore accuracy
 
-<center><img src="png1/ont-accuracy.png" height="350"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=350}
+knitr::include_graphics("../fig/01-ont-accuracy.png")
+```
 
 ### https://nanoporetech.com/accuracy
 
@@ -361,7 +465,11 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 ## Duplex (and simplex) accuracy
 
-<center><img src="png1/ont-duplex-q30.png" height="380"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=380}
+knitr::include_graphics("../fig/01-ont-duplex.png")
+```
 
 What aren't they telling us about those duplex reads...? 
 
@@ -371,7 +479,11 @@ https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanop
 
 ## Coming... sometime - the Mk1D
 
-<center><img src="png1/ont-mk1d.png" height="400"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=400}
+knitr::include_graphics("../fig/01-ont-mk1d.png")
+```
 
 ### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
 ### https://nanoporetech.com/products/minion-mk1d
@@ -392,7 +504,11 @@ https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanop
 
 ## Nanopore workflow
 
-<center><img src="png1/nanopore-workflow.png" height="180"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=180}
+knitr::include_graphics("../fig/01-nanopore-workflow.png")
+```
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
  - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
@@ -421,7 +537,11 @@ https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanop
 
 ## Assessing sequence quality: phred scores
 
-<center><img src="png1/phred.png" height="450"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=450}
+knitr::include_graphics("../fig/01-phred.png")
+```
 
 ### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
@@ -429,7 +549,12 @@ https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanop
 
 ## Assessing seqeunce quality: phred scores
 
-<center><img src="png1/phred2.png" height="300"></center>
+
+
+
+```{r, echo=FALSE, out.align="center", out.height=300}
+knitr::include_graphics("../fig/01-phred2.png")
+```
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
  - Quality score of 38 becomes 38+33=71: “G” 
@@ -438,11 +563,18 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
  
-<img src="png1/asciitable.png" height="600">
+
+
+```{r, echo=FALSE, out.align="center", out.height=600}
+knitr::include_graphics("../fig/01-asciitable.png")
+```
 
 
 
-<center><img src="png1/phredtrace.png" height="550"></center>
+
+```{r, echo=FALSE, out.align="center", out.height=550}
+knitr::include_graphics("../fig/01-phredtrace.png")
+```
 
 ### http://en.wikipedia.org/wiki/Phred_quality_score
 
@@ -459,7 +591,11 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
 
-<img src="png1/fastq1.png" height="420">
+
+
+```{r, echo=FALSE, out.align="center", out.height=420}
+knitr::include_graphics("../fig/01-fastq1.png")
+```
 
 ### http://en.wikipedia.org/wiki/FASTQ_format
 
@@ -473,7 +609,11 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 ## Fastq format
 
-<img src="png1/fastq2.png" height="475">
+
+
+```{r, echo=FALSE, out.align="center", out.height=475}
+knitr::include_graphics("../fig/01-fastq2.png")
+```
 
 ### http://en.wikipedia.org/wiki/FASTQ_format
 
@@ -510,9 +650,11 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
  - SAM (Sequence Alignment/Map) format has become the _de facto_ standard for storing alignment data.
  - BAM is a binary version of SAM allowing more efficient storage.
 
-<center><img src="png1/samtools.png" height="370"></center>
 
 
+```{r, echo=FALSE, out.align="center", out.height=370}
+knitr::include_graphics("../fig/01-samtools.png")
+```
 
 ## SAMtools
 
@@ -530,7 +672,11 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 ## More Nanopore: London Calling 2022
 
-<center><img src="png1/lc22.png" height="300"></center>
+
+
+```{r, echo=FALSE, out.align="center", out.height=300}
+knitr::include_graphics("../fig/01-lc22.png")
+```
 
  - Online conference held in May 2022
  - Talk videos available online

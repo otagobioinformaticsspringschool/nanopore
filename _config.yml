@@ -99,6 +99,7 @@ exclude:
   - .vendor/
   - vendor/
   - .docker-vendor/
+  - existing_material/
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
