@@ -1,6 +1,6 @@
 ---
 
-title: "Nanopore - session 1"
+title: "Nanopore - Background"
 teaching: 10
 exercises: 10
 questions:
@@ -77,7 +77,7 @@ knitr::include_graphics("../fig/01-sequel.jpg")
 
 
 
-### http://www.pacb.com/products-and-services/pacbio-systems/sequel/
+[http://www.pacb.com/products-and-services/pacbio-systems/sequel/](http://www.pacb.com/products-and-services/pacbio-systems/sequel/)
 
 
 ## Oxford Nanopore (2022)
@@ -92,7 +92,7 @@ knitr::include_graphics("../fig/01-oxnano_2022.png")
 
 ## Oxford Nanopore - the MinION
 
-### http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724
+[http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724](http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724)
 
 
 
@@ -283,8 +283,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 knitr::include_graphics("../fig/01-nanopore.png")
 ```
 
-
-### https://nanoporetech.com/how-it-works
+[https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
 
 
@@ -343,7 +342,7 @@ knitr::include_graphics("../fig/01-nanopore-2d-reads.png")
 knitr::include_graphics("../fig/01-2d-reads.png")
 ```
 
-### https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528
+[https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528](https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528)
 
 
 
@@ -357,7 +356,7 @@ knitr::include_graphics("../fig/01-europe-lawsuit.png")
 ```
 
 
-### https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe
+[https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe](https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe)
 
  
 
@@ -375,7 +374,7 @@ knitr::include_graphics("../fig/01-D2-accuracy.png")
 
  - Video at link below:
 
-### https://nanoporetech.com/about-us/news/1d-squared-kit-available-store-boost-accuracy-simple-prep
+[https://nanoporetech.com/about-us/news/1d-squared-kit-available-store-boost-accuracy-simple-prep](https://nanoporetech.com/about-us/news/1d-squared-kit-available-store-boost-accuracy-simple-prep)
 
 
 
@@ -391,7 +390,7 @@ knitr::include_graphics("../fig/01-D2-accuracy.png")
 knitr::include_graphics("../fig/01-r10-pore.png")
 ```
 
-### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
+[https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
 
 
@@ -406,7 +405,7 @@ knitr::include_graphics("../fig/01-r10-pore.png")
 knitr::include_graphics("../fig/01-r10.3-results.png")
 ```
 
-### https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store
+[https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
 
 
@@ -423,7 +422,7 @@ knitr::include_graphics("../fig/01-r10.3-results.png")
 knitr::include_graphics("../fig/01-lawsuit2020.png")
 ```
 
-### https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI
+[https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
 
@@ -435,7 +434,7 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 knitr::include_graphics("../fig/01-ont-screening.png")
 ```
 
-### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
+[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
 
 
 
@@ -490,183 +489,6 @@ knitr::include_graphics("../fig/01-ont-mk1d.png")
 
 
 
-
-## FAST5 / HDF5 data
-
- - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially 500GB of files for a 72 hour MinION run.
- - The electrical trace data is saved as ".fast5", which utises the HDF5 file format:
- 
-"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
-
-### https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5
-
-
-
-## Nanopore workflow
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=180}
-knitr::include_graphics("../fig/01-nanopore-workflow.png")
-```
-
- - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
- - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
-
-### https://nanoporetech.com/nanopore-sequencing-data-analysis
-
-
-
-## Basecalling: `guppy`
-
- - `guppy` is a neural network based basecaller.
-    - analyses the electrical trace data and predicts base 
-    - it is GPU-aware, and can basecall in real time 
-    - can also call base modifications (e.g., 5mC, 6mA)
-    - high accuracy mode (slower) and super-high accuracy mode (even slower) can improve basecalls post-sequencing
- - The software is provided by ONT, and the source code is available via a developer agreement.
- - MANY other machine learning basecallers have been proposed.
- - Output is the standard "FASTQ" format for sequence data.
-
-
-
-<BR><BR><BR><BR><BR><BR>
-# Recap: sequence data
-
-
-
-## Assessing sequence quality: phred scores
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=450}
-knitr::include_graphics("../fig/01-phred.png")
-```
-
-### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
-
-
-
-## Assessing seqeunce quality: phred scores
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=300}
-knitr::include_graphics("../fig/01-phred2.png")
-```
-
-Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
- - Quality score of 38 becomes 38+33=71: “G” 
-
-### http://en.wikipedia.org/wiki/Phred_quality_score
-
-
- 
-
-
-```{r, echo=FALSE, out.align="center", out.height=600}
-knitr::include_graphics("../fig/01-asciitable.png")
-```
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=550}
-knitr::include_graphics("../fig/01-phredtrace.png")
-```
-
-### http://en.wikipedia.org/wiki/Phred_quality_score
-
-
-
-## Sequence data format
-
- - The FASTQ format allows the storage of both sequence and quality information for each read.
- - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
-
-
-
-## Fastq format 
-
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=420}
-knitr::include_graphics("../fig/01-fastq1.png")
-```
-
-### http://en.wikipedia.org/wiki/FASTQ_format
-
-*** =right
- - Line 1: '@' character followed by sequence identifier and optional description.
- - Line 2: base calls.
- - Line 3: '+' character, ptionally followed by the same sequence identifier (and description) again.
- - Line 4: quality scores
-
-
-
-## Fastq format
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=475}
-knitr::include_graphics("../fig/01-fastq2.png")
-```
-
-### http://en.wikipedia.org/wiki/FASTQ_format
-
-
-
-## Quality Assessment
-
- - The information in the FASTQ file can be used to assess the read quality.
- - A number of tools are available on the unix/linux command line, and/or within R for manipulating FASTQ data.
-
-
-
-## Sequence alignment
-
- - If a “reference” genome exists for the organism you are sequencing, reads can be “aligned” to the reference.
- - This involves finding the place in the reference genome that each read matches to.
- - Due to high sequence similarity within members of the same species, most reads should map to the reference.
-
-
-
-## Tools for generating alignments
-
- - There are MANY software packages available for aligning data from next generation sequencing experiments.
- - The two "original" short read aligners were:
-    - BWA: http://bio-bwa.sourceforge.net
-    - Bowtie: http://bowtie-bio.sourceforge.net
- - More recently MANY more "aligners" have been developed
- - For long-read data, ONT provides the Minimap2 aligner (but there are also a number of other options).
-
-
-
-## Alignment formats
-
- - SAM (Sequence Alignment/Map) format has become the _de facto_ standard for storing alignment data.
- - BAM is a binary version of SAM allowing more efficient storage.
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=370}
-knitr::include_graphics("../fig/01-samtools.png")
-```
-
-## SAMtools
-
- - SAMtools provides a command line interface for manipulation of SAM/BAM formatted data.
- - Open source and multi-platform (R package available: Rsamtools).
- - Able to:
-   - Extract reads from specific genomic region 
-   - Operate on remote files
-   - Much more….
-
-
-### http://samtools.sourceforge.net/
 
 
 
