@@ -38,3 +38,18 @@ A list of contributors to the lesson can be found in [AUTHORS](AUTHORS)
 To cite this lesson, please consult with [CITATION](CITATION)
 
 [lesson-example]: https://carpentries.github.io/lesson-example
+
+
+##  compiling the site locally
+
+after following the instructions at [https://carpentries.github.io/lesson-example/setup.html](https://carpentries.github.io/lesson-example/setup.html)
+
+
+```
+eval "$(rbenv init - zsh)"
+rbenv shell 2.7.3
+rbenv local 2.7.3
+
+make site
+make serve
+```

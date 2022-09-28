@@ -369,7 +369,7 @@ knitr::include_graphics("../fig/01-europe-lawsuit.png")
 
 
 ```{r, echo=FALSE, out.align="center", out.height=250}
-knitr::include_graphics("../fig/01-D2-accuracy.png")
+knitr::include_graphics("../fig/01-1D2-accuracy.png")
 ```
 
  - Video at link below:
@@ -467,7 +467,7 @@ knitr::include_graphics("../fig/01-ont-accuracy.png")
 
 
 ```{r, echo=FALSE, out.align="center", out.height=380}
-knitr::include_graphics("../fig/01-ont-duplex.png")
+knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 ```
 
 What aren't they telling us about those duplex reads...? 
@@ -496,7 +496,8 @@ knitr::include_graphics("../fig/01-ont-mk1d.png")
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=300}
+```{r, echo=FALSE, out.align="center", out.height=300, fig.cap="a figure caption"}
+
 knitr::include_graphics("../fig/01-lc22.png")
 ```
 

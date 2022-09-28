@@ -324,11 +324,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 
-
-~~~
-Error in knitr::include_graphics("../fig/01-D2-accuracy.png"): Cannot find the file(s): "../fig/01-D2-accuracy.png"
-~~~
-{: .error}
+<img src="../fig/01-1D2-accuracy.png" alt="plot of chunk unnamed-chunk-23" height="250" style="display: block; margin: auto;" />
 
  - Video at link below:
 
@@ -412,11 +408,7 @@ Error in knitr::include_graphics("../fig/01-D2-accuracy.png"): Cannot find the f
 
 
 
-
-~~~
-Error in knitr::include_graphics("../fig/01-ont-duplex.png"): Cannot find the file(s): "../fig/01-ont-duplex.png"
-~~~
-{: .error}
+<img src="../fig/01-ont-duplex-q30.png" alt="plot of chunk unnamed-chunk-30" height="380" style="display: block; margin: auto;" />
 
 What aren't they telling us about those duplex reads...? 
 
@@ -442,7 +434,7 @@ https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanop
 
 
 
-<img src="../fig/01-lc22.png" alt="plot of chunk unnamed-chunk-32" height="300" style="display: block; margin: auto;" />
+<img src="../fig/01-lc22.png" alt="a figure caption" height="300" style="display: block; margin: auto;" />
 
  - Online conference held in May 2022
  - Talk videos available online
