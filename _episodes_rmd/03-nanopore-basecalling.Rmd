@@ -15,7 +15,7 @@ source: Rmd
 
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
-knitr_fig_path("02-")
+knitr_fig_path("03-")
 ```
 
 > possible example dataset of E coli available from https://zenodo.org/record/1257429

@@ -4,13 +4,14 @@ title: "Data Transfer"
 teaching: 10
 exercises: 10
 questions:
-- "How to write a lesson using RMarkdown?"
+- "How do I get data to and from NeSI?"
 objectives:
-- "Explain how to use RMarkdown with the new lesson template."
-- "Demonstrate how to include pieces of code, figures, and challenges."
+- "Understand how to transfer data with Globus."
+- "Understand how to transfer data with `scp`."
+- "Understand how to transfer data within JupyterHub."
 keypoints:
-- "Edit the .Rmd files not the .md files"
-- "Run `make serve` to knit documents and preview lesson website locally"
+- "There are multiple methods to transfer data to and from NeSI."
+- "The method of choice depends on the size of the data."
 source: Rmd
 
 ---
@@ -18,7 +19,7 @@ source: Rmd
 ```{r, include=FALSE}
 library(here)
 source("../bin/chunk-options.R")
-knitr_fig_path("03-")
+knitr_fig_path("02-")
 ```
 
 https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5

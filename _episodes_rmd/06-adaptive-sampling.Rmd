@@ -1,0 +1,24 @@
+---
+title: "Nanopore - Adaptive Sampling"
+teaching: 10
+exercises: 10
+questions:
+- "How to write a lesson using RMarkdown?"
+objectives:
+- "Explain how to use RMarkdown with the new lesson template."
+- "Demonstrate how to include pieces of code, figures, and challenges."
+keypoints:
+- "Edit the .Rmd files not the .md files"
+- "Run `make serve` to knit documents and preview lesson website locally"
+source: Rmd
+---
+
+```{r, include=FALSE}
+source("../bin/chunk-options.R")
+knitr_fig_path("06-")
+```
+
+> possible example dataset of E coli available from https://zenodo.org/record/1257429
+
+
+
