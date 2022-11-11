@@ -82,12 +82,17 @@ mkdir bcf
 ```
 
 
-Dang, this takes a l-o-n-g time...
+~~Dang, this takes a l-o-n-g time...~~
+
+Actually, need to use ONT-specific parameters 
+
+
+~~bcftools mpileup -O b -o bcf/ecoli-pass.bcf -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam~~
 
 ```
-bcftools mpileup -O b -o bcf/ecoli-pass.bcf \
- -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam
+bcftools mpileup -B -Q5 --max-BQ 30 -I -o bcf/ecoli-pass.bcf -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam
 ```
+
 
 ```
 mkdir vcf
