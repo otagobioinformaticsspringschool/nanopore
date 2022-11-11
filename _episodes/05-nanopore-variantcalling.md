@@ -77,7 +77,7 @@ samtools coverage ecoli-pass-aligned-sort.bam
 ## Variant calling from Genomic Data Carpentry
 
 ```
-load moduel BCFtools
+load module BCFtools
 mkdir bcf
 ```
 
