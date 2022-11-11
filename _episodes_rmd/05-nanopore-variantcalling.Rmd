@@ -44,11 +44,60 @@ knitr_fig_path("05-")
 
 
 
-~~~
-minimap2
-~~~
-{: .bash}
+## Alignment with minimap2 on NeSI
 
+```
+module load minimap2
+```
+ 
+```
+ls genome
+```
+ 
+```
+module load SAMtools
+```
+ 
+```
+minimap2 -ax map-ont genome/e-coli-k12-MG1655.fasta \
+   fastq_fastmodel_subset/pass/*.gz | \
+   samtools sort -o ecoli-pass-aligned-sort.bam
+   
+samtools index ecoli-pass-aligned-sort.bam
+```
+
+```
+NanoPlot -o nanoplot_fastmodel_subset_bam/ \
+  -p ecoli_bam_subset_ --bam ecoli-pass-aligned-sort.bam 
+```
+
+```
+samtools coverage ecoli-pass-aligned-sort.bam
+```
+
+## Variant calling from Genomic Data Carpentry
+
+```
+load moduel BCFtools
+mkdir bcf
+```
+
+
+Dang, this takes a l-o-n-g time...
+
+```
+bcftools mpileup -O b -o bcf/ecoli-pass.bcf \
+ -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam
+```
+
+```
+mkdir vcf
+bcftools call --ploidy 1 -m -v -o vcf/ecoli_variants.vcf bcf/ecoli_pass.bcf 
+```
+ 
+```
+vcfutils.pl varFilter vcf/ecoli_variants.vcf  > vcf/ecoli_final_variants.vcf
+```
 
 
 ## Existing tutorials 

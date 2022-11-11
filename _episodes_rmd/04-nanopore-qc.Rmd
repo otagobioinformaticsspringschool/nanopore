@@ -19,9 +19,6 @@ knitr_fig_path("04-")
 ```
 
 
-
-
-
 ## Assessing sequence quality: phred scores
 
 
@@ -112,4 +109,69 @@ knitr::include_graphics("../fig/01-fastq2.png")
  - A number of tools are available on the unix/linux command line, and/or within R for manipulating FASTQ data.
 
 
+
+## NanoPlot / FastQC / bioawk
+
+Code for e. coli data set on NeSI:
+
+```
+# Load NanoPlot module
+module load NanoPlot
+```
+ 
+```
+# Run NanoPlot on passed fastq data
+NanoPlot -o nanoplot_fastmodel_subset/ \
+         -p ecoli_fastmodel_subset_ \
+         --fastq fastq_fastmodel_subset/pass/fastq_runid_*.gz
+```
+
+```
+# create single .fastq.gz file containing all reads 
+# NB: not actually needed for bioawk  - can just use: 
+#     fastq_fastmodel_subset/pass/*gz
+#     Needed for FastQC though
+
+cat fastq_fastmodel_subset/pass/*.gz > ecoli-pass.fastq.gz
+zcat ecoli-pass.fastq.gz | wc -l 
+echo 48924/4 | bc
+```
+
+```
+module load FastQC
+
+mkdir fastqc_fastmodel_subset
+# NB: I get a java memory error if I don't use two threads
+#     FastQC allocates 250Mb per thread. Can't remember how 
+#     to specify more memory for java...
+fastqc -t 2 -o fastqc_fastmodel_subset ecoli-pass.fastq.gz
+```
+
+```
+module load bioawk
+
+# Extract read name and length
+bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | head
+
+# Number of reads
+bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | wc -l
+
+# Total number of bases in reads (subset to demonstrate)
+bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head 
+bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ 
+bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ | bc
+
+# Total number of bases in reads 
+bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | \
+  paste -sd+ | bc
+  
+# Number of reads longer than 10000 bases
+bioawk -c fastx '{print (length($seq) > 10000)}' ecoli-pass.fastq.gz | head
+bioawk -c fastx '{print (length($seq) > 5000)}' ecoli-pass.fastq.gz | \
+  paste -sd+ | bc
+
+# NB: mean quality scores aren't correct
+# Maybe skip this stuff...
+bioawk -c fastx '{print $name,length($seq),meanqual($seq)}' ecoli-pass.fastq.gz | head
+```
 

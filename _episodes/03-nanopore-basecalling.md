@@ -19,30 +19,51 @@ source: Rmd
 
 > possible example dataset of E coli available from https://zenodo.org/record/1257429
 
+## Data generation
 
-
-## FAST5 / HDF5 data
-
- - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially 500GB of files for a 72 hour MinION run.
- - The electrical trace data is saved as ".fast5", which utises the HDF5 file format:
+During the sequencing run, the electric trace ("squiggle") data are stored in `.fast5` files, which utilse the HDF5 file format:
  
-"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
+"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally 
+developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose 
+mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
 
-### https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5
+[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
+
+ - A single ONT flowcell produces a large amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), 
+ but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run 
+ (a 30Gbp run will typically generate 300-400GB of `.fast5` files).
+
+ - As the data are generated, they are saved as `.fast5` files in either the `fast5_pass` or `fast5_fail` folders, depending on whether reads 
+ passed or failed the quality assessment process, based on the criteria that were specified when setting up the run in MinKNOW. 
+
+ - Each `.fast5` file contains squiggle data for 1000 reads, so MANY files are created in a single sequencing run (e.g., a run generating five millions reads 
+ will produce 5000 `.fast5` files, which are split across the `fast5_pass` and `fast5_fail` folders).
+
+ - If realtime basecalling is performed during the run, then there will also be teh equivalent number of `.fastq` files generated (1000 reads per file), 
+ split across the `fastq_pass` and `fastq_fail` folders.
+
+
+## Basecalling workflow
+
+In order to analyse the data from a sequencing run, the FAST5 "squiggle" data needs to be converted to base calls.
+The ONT software application "guppy" can be used to process FAST5 data into FASTQ format - this is the de facto standard 
+for storage of sequence data and associated base-level quality scores.
 
 
 
-## Nanopore workflow
-
-
-
-<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-2" height="180" style="display: block; margin: auto;" />
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
  - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
 [https://nanoporetech.com/nanopore-sequencing-data-analysis](https://nanoporetech.com/nanopore-sequencing-data-analysis)
 
+The current version of the Guppy software can be downloaded from the "Software Downloads" section of the Nanopore Community website:
+
+https://community.nanoporetech.com/downloads
+
+Note that you will need to create a login to access the website.  
+
+Today we will be using `guppy_basecaller` on the NeSI system.
 
 
 ## Basecalling: `guppy`
@@ -53,7 +74,6 @@ source: Rmd
     - can also call base modifications (e.g., 5mC, 6mA)
     - high accuracy mode (slower) and super-high accuracy mode (even slower) can improve basecalls post-sequencing
  - The software is provided by ONT, and the source code is available via a developer agreement.
- - MANY other machine learning basecallers have been proposed.
  - Output is the standard "FASTQ" format for sequence data.
 
 
@@ -343,7 +363,7 @@ Command line parameters:
 {: .output}
 
 <BR><BR><BR><BR><BR><BR>
-# Recap: sequence data
+# Recap: FASTQ data format
 
 
 
@@ -351,18 +371,12 @@ Command line parameters:
 
 
 
-<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-3" height="450" style="display: block; margin: auto;" />
+<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-3" height="250" style="display: block; margin: auto;" />
 
 ### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
-
-## Assessing seqeunce quality: phred scores
-
-
-
-
-<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-4" height="300" style="display: block; margin: auto;" />
+<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-4" height="150" style="display: block; margin: auto;" />
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
  - Quality score of 38 becomes 38+33=71: “G” 
@@ -370,36 +384,19 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 [http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
 
 
- 
 
 
-<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" height="600" style="display: block; margin: auto;" />
-
-
-
-
-<img src="../fig/01-phredtrace.png" alt="plot of chunk unnamed-chunk-6" height="550" style="display: block; margin: auto;" />
-
-[http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
-
-
-
-## Sequence data format
+<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" height="300" style="display: block; margin: auto;" />
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
  - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
 
 
+FASTQ format:
 
-## Fastq format 
+<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" height="250" style="display: block; margin: auto;" />
 
-
-
-
-
-<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-7" height="420" style="display: block; margin: auto;" />
-
-### http://en.wikipedia.org/wiki/FASTQ_format
+http://en.wikipedia.org/wiki/FASTQ_format
 
 *** =right
  - Line 1: '@' character followed by sequence identifier and optional description.
@@ -413,7 +410,7 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
 
-<img src="../fig/01-fastq2.png" alt="plot of chunk unnamed-chunk-8" height="475" style="display: block; margin: auto;" />
+<img src="../fig/01-fastq2.png" alt="plot of chunk unnamed-chunk-7" height="475" style="display: block; margin: auto;" />
 
 ### http://en.wikipedia.org/wiki/FASTQ_format
 
@@ -445,12 +442,15 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
 
-~~~
-minimap2
-~~~
-{: .bash}
+## E coli data set on NeSI
 
+Guppy command from slurm file:
 
+```
+guppy_basecaller -i fast5_pass_subset  -s fastq_fastmodel_subset \
+ --config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg  \
+ --device auto  --recursive --records_per_fastq 4000 --min_qscore 7 --compress_fastq
+```
 
 ## Existing tutorials 
 

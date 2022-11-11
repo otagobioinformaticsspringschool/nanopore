@@ -20,24 +20,38 @@ knitr_fig_path("03-")
 
 > possible example dataset of E coli available from https://zenodo.org/record/1257429
 
+## Data generation
 
-
-## FAST5 / HDF5 data
-
- - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially 500GB of files for a 72 hour MinION run.
- - The electrical trace data is saved as ".fast5", which utises the HDF5 file format:
+During the sequencing run, the electric trace ("squiggle") data are stored in `.fast5` files, which utilse the HDF5 file format:
  
-"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
+"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally 
+developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose 
+mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
 
-### https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5
+[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
+
+ - A single ONT flowcell produces a large amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), 
+ but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run 
+ (a 30Gbp run will typically generate 300-400GB of `.fast5` files).
+
+ - As the data are generated, they are saved as `.fast5` files in either the `fast5_pass` or `fast5_fail` folders, depending on whether reads 
+ passed or failed the quality assessment process, based on the criteria that were specified when setting up the run in MinKNOW. 
+
+ - Each `.fast5` file contains squiggle data for 1000 reads, so MANY files are created in a single sequencing run (e.g., a run generating five millions reads 
+ will produce 5000 `.fast5` files, which are split across the `fast5_pass` and `fast5_fail` folders).
+
+ - If realtime basecalling is performed during the run, then there will also be teh equivalent number of `.fastq` files generated (1000 reads per file), 
+ split across the `fastq_pass` and `fastq_fail` folders.
 
 
+## Basecalling workflow
 
-## Nanopore workflow
+In order to analyse the data from a sequencing run, the FAST5 "squiggle" data needs to be converted to base calls.
+The ONT software application "guppy" can be used to process FAST5 data into FASTQ format - this is the de facto standard 
+for storage of sequence data and associated base-level quality scores.
 
 
-
-```{r, echo=FALSE, out.align="center", out.height=180}
+```{r, echo=FALSE, out.align="center", out.height=180, eval=FALSE}
 knitr::include_graphics("../fig/01-nanopore-workflow.png")
 ```
 
@@ -46,6 +60,13 @@ knitr::include_graphics("../fig/01-nanopore-workflow.png")
 
 [https://nanoporetech.com/nanopore-sequencing-data-analysis](https://nanoporetech.com/nanopore-sequencing-data-analysis)
 
+The current version of the Guppy software can be downloaded from the "Software Downloads" section of the Nanopore Community website:
+
+https://community.nanoporetech.com/downloads
+
+Note that you will need to create a login to access the website.  
+
+Today we will be using `guppy_basecaller` on the NeSI system.
 
 
 ## Basecalling: `guppy`
@@ -56,7 +77,6 @@ knitr::include_graphics("../fig/01-nanopore-workflow.png")
     - can also call base modifications (e.g., 5mC, 6mA)
     - high accuracy mode (slower) and super-high accuracy mode (even slower) can improve basecalls post-sequencing
  - The software is provided by ONT, and the source code is available via a developer agreement.
- - MANY other machine learning basecallers have been proposed.
  - Output is the standard "FASTQ" format for sequence data.
 
 
@@ -346,7 +366,7 @@ Command line parameters:
 {: .output}
 
 <BR><BR><BR><BR><BR><BR>
-# Recap: sequence data
+# Recap: FASTQ data format
 
 
 
@@ -354,20 +374,14 @@ Command line parameters:
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=450}
+```{r, echo=FALSE, out.align="center", out.height=250}
 knitr::include_graphics("../fig/01-phred.png")
 ```
 
 ### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
-
-## Assessing seqeunce quality: phred scores
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=300}
+```{r, echo=FALSE, out.align="center", out.height=150}
 knitr::include_graphics("../fig/01-phred2.png")
 ```
 
@@ -377,42 +391,23 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 [http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
 
 
- 
 
 
-```{r, echo=FALSE, out.align="center", out.height=600}
+```{r, echo=FALSE, out.align="center", out.height=300}
 knitr::include_graphics("../fig/01-asciitable.png")
 ```
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=550}
-knitr::include_graphics("../fig/01-phredtrace.png")
-```
-
-[http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
-
-
-
-## Sequence data format
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
  - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
 
 
+FASTQ format:
 
-## Fastq format 
-
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=420}
+```{r, echo=FALSE, out.align="center", out.height=250}
 knitr::include_graphics("../fig/01-fastq1.png")
 ```
 
-### http://en.wikipedia.org/wiki/FASTQ_format
+http://en.wikipedia.org/wiki/FASTQ_format
 
 *** =right
  - Line 1: '@' character followed by sequence identifier and optional description.
@@ -460,12 +455,15 @@ knitr::include_graphics("../fig/01-fastq2.png")
 
 
 
-~~~
-minimap2
-~~~
-{: .bash}
+## E coli data set on NeSI
 
+Guppy command from slurm file:
 
+```
+guppy_basecaller -i fast5_pass_subset  -s fastq_fastmodel_subset \
+ --config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg  \
+ --device auto  --recursive --records_per_fastq 4000 --min_qscore 7 --compress_fastq
+```
 
 ## Existing tutorials 
 
