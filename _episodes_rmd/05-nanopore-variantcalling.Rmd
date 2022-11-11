@@ -92,11 +92,11 @@ bcftools mpileup -O b -o bcf/ecoli-pass.bcf \
 
 ```
 mkdir vcf
-bcftools call --ploidy 1 -m -v -o vcf/ecoli_variants.vcf bcf/ecoli_pass.bcf 
+bcftools call --ploidy 1 -m -v -o vcf/ecoli-variants.vcf bcf/ecoli-pass.bcf 
 ```
  
 ```
-vcfutils.pl varFilter vcf/ecoli_variants.vcf  > vcf/ecoli_final_variants.vcf
+vcfutils.pl varFilter vcf/ecoli-variants.vcf  > vcf/ecoli-final-variants.vcf
 ```
 
 
