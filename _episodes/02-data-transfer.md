@@ -22,18 +22,18 @@ source: Rmd
 
 ### Generating FASTQ data - basecalling
 
-During the ONT sequencing run, the data generated on the flowcell is stored in FAST5 format. In order to perform further analysis, the FAST5 data 
+During the ONT sequencing run, the data generated on the flowcell are stored in FAST5 format. In order to perform further analysis, the FAST5 data 
 needs to be converted to FASTQ (the de facto standard for storing sequence and associated base-level quality information).  
 
 Basecalling usually occurs while a sequencing run is underway, but there are some specific situations that will require you to "re-basecall" your data:
 
-1. You didn't perform any basecalling while sequencing - e.g., a MinION being run from a laptop without a GPU (so real-time basecalling not possible)
+1. You didn't perform any basecalling while sequencing - e.g., a MinION being run from a computer without a GPU (so real-time basecalling not possible)
 
 2. You performed basecalling in FAST mode while sequencing, and now you would like to "re-basecall" using a more accurate model (e.g., super-high accuracy mode: SUP)
 
 You may also have downloaded some FAST5 data (i.e., without basecalls), or have access to some older FAST5 data, and you would like re-basecall using a more recent version of ONT's software.
 
-In all of these case, we need to get the FAST5 data onto a compute system where you have access to a GPU.
+In all of these cases, we need to get the FAST5 data onto a compute system where you have access to a GPU.
 
 Today we will use NeSI for this. 
 
