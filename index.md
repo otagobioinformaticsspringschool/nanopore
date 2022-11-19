@@ -4,7 +4,7 @@ root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
 
-Nanopore Sequencing
+This lesson will introduce the Oxford Nanopore Technologies (ONT) sequencing platform, and will work through the process of generating data using an ONT sequencing device (e.g., Flongle, MinION, GridION, PromethION), moving that data to a separate compute system, then running through a typical workflow (e.g., basecalling, quality assessment, read alignment, variant calling). 
 
 <!-- this is an html comment -->
 
@@ -12,15 +12,8 @@ Nanopore Sequencing
 
 > ## Prerequisites
 >
-> This lesson assumes a working understanding of the bash shell. If you haven’t already completed the Shell Genomics lesson, and aren’t familiar with the bash shell, please review those materials before starting this lesson.
+> All pre-requisites are taken care of if you are using this lesson at the Otago Bioinformatics Spring School 2022.
 >
-> This lesson also assumes some familiarity with biological concepts, including the structure of DNA, nucleotide abbreviations, and the concept of genomic variation within a population.
->
-> This lesson uses data hosted on NeSI. Workshop participants will be given information on how to log-in to NeSI during the workshop. Learners using these materials for self-directed study will need to set up their own AMI. Information on setting up an AMI and accessing the required data is provided on the original Genomics Workshop setup page.
-
 {: .prereq}
-
-
-
 
 {% include links.md %}
