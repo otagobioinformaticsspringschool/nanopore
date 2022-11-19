@@ -1,16 +1,15 @@
 ---
 
-title: "Nanopore - Background"
-teaching: 10
-exercises: 10
+title: "Nanopore-based sequencing: introduction"
+teaching: 20
+exercises: 0
 questions:
-- "How to write a lesson using RMarkdown?"
+- "What is nanopore-based sequencing?"
 objectives:
-- "Explain how to use RMarkdown with the new lesson template."
-- "Demonstrate how to include pieces of code, figures, and challenges."
+- "Provide details of ONT sequencing platforms."
 keypoints:
-- "Edit the .Rmd files not the .md files"
-- "Run `make serve` to knit documents and preview lesson website locally"
+- "ONT produce a range of popular sequencing platforms."
+- "This technology is constantly advancing."
 source: Rmd
 
 ---
@@ -19,12 +18,13 @@ source: Rmd
 library(here)
 source("../bin/chunk-options.R")
 knitr_fig_path("01-")
+knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 
-## What is this module about?
+### What is this module about?
 
- - Long-read sequencing with the Oxford Nanopore Technology platform.
+ - Long-read sequencing with the Oxford Nanopore Technologies (ONT) platform.
  - WHY?
     - recent technology advances have led to a surge in popularly for this platform.
     - Huge scope for really exciting (and low cost) science
@@ -37,64 +37,16 @@ knitr_fig_path("01-")
     - Metagenomics
 
 
-Moving from short to long read technologies.
-
-## Technology – NextGenSeq
-
- - Over the past decade, the “Next Generation” of sequencing technologies has emerged.
- - Currently three “major” players in the field:
-   - Illumina
-   - Pacific Biosciences
-   - Oxford Nanopore
+### ONT platforms
 
 
-
-## Illumina sequencer family: 2022
-
-Illumina has been the most popular sequencing technology of the decade for short read sequencing.
-
-```{r, out.align = "center", echo = FALSE}
-knitr::include_graphics("../fig/01-illumina-2022.png")
-```
-
-
-[http://www.illumina.com](http://www.illumina.com)
-
-
-
-## PacBio Sequel II
-
-
-
- - Up to 10 hours per run 
- - Median read length of ~50Kbp 
- - Longest reads exceeding 175Kbp
- - Generates up to 160 Gbp per run
-
-```{r, out.align="center", echo = FALSE}
-knitr::include_graphics("../fig/01-sequel.jpg")
-```
-
-
-
-[http://www.pacb.com/products-and-services/pacbio-systems/sequel/](http://www.pacb.com/products-and-services/pacbio-systems/sequel/)
-
-
-## Oxford Nanopore (2022)
-
-<!-- <center><img src="png1/oxnano1.png" height="180"></center> -->
-<!-- <center><img src="png1/oxnano3_update.png" height="280"></center> -->
-
-```{r, echo=FALSE, out.align="center", out.height=400}
+```{r, out.width="80%"}
 knitr::include_graphics("../fig/01-oxnano_2022.png")
 ```
 
-
-## Oxford Nanopore - the MinION
+### The MinION
 
 [http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724](http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724)
-
-
 
  - It's a USB stick sequencer!!
  - Rough specs (2014)
@@ -108,57 +60,26 @@ knitr::include_graphics("../fig/01-oxnano_2022.png")
    - Max yield per run: 50Gbp
    - Max read length recorded: >4Mbp
 
-```{r, out.align="center", echo = FALSE, out.height=200}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-minion.png")
 ```
 
-```{r, out.align="center", echo = FALSE}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-nanopore-animation.gif")
 ```
 
-
-
 [https://nanoporetech.com](https://nanoporetech.com)
-
-
-
-
-
-
 [https://nanoporetech.com/products/specifications](https://nanoporetech.com/products/specifications)
 
 
-
-## A brief aside: Nanopore and COVID
-
- - In New Zealand, nanopore technology is being used at ESR to sequence COVID genomes (roughly 30Kbp long): can sequence the entire genome as a single read!
-
- - The genomics and bioinformatics setup at ESR has been a big factor in NZ's ability to rapidly connect new COVID infections to known cases.
-
-### https://twitter.com/esrnewzealand/status/1296308546582142978
-
-```{r, echo=FALSE, out.align="center", out.height=250}
-knitr::include_graphics("../fig/01-jacinda_joep.png")
-```
-
-```{r, echo=FALSE, out.align="center", out.height=250}
-knitr::include_graphics("../fig/01-that_shirt.png")
-```
-
-
-
-
-
-
-## The MinION Mk1B
+### The MinION Mk1B
 
  - The MinION Mk1B is the current version of ONT's original sequencer.
  - Connects to a computer via USB.
 
-```{r, echo=FALSE, out.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-minion-usb.png")
 ```
-
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
@@ -166,32 +87,28 @@ knitr::include_graphics("../fig/01-minion-usb.png")
 <BR><BR><BR><BR>
 
 
-```{r, echo=FALSE, out.align="center", out.height=180}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-minion-mk1b.png")
 ```
 
-## The MinION Mk1C
+### The MinION Mk1C
 
  - The MinION Mk1C provides a truly portable sequencing option, with built in compute and touchscreen.
  - For the price, however, the hardware is not particularly impressive.
- 
 
 <BR><BR><BR>
-```{r, echo=FALSE, out.align="center", out.height=200}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-minion-mk1c.png")
 ```
 
+[https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
 
-### https://nanoporetech.com/products/minion
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-mk1c-spec-top.png")
 ```
 
-## The GridION
+### The GridION
 
  - The GridION offers a "medium-throughput" option for Nanopore-based sequencing: 
  can run up to five flowcells at once.
@@ -200,7 +117,7 @@ knitr::include_graphics("../fig/01-mk1c-spec-top.png")
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=300}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-gridion.png")
 ```
 
@@ -208,15 +125,12 @@ knitr::include_graphics("../fig/01-gridion.png")
 
 
 
-## The Flongle
+### The Flongle
 
  - The Flongle uses an adapter to allow a smaller (and cheaper) flow cell to be used in the MinION and GridION devices.
  - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
- - There are rumors that it is hard to get good data out of it...
- 
 
-
-```{r, echo=FALSE, out.align="center", out.height=250}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-flongle.png")
 ```
 
@@ -224,7 +138,7 @@ knitr::include_graphics("../fig/01-flongle.png")
 
 
 
-## PromethION
+### PromethION
 
  - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
 
@@ -232,54 +146,52 @@ knitr::include_graphics("../fig/01-flongle.png")
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-promethion48.jpg")
 ```
 
-### https://nanoporetech.com/products/promethion
-
-
+[https://nanoporetech.com/products/promethion](https://nanoporetech.com/products/promethion)
 
 <BR>
 
 
-```{r, echo=FALSE, out.align="center", out.height=250}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-promethion-flowcell.jpg")
 ```
 
 
 
-## Coming soon: the P2
+### Coming ~~soon~~ now: the P2
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="70%"}
 knitr::include_graphics("../fig/01-p2.png")
 ```
 
 
 Smaller device (standalone or connect to host computer) that can run Promethion flow cells.
 
-### https://nanoporetech.com/products/p2
+[https://nanoporetech.com/products/p2](https://nanoporetech.com/products/p2)
 
 
 
 
-## MinION flowcell characteristics
+### MinION flowcell characteristics
 
  - MinION flowcells typically have ~1200-1800 active pores (ONT guarantees at least 800 active pores).
  - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*)
  - BUT: pores are not constantly active, and can become blocked during the run 
  
-### * https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell
+ * [https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell](https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell)
 
 
 
-## Nanopore technology
+### Nanopore technology
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=490}
+```{r, out.width="70%"}
 knitr::include_graphics("../fig/01-nanopore.png")
 ```
 
@@ -287,13 +199,11 @@ knitr::include_graphics("../fig/01-nanopore.png")
 
 
 
-## Nanopore technology
+### Nanopore technology
 
  - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
 
-
-
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="60%"}
 knitr::include_graphics("../fig/01-sequencing-animated_0.gif")
 ```
 
@@ -301,22 +211,23 @@ knitr::include_graphics("../fig/01-sequencing-animated_0.gif")
 
 
 
-## Nanopore movies
+### Nanopore movies
 
- - https://nanoporetech.com/products/minion
- - https://nanoporetech.com/how-it-works
+For more detailed information about ONT sequencing:
+
+ - [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
+ - [https://nanoporetech.com/products/minion](https://nanoporetech.com/how-it-works)
 
 
 
-## Technological advances...
+### Technological advances...
 
  - Since its introduction, nanopore sequencing has seen a number of improvements.
- - The initial product was slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
+ - The initial product was realtively slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
  - Incremental improvements have led to major advances in both speed and accuracy.
 
  
-
-## 2D sequencing (prior to 2017)
+### 2D sequencing (prior to 2017)
 
  - Hairpin-based approach provided natural error detection methodology:
    - Link DNA strands with a hairpin adapter.
@@ -325,20 +236,20 @@ knitr::include_graphics("../fig/01-sequencing-animated_0.gif")
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=250}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-nanopore-2d-reads.png")
 ```
 
-
-### Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). https://doi.org/10.1186/s13059-016-1103-0
-
-
-
-## What happened to 2D reads?
+Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). 
+[https://doi.org/10.1186/s13059-016-1103-0](https://doi.org/10.1186/s13059-016-1103-0)
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=450}
+### What happened to 2D reads?
+
+
+
+```{r, out.width="50%", fig.align="center"}
 knitr::include_graphics("../fig/01-2d-reads.png")
 ```
 
@@ -346,12 +257,12 @@ knitr::include_graphics("../fig/01-2d-reads.png")
 
 
 
-## The hairpin lawsuit...
+### The hairpin lawsuit...
 
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
 
-```{r, echo=FALSE, out.align="center", out.height=300}
+```{r, out.width="50%", fig.align="center"}
 knitr::include_graphics("../fig/01-europe-lawsuit.png")
 ```
 
@@ -360,15 +271,15 @@ knitr::include_graphics("../fig/01-europe-lawsuit.png")
 
  
 
-## 1D$^2$ sequencing
+### 1D$^2$ sequencing
 
- - In 2017 ONT announed the new 1D$^2$ chemistry
+ - In 2017 ONT announced the new 1D$^2$ chemistry
  - Showed higher accuracy that 1D (and SAID it was better than 2D)
  - It didn't last long... 
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=250}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-1D2-accuracy.png")
 ```
 
@@ -378,7 +289,7 @@ knitr::include_graphics("../fig/01-1D2-accuracy.png")
 
 
 
-## Pore imporvements: the R10 pore
+### Pore imporvements: the R10 pore
 
  - ONT introduced the new R10 pore in 2019 (previous was R9.4.1).
  - Main differences were *longer barrel* and *dual reader head:* gave improved resolution of homopolymer runs.
@@ -386,7 +297,7 @@ knitr::include_graphics("../fig/01-1D2-accuracy.png")
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=300}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-r10-pore.png")
 ```
 
@@ -394,14 +305,11 @@ knitr::include_graphics("../fig/01-r10-pore.png")
 
 
 
-## R10.3 vs R9.4.1 performance 
+### R10.3 vs R9.4.1 performance 
 
  - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
 
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="70%"}
 knitr::include_graphics("../fig/01-r10.3-results.png")
 ```
 
@@ -409,16 +317,14 @@ knitr::include_graphics("../fig/01-r10.3-results.png")
 
 
 
-## Q20+: the return of 2D reads...
+### Q20+: the return of 2D reads...
 
 - The previous ONT products are "Q10" (we'll discuss this soon), meaning that the error rate is roughly 1 incorrect base call per 10 bases (that's high!)
 - The new "Q20+" products are now available  - moves to less than 1 error per 100 bases (a little more respectable, but still well below short-read technologies like Illumina).
 - Upgrade includes a return to the "2D" approach.
 
 
-
-
-```{r, echo=FALSE, out.align="center", out.height=180}
+```{r, out.width="50%", fig.align="center"}
 knitr::include_graphics("../fig/01-lawsuit2020.png")
 ```
 
@@ -426,11 +332,9 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 
 
 
-## Making improvements
+### Making improvements
 
-
-
-```{r, echo=FALSE, out.align="center", out.height=400}
+```{r, out.width="80%"}
 knitr::include_graphics("../fig/01-ont-screening.png")
 ```
 
@@ -438,65 +342,57 @@ knitr::include_graphics("../fig/01-ont-screening.png")
 
 
 
-## Q20+ and Kit 14
+### Q20+ and Kit 14
 
-
-
-```{r, echo=FALSE, out.align="center", out.height=480}
+```{r, out.width=480}
 knitr::include_graphics("../fig/01-ont-q20.png")
 ```
 
-### https://nanoporetech.com/q20plus-chemistry
+[https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
 
 
-## Nanopore accuracy
+### Nanopore accuracy
 
 
-
-```{r, echo=FALSE, out.align="center", out.height=350}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-ont-accuracy.png")
 ```
 
-### https://nanoporetech.com/accuracy
+[https://nanoporetech.com/accuracy](https://nanoporetech.com/q20plus-chemistry)
 
 
 
-## Duplex (and simplex) accuracy
+### Duplex (and simplex) accuracy
 
 
-
-```{r, echo=FALSE, out.align="center", out.height=380}
+```{r, out.width="80%"}
 knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 ```
 
 What aren't they telling us about those duplex reads...? 
 
-https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
+[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
 
 
 
-## Coming... sometime - the Mk1D
+### Coming... sometime - the Mk1D
 
 
 
-```{r, echo=FALSE, out.align="center", out.height=400}
+```{r, out.width="70%"}
 knitr::include_graphics("../fig/01-ont-mk1d.png")
 ```
 
-### https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies
-### https://nanoporetech.com/products/minion-mk1d
+[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
+[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
+
+
+### More Nanopore: London Calling 2022
 
 
 
-
-
-
-## More Nanopore: London Calling 2022
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=300, fig.cap="a figure caption"}
+```{r, out.width="50%", fig.cap="a figure caption"}
 
 knitr::include_graphics("../fig/01-lc22.png")
 ```
@@ -505,7 +401,7 @@ knitr::include_graphics("../fig/01-lc22.png")
  - Talk videos available online
  - LOTS of really cool announcements and research applications
 
-### https://nanoporetech.com/lc22
+[https://nanoporetech.com/lc22](https://nanoporetech.com/lc22)
 
 
 
