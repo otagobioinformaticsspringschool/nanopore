@@ -8,7 +8,7 @@ exercises: 0
 questions:
 - "What is nanopore-based sequencing?"
 objectives:
-- "Provide details of ONT sequencing platforms."
+- "Understand details of ONT sequencing platforms."
 keypoints:
 - "ONT produce a range of popular sequencing platforms."
 - "This technology is constantly advancing."
