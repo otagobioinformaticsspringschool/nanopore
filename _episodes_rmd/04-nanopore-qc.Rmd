@@ -25,49 +25,144 @@ In this part of the module, we'll look at software applications that can be used
 - FASTQC (you've already seen this): generic tool for assessing the quality of next generation sequencing data.
 - NanoPlot: quality assessment software specifically built for ONT data.
 
-### NanoPlot
+## NanoPlot
 
 Let's use the NanoPlot software to assess the quality of our `.fastq` data.  We can run NanoPlot interactively (i.e., we don't need to submit it as a slurm job), and it wil produce an HTML-based report that can be viewed in a browser.
 
+Load the NanoPlot module:
 
-```
-# Load NanoPlot module
+~~~
 module load NanoPlot
-```
- 
-```
-# Run NanoPlot on passed fastq data
-NanoPlot -o nanoplot_fastmodel_subset/ \
+~~~
+{: .bash}
+
+Run NanoPlot on passed fastq data (i.e., just the files in the `pass` folder):
+
+~~~
+NanoPlot -o nanoplot_fastmodel \
          -p ecoli_fastmodel_subset_ \
-         --fastq fastq_fastmodel_subset/pass/fastq_runid_*.gz
-```
+         --fastq fastq_fastmodel/pass/fastq_runid_*.gz
+~~~
+{: .bash}
 
-```
-# create single .fastq.gz file containing all reads 
-# NB: not actually needed for bioawk  - can just use: 
-#     fastq_fastmodel_subset/pass/*gz
-#     Needed for FastQC though
+Command syntax:
 
-cat fastq_fastmodel_subset/pass/*.gz > ecoli-pass.fastq.gz
+- `NanoPlot`: run the NanoPlot command (note that the capital N and P are required).
+- `-o nanoplot_fastmodel`: folder for output (`-o`) to be written.
+- `-p ecoli_fastmodel_subset_`: prefix (`-p`) to be appended to start of each filename in the output folder.
+- `--fastq fastq_fastmodel/pass/fastq_runid_*.gz`: the `.fastq.gz` files to process with NanoPlot.
+
+Let's check what outoput was generated:
+
+~~~
+ls -1 nanoplot_fastmodel/
+~~~
+{: .bash}
+
+~~~
+ecoli_fastmodel_subset_LengthvsQualityScatterPlot_dot.html
+ecoli_fastmodel_subset_LengthvsQualityScatterPlot_kde.html
+ecoli_fastmodel_subset_NanoPlot_20221120_2127.log
+ecoli_fastmodel_subset_NanoPlot-report.html
+ecoli_fastmodel_subset_NanoStats.txt
+ecoli_fastmodel_subset_Non_weightedHistogramReadlength.html
+ecoli_fastmodel_subset_Non_weightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_subset_WeightedHistogramReadlength.html
+ecoli_fastmodel_subset_WeightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_subset_Yield_By_Length.html
+~~~
+{: .output}
+
+The file that we are interested in is the HTML report: `ecoli_fastmodel_subset_NanoPlot-report.html`
+
+To view this in your browser:
+
+1. Use the file browser (left panel of Jupyter window) to navigate to the `nanoplot_fastmodel` folder.
+2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli_fastmodel_subset_NanoPlot-report.html" file and choose "Open in New Browser Tab".
+3. The report should now be displayed in a new tab in your browser.
+
+## FASTQC
+
+To run the FASTQC application on our FASTQ data, we need to create a *single* `.fastq.gz` file containing *all* our data (remember the data are currently spread across multiple `.fastq.gz` files in the `fastq_fastmodel` folder).
+
+~~~
+# Make a single .fastq.gz file:
+cat fastq_fastmodel/pass/*.gz > ecoli-pass.fastq.gz
+
+# Use zcat to decompress the data on-the-fly and stream it to wc to count the number of lines in the file
 zcat ecoli-pass.fastq.gz | wc -l 
-echo 48924/4 | bc
-```
 
-```
+# Use bc to calculate the number of reads (remember: 4 lines per read):
+echo 56448/4 | bc
+~~~
+{: .bash}
+
+Load the FASTQC module:
+
+~~~
 module load FastQC
+~~~
+{: .bash}
 
-mkdir fastqc_fastmodel_subset
+Make a folder for the FASTQC output to written to:
+
+~~~
+mkdir fastqc_fastmodel
+~~~
+{: .bash}
+
+Run FASTQC on out data:
+
+~~~
 # NB: I get a java memory error if I don't use two threads
 #     FastQC allocates 250Mb per thread. Can't remember how 
 #     to specify more memory for java...
-fastqc -t 2 -o fastqc_fastmodel_subset ecoli-pass.fastq.gz
+
+fastqc -t 2 -o fastqc_fastmodel ecoli-pass.fastq.gz
 ```
 
-```
+Command syntax:
+
+- `fastqc`: run the `fastqc` command
+- `-t 2`: use two cpus (see my note about memory usage above) - the `-t` is for "threads".
+- `-o fastqc_fastmodel`: specify output folder.
+- `ecoli-pass.fastq.gz`: FASTQ data to analyse.
+
+Check the output:
+
+~~~
+ls -1 fastqc_fastmodel
+~~~
+{: .bash}
+
+~~~
+ecoli-pass_fastqc.html
+ecoli-pass_fastqc.zip
+~~~
+{: .output}
+
+As we did with the NanoPlot output, we can view the HTML report in the browser:
+
+1. Use the file browser (left panel of Jupyter window) to navigate to the `fastqc_fastmodel` folder.
+2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli-pass_fastqc.html" file and choose "Open in New Browser Tab".
+3. The report should now be displayed in a new tab in your browser.
+
+
+
+## Bioawk
+
+Load the bioawk module.
+
+~~~
 module load bioawk
+~~~
+{: .bash}
 
+~~~
 # Extract read name and length
 bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | head
+~~~
+{: .bash}
 
 # Number of reads
 bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | wc -l
