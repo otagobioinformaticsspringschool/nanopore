@@ -10,20 +10,14 @@ objectives:
 - "Align reads from long-read data."
 - "Perform variant calling using nanopore data."
 keypoints:
-- "Long-read based algorithms need to be used when aligning long read data."
+- "Long-read based algorithms (e.g., minimap2) need to be used when aligning long read data."
+- "Post-alignment, standard software tools (e.g., samtools, bcftools, etc) can be used to perform variant calling."
 source: Rmd
 ---
 
 
 
-> possible example dataset of E coli available from https://zenodo.org/record/1257429
-
-
-
-
-
-
-## Sequence alignment
+### Sequence alignment
 
  - If a “reference” genome exists for the organism you are sequencing, reads can be “aligned” to the reference.
  - This involves finding the place in the reference genome that each read matches to.
@@ -31,83 +25,140 @@ source: Rmd
 
 
 
-## Tools for generating alignments
+### Tools for generating alignments
 
  - There are MANY software packages available for aligning data from next generation sequencing experiments.
- - The two "original" short read aligners were:
+ - For short-read data e.g., Illumina sequencing), the two "original" short read aligners were:
     - BWA: http://bio-bwa.sourceforge.net
     - Bowtie: http://bowtie-bio.sourceforge.net
- - More recently MANY more "aligners" have been developed
+ - Over the years, MANY more "aligners" have been developed.
  - For long-read data, ONT provides the Minimap2 aligner (but there are also a number of other options).
 
 
+## Alignment with `minimap2` on NeSI
 
-## Alignment with minimap2 on NeSI
+Load the minimap2 module:
 
-```
+~~~
 module load minimap2
-```
+~~~
+{: .bash}
  
-```
+Check that we've got a reference genome:
+
+~~~
 ls genome
-```
- 
-```
+~~~
+{: .bash}
+
+~~~
+e-coli-k12-MG1655.fasta
+~~~
+{: .output}
+
+Load the SAMtools module:
+
+~~~
 module load SAMtools
-```
- 
-```
+~~~
+{: .bash}
+
+Make a folder for our aligned data:
+
+~~~
+mkdir bam-files
+~~~
+
+Use minimap2 followed by samtools to generate aligned data in `.bam` format:
+
+~~~
 minimap2 -ax map-ont genome/e-coli-k12-MG1655.fasta \
-   fastq_fastmodel_subset/pass/*.gz | \
-   samtools sort -o ecoli-pass-aligned-sort.bam
-   
-samtools index ecoli-pass-aligned-sort.bam
-```
+   fastq_fastmodel/pass/*.gz | \
+   samtools sort -o bam-files/ecoli-pass-aligned-sort.bam
+~~~
+{: .bash}
 
-```
-NanoPlot -o nanoplot_fastmodel_subset_bam/ \
-  -p ecoli_bam_subset_ --bam ecoli-pass-aligned-sort.bam 
-```
+Index the bam file:
 
-```
-samtools coverage ecoli-pass-aligned-sort.bam
-```
+~~~
+samtools index bam-files/ecoli-pass-aligned-sort.bam
+~~~
+{: .bash}
 
-## Variant calling from Genomic Data Carpentry
+Run NanoPlot on the bam file (adds additional output to NanoPlot report):
 
-```
-load module BCFtools
-mkdir bcf
-```
+~~~
+NanoPlot -o nanoplot_fastmodel_bam/ \
+  -p ecoli_bam_subset_ \
+  --bam bam-files/ecoli-pass-aligned-sort.bam 
+~~~
+{: .bash}
 
+Generate basic mapping information using samtools:
 
-~~Dang, this takes a l-o-n-g time...~~
+~~~
+samtools coverage bam-files/ecoli-pass-aligned-sort.bam
+~~~
+{: .bash}
 
-Actually, need to use ONT-specific parameters 
-
-
-~~bcftools mpileup -O b -o bcf/ecoli-pass.bcf -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam~~
-
-```
-bcftools mpileup -B -Q5 --max-BQ 30 -I -o bcf/ecoli-pass.bcf -f genome/e-coli-k12-MG1655.fasta  ecoli-pass-aligned-sort.bam
-```
-
-
-```
-mkdir vcf
-bcftools call --ploidy 1 -m -v -o vcf/ecoli-variants.vcf bcf/ecoli-pass.bcf 
-```
- 
-```
-vcfutils.pl varFilter vcf/ecoli-variants.vcf  > vcf/ecoli-final-variants.vcf
-```
+~~~
+#rname      startpos     endpos   numreads   covbases    coverage    meandepth   meanbaseq   meanmapq
+U00096.3           1    4641652      14273    4641652         100        28.93        17.3       59.8
+~~~
+{: .output}
 
 
-## Existing tutorials 
+## Variant calling 
 
-https://labs.epi2me.io/nbindex/
+NB - code below is taken from the "Variant Calling Workflow" section of the Genomic Data Carpentry course: 
 
-- https://labs.epi2me.io/notebooks/Introduction_to_Fast5_files.html
-- https://labs.epi2me.io/notebooks/Basic_QC_Tutorial.html
+[https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html)
 
-https://denbi-nanopore-training-course.readthedocs.io/en/latest/data.html
+Load the BCFtools module:
+
+~~~
+module load BCFtools
+~~~
+{: .bash}
+
+Make a folder for the output data:
+
+~~~
+mkdir bcf-files
+~~~
+{: .bash}
+
+Generate a "pileup" file to enable variant calling:
+
+~~~
+bcftools mpileup -B -Q5 --max-BQ 30 -I \
+   -o bcf-files/ecoli-pass.bcf \
+   -f genome/e-coli-k12-MG1655.fasta  \
+   bam-files/ecoli-pass-aligned-sort.bam
+~~~
+{: .bash}
+
+Make a folder to hold vcf (variant call format) files:
+
+~~~
+mkdir vcf-files
+~~~
+{: .bash}
+
+Use `bcftools` to call variants in the *e. coli* data:
+
+~~~
+bcftools call --ploidy 1 -m -v \
+   -o vcf-files/ecoli-variants.vcf \
+   bcf-files/ecoli-pass.bcf 
+~~~
+{: .bash}
+
+Use `vcfutils.pl` to *filter* the variants:
+
+~~~
+vcfutils.pl varFilter vcf-files/ecoli-variants.vcf  > vcf-files/ecoli-final-variants.vcf
+~~~
+{: .bash}
+
+
