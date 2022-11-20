@@ -3,11 +3,14 @@ title: "Nanopore - Basecalling"
 teaching: 10
 exercises: 10
 questions:
-- "How do I basecall my nanopore data?"
+- "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
-- "Understand how to use guppy for basecalling."
+- "Understand FASTQ format."
+- "Use guppy_basecaller on NeSI to generate FASTQ data from FAST5 output files."   
 keypoints:
-- "Guppy is used for basecalling your fast5 data."
+- "FAST5 data can be converted to FASTQ via the guppy_basecaller software."
+- "guppy_basecaller has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
+- "Once bascalling has been done, standard tasks such as QA/QC, mapping and variant calling can be performed."
 source: Rmd
 ---
 
@@ -48,7 +51,7 @@ The ONT software application "guppy" can be used to process FAST5 data into FAST
 for storage of sequence data and associated base-level quality scores.
 
 
-```{r, echo=FALSE, out.align="center", out.height=180, eval=FALSE}
+```{r, out.width="80%"}
 knitr::include_graphics("../fig/01-nanopore-workflow.png")
 ```
 
@@ -72,14 +75,14 @@ Today we will be using `guppy_basecaller` on the NeSI system to generate FASTQ d
 
 ### Assessing sequence quality: phred scores
 
-```{r, echo=FALSE, out.align="center", out.width="50%"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-phred.png")
 ```
 
 Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
-```{r, echo=FALSE, out.align="center", out.width="50%"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-phred2.png")
 ```
 
@@ -91,7 +94,7 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
 
-```{r, echo=FALSE, out.align="center", out.width="80%"}
+```{r, out.width="80%"}
 knitr::include_graphics("../fig/01-asciitable.png")
 ```
 
@@ -101,7 +104,7 @@ knitr::include_graphics("../fig/01-asciitable.png")
 
 FASTQ format:
 
-```{r, echo=FALSE, out.align="center", outwidth="50%"}
+```{r, out.width="60%"}
 knitr::include_graphics("../fig/01-fastq1.png")
 ```
 

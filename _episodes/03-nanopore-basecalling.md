@@ -5,11 +5,14 @@ title: "Nanopore - Basecalling"
 teaching: 10
 exercises: 10
 questions:
-- "How do I basecall my nanopore data?"
+- "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
-- "Understand how to use guppy for basecalling."
+- "Understand FASTQ format."
+- "Use guppy_basecaller on NeSI to generate FASTQ data from FAST5 output files."   
 keypoints:
-- "Guppy is used for basecalling your fast5 data."
+- "FAST5 data can be converted to FASTQ via the guppy_basecaller software."
+- "guppy_basecaller has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
+- "Once bascalling has been done, standard tasks such as QA/QC, mapping and variant calling can be performed."
 source: Rmd
 ---
 
@@ -46,7 +49,7 @@ The ONT software application "guppy" can be used to process FAST5 data into FAST
 for storage of sequence data and associated base-level quality scores.
 
 
-
+<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-2" width="80%" style="display: block; margin: auto auto auto 0;" />
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
  - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
@@ -91,7 +94,7 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 FASTQ format:
 
-<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" style="display: block; margin: auto auto auto 0;" />
+<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" width="60%" style="display: block; margin: auto auto auto 0;" />
 
 http://en.wikipedia.org/wiki/FASTQ_format
 

@@ -1,14 +1,15 @@
 ---
-title: "Nanopore - QC"
+title: "Nanopore: quality assessment"
 teaching: 10
 exercises: 10
 questions:
-- "How can I perform QC on nanopore data?"
+- "How can I perform quality assessment of ONT data?"
 objectives:
 - "Assess the quality of reads."
-- "Generate summary metrics"
+- "Generate summary metrics."
 keypoints:
-- "Bioawk can be used to generate summary metrics"
+- "FASTQC and NanoPore provide pre-formatted reports on run characteristics and read quality."
+- "Bioawk can be used to generate summary metrics and ask specific questions about the read data."
 source: Rmd
 ---
 
@@ -17,101 +18,17 @@ source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 ```
 
+## Software for quality assessment
 
-## Assessing sequence quality: phred scores
+In this part of the module, we'll look at software applications that can be used to assess the quality of data from ONT sequencing runs. We'll be focussing on two pieces of software: FASTQC and NanoPlot.
 
+- FASTQC (you've already seen this): generic tool for assessing the quality of next generation sequencing data.
+- NanoPlot: quality assessment software specifically built for ONT data.
 
+### NanoPlot
 
-```{r, echo=FALSE, out.align="center", out.height=450}
-knitr::include_graphics("../fig/01-phred.png")
-```
+Let's use the NanoPlot software to assess the quality of our `.fastq` data.  We can run NanoPlot interactively (i.e., we don't need to submit it as a slurm job), and it wil produce an HTML-based report that can be viewed in a browser.
 
-### Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
-
-
-
-## Assessing seqeunce quality: phred scores
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=300}
-knitr::include_graphics("../fig/01-phred2.png")
-```
-
-Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
- - Quality score of 38 becomes 38+33=71: “G” 
-
-[http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
-
-
- 
-
-
-```{r, echo=FALSE, out.align="center", out.height=600}
-knitr::include_graphics("../fig/01-asciitable.png")
-```
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=550}
-knitr::include_graphics("../fig/01-phredtrace.png")
-```
-
-[http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
-
-
-
-## Sequence data format
-
- - The FASTQ format allows the storage of both sequence and quality information for each read.
- - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
-
-
-
-## Fastq format 
-
-
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=420}
-knitr::include_graphics("../fig/01-fastq1.png")
-```
-
-### http://en.wikipedia.org/wiki/FASTQ_format
-
-*** =right
- - Line 1: '@' character followed by sequence identifier and optional description.
- - Line 2: base calls.
- - Line 3: '+' character, ptionally followed by the same sequence identifier (and description) again.
- - Line 4: quality scores
-
-
-
-## Fastq format
-
-
-
-```{r, echo=FALSE, out.align="center", out.height=475}
-knitr::include_graphics("../fig/01-fastq2.png")
-```
-
-### http://en.wikipedia.org/wiki/FASTQ_format
-
-
-
-## Quality Assessment
-
- - The information in the FASTQ file can be used to assess the read quality.
- - A number of tools are available on the unix/linux command line, and/or within R for manipulating FASTQ data.
-
-
-
-## NanoPlot / FastQC / bioawk
-
-Code for e. coli data set on NeSI:
 
 ```
 # Load NanoPlot module
