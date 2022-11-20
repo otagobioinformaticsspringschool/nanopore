@@ -10,7 +10,7 @@ objectives:
 - "Assess the quality of reads."
 - "Generate summary metrics."
 keypoints:
-- "FASTQC and NanoPore provide pre-formatted reports on run characteristics and read quality."
+- "FastQC and NanoPore provide pre-formatted reports on run characteristics and read quality."
 - "Bioawk can be used to generate summary metrics and ask specific questions about the read data."
 source: Rmd
 ---
@@ -19,9 +19,9 @@ source: Rmd
 
 ## Software for quality assessment
 
-In this part of the module, we'll look at software applications that can be used to assess the quality of data from ONT sequencing runs. We'll be focussing on two pieces of software: FASTQC and NanoPlot.
+In this part of the module, we'll look at software applications that can be used to assess the quality of data from ONT sequencing runs. We'll be focussing on two pieces of software: FastQC and NanoPlot.
 
-- FASTQC (you've already seen this): generic tool for assessing the quality of next generation sequencing data.
+- FastQC (you've already seen this): generic tool for assessing the quality of next generation sequencing data.
 - NanoPlot: quality assessment software specifically built for ONT data.
 
 ## NanoPlot
@@ -80,9 +80,9 @@ To view this in your browser:
 2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli_fastmodel_subset_NanoPlot-report.html" file and choose "Open in New Browser Tab".
 3. The report should now be displayed in a new tab in your browser.
 
-## FASTQC
+## FastQC
 
-To run the FASTQC application on our FASTQ data, we need to create a *single* `.fastq.gz` file containing *all* our data (remember the data are currently spread across multiple `.fastq.gz` files in the `fastq_fastmodel` folder).
+To run the FastQC application on our FASTQ data, we need to create a *single* `.fastq.gz` file containing *all* our data (remember the data are currently spread across multiple `.fastq.gz` files in the `fastq_fastmodel` folder).
 
 ~~~
 # Make a single .fastq.gz file:
@@ -96,21 +96,21 @@ echo 56448/4 | bc
 ~~~
 {: .bash}
 
-Load the FASTQC module:
+Load the FastQC module:
 
 ~~~
 module load FastQC
 ~~~
 {: .bash}
 
-Make a folder for the FASTQC output to written to:
+Make a folder for the FastQC output to written to:
 
 ~~~
 mkdir fastqc_fastmodel
 ~~~
 {: .bash}
 
-Run FASTQC on out data:
+Run FastQC on our data:
 
 ~~~
 # NB: I get a java memory error if I don't use two threads
@@ -118,7 +118,8 @@ Run FASTQC on out data:
 #     to specify more memory for java...
 
 fastqc -t 2 -o fastqc_fastmodel ecoli-pass.fastq.gz
-```
+~~~
+{: .bash}
 
 Command syntax:
 
@@ -146,9 +147,13 @@ As we did with the NanoPlot output, we can view the HTML report in the browser:
 2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli-pass_fastqc.html" file and choose "Open in New Browser Tab".
 3. The report should now be displayed in a new tab in your browser.
 
-
-
 ## Bioawk
+
+FastQC and NanoPlot are great for producing pre-formatted reports that summarise read/run quality.  
+
+But what if you want to ask some more specific questions about your data?
+
+Bioawk is an extension to the Unix `awk` command which allows use to query specific biological data types - here we will use it to ask some specific questions about our FASTQ data.
 
 Load the bioawk module.
 
@@ -157,31 +162,133 @@ module load bioawk
 ~~~
 {: .bash}
 
+Extract read name and length:
+
 ~~~
-# Extract read name and length
 bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | head
 ~~~
 {: .bash}
 
-# Number of reads
+~~~
+04670db1-f5f2-41f6-a6bd-92f43f6d3968    4403
+0d91f59f-9fcd-4935-b062-8f05258816c5    12428
+0c6a1ddc-1098-472e-a219-6d5c336e9e1b    2996
+0e1306e1-785a-4307-8bbb-a5095f022306    4249
+101a659f-fb10-4a22-8174-3f659c6ce462    772
+106a9dc6-5e05-4c93-8ff1-569dc97426ca    6377
+0f90ec4c-6fc9-4592-8754-bf4fb800d115    2452
+11fffe54-669b-4fbf-be13-2236507aa8c9    8762
+13f7a628-acda-4f6e-927d-651cb62adf51    14868
+14a422e7-c54b-4a1a-9a64-a68ce69e4c5c    7185
+~~~
+{: .output}
+
+Number of reads:
+
+~~~
 bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | wc -l
+~~~
+{: .bash}
 
-# Total number of bases in reads (subset to demonstrate)
+~~~
+14112
+~~~
+{: .output}
+
+NB: this SHOULD match what we calculated above.
+
+Total number of bases in first ten reads (I've stepped through the process to illustrate each component of the command):
+
+~~~
 bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head 
+~~~
+{: .bash}
+
+~~~
+4403
+12428
+2996
+4249
+772
+6377
+2452
+8762
+14868
+7185
+~~~
+{: .output}
+
+~~~
 bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ 
+~~~
+{: .bash}
+
+~~~
+4403+12428+2996+4249+772+6377+2452+8762+14868+7185
+~~~
+{: .output}
+
+~~~
 bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ | bc
+~~~
+{: .bash}
 
-# Total number of bases in reads 
-bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | \
-  paste -sd+ | bc
-  
-# Number of reads longer than 10000 bases
+~~~
+64492
+~~~
+{: .output}
+
+So the first 10 reads comprise 64,492 bases.
+
+Total number of bases in all reads 
+
+~~~
+bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | paste -sd+ | bc
+~~~
+{: .bash}
+
+~~~
+144479297
+~~~
+{: .output}
+
+In total, the 14112 reads in our data set comprise 144,479,297 bases (144Mbp).
+
+
+Number of reads longer than 10000 bases
+
+First create "yes/no" (1/0) information about whether each read has a length greater than 10,000 bases:
+
+~~~
 bioawk -c fastx '{print (length($seq) > 10000)}' ecoli-pass.fastq.gz | head
-bioawk -c fastx '{print (length($seq) > 5000)}' ecoli-pass.fastq.gz | \
-  paste -sd+ | bc
+~~~
+{: .bash}
 
-# NB: mean quality scores aren't correct
-# Maybe skip this stuff...
-bioawk -c fastx '{print $name,length($seq),meanqual($seq)}' ecoli-pass.fastq.gz | head
-```
+~~~
+0
+1
+0
+0
+0
+0
+0
+0
+1
+0
+~~~
+{: .output}
+
+Now sum this up to find the total number of reads satisfying this condition:
+
+~~~
+bioawk -c fastx '{print (length($seq) > 5000)}' ecoli-pass.fastq.gz | paste -sd+ | bc
+~~~
+{: .bash}
+
+~~~
+8700
+~~~
+{: .output}
+
+So, of our 14112 reads, 8700 of them are longer than 10,000 bases.
 
