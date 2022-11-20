@@ -3,13 +3,12 @@ title: "Nanopore - QC"
 teaching: 10
 exercises: 10
 questions:
-- "How to write a lesson using RMarkdown?"
+- "How can I perform QC on nanopore data?"
 objectives:
-- "Explain how to use RMarkdown with the new lesson template."
-- "Demonstrate how to include pieces of code, figures, and challenges."
+- "Assess the quality of reads."
+- "Generate summary metrics"
 keypoints:
-- "Edit the .Rmd files not the .md files"
-- "Run `make serve` to knit documents and preview lesson website locally"
+- "Bioawk can be used to generate summary metrics"
 source: Rmd
 ---
 

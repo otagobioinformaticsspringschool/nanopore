@@ -3,13 +3,12 @@ title: "Nanopore - Variant Calling"
 teaching: 10
 exercises: 10
 questions:
-- "How to write a lesson using RMarkdown?"
+- "How can I use nanopore data for variant calling?"
 objectives:
-- "Explain how to use RMarkdown with the new lesson template."
-- "Demonstrate how to include pieces of code, figures, and challenges."
+- "Align reads from long-read data."
+- "Perform variant calling using nanopore data."
 keypoints:
-- "Edit the .Rmd files not the .md files"
-- "Run `make serve` to knit documents and preview lesson website locally"
+- "Long-read based algorithms need to be used when aligning long read data."
 source: Rmd
 ---
 

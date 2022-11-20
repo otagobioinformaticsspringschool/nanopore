@@ -5,13 +5,11 @@ title: "Nanopore - Adaptive Sampling"
 teaching: 10
 exercises: 10
 questions:
-- "How to write a lesson using RMarkdown?"
+- "How can nanopore be used for sequencing only what I want?"
 objectives:
-- "Explain how to use RMarkdown with the new lesson template."
-- "Demonstrate how to include pieces of code, figures, and challenges."
+- "Explain how adaptive sampling works"
 keypoints:
-- "Edit the .Rmd files not the .md files"
-- "Run `make serve` to knit documents and preview lesson website locally"
+- "Nanopore can determine if it should continue to sequence a read."
 source: Rmd
 ---
 
