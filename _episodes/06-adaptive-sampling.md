@@ -36,16 +36,20 @@ just regenerate the exact same data that the run produced initially), I used Min
 2. Provided a bed file that listed 100Kbp regions, interspersed with 100Kbp gaps:
 
 ```
-NZ_LS974444.1   1       100000
-NZ_LS974444.1   200001  300000
+NZ_LS974444.1   0       99999
+NZ_LS974444.1   200000  299999
 NZ_LS974444.1   400001  500000
-NZ_LS974444.1   600001  700000
-NZ_LS974444.1   800001  900000
-NZ_LS974444.1   1000001 1100000
-NZ_LS974444.1   1200001 1300000
-NZ_LS974444.1   1400001 1500000
-NZ_LS974444.1   1600001 1700000
+NZ_LS974444.1   600000  699999
+NZ_LS974444.1   800000  899999
+NZ_LS974444.1   1000000 1099999
+NZ_LS974444.1   1200000 1299999
+NZ_LS974444.1   1400000 1499999
+NZ_LS974444.1   1600000 1699999
 ```
+
+Note that NZ_LS974444.1 is the name of the single chromosome in the fasta file.
+
+Also note that the bed format starts counting at 0 (i.e., the first base of a chromosome is considered "base 0").
 
 3. Specified that we wanted to *enrich* for these regions.
 
@@ -58,7 +62,7 @@ doesn't then become available for sequencing another read (because in the REAL r
 pore continued to sequence that read).
 
 2. This sample had a LOT of short sequences, so in many cases, the read had been fully sequenced before 
-the software had a chance to map it to teh genome and determine whether or not to continue sequencing. 
+the software had a chance to map it to the genome and determine whether or not to continue sequencing. 
 
 ### Distribution of read lengths
 
@@ -174,27 +178,25 @@ For this, we need a bed file.  This one breaks the 1.8Mbp *S. thermophilus* geno
 a little bit of the end - after 1,800,000bp):
 
 ```
-NZ_LS974444.1   1       100000
-NZ_LS974444.1   100001  200000
-NZ_LS974444.1   200001  300000
-NZ_LS974444.1   300001  400000
-NZ_LS974444.1   400001  500000
-NZ_LS974444.1   500001  600000
-NZ_LS974444.1   600001  700000
-NZ_LS974444.1   700001  800000
-NZ_LS974444.1   800001  900000
-NZ_LS974444.1   900001  1000000
-NZ_LS974444.1   1000001 1100000
-NZ_LS974444.1   1100001 1200000
-NZ_LS974444.1   1200001 1300000
-NZ_LS974444.1   1300001 1400000
-NZ_LS974444.1   1400001 1500000
-NZ_LS974444.1   1500001 1600000
-NZ_LS974444.1   1600001 1700000
-NZ_LS974444.1   1700001 1800000
+NZ_LS974444.1   0       99999
+NZ_LS974444.1   100000  199999
+NZ_LS974444.1   200000  299999
+NZ_LS974444.1   300000  399999
+NZ_LS974444.1   400000  499999
+NZ_LS974444.1   500000  599999
+NZ_LS974444.1   600000  699999
+NZ_LS974444.1   700000  799999
+NZ_LS974444.1   800000  899999
+NZ_LS974444.1   900000  999999
+NZ_LS974444.1   1000000 1099999
+NZ_LS974444.1   1100000 1199999
+NZ_LS974444.1   1200000 1299999
+NZ_LS974444.1   1300000 1399999
+NZ_LS974444.1   1400000 1499999
+NZ_LS974444.1   1500000 1599999
+NZ_LS974444.1   1600000 1699999
+NZ_LS974444.1   1700000 1799999
 ```
-
-Note that NZ_LS974444.1 is the name of the single chromosome in the fasta file.
 
 ### Aside: how can we generate a file like that?
 
@@ -203,7 +205,7 @@ Let's build one with bash!
 First, let's write a loop that counts from 1 to 10 in steps of 2:
 
 ~~~
-for i in {1 10 2}
+for i in {1..10..2}
 do
     echo $i
 done    
@@ -219,10 +221,10 @@ done
 ~~~
 {: .output}
 
-Now lets do 1 to 1,800,000, in steps of 100,000:
+Now lets do 0 to 1,799,999, in steps of 100,000:
 
 ~~~
-for i in {1..1800000..100000}
+for i in {0..1799999..100000}
 do
     echo $i
 done    
@@ -230,31 +232,31 @@ done
 {: .bash}
 
 ~~~
-1
-100001
-200001
-300001
-400001
-500001
-600001
-700001
-800001
-900001
-1000001
-1100001
-1200001
-1300001
-1400001
-1500001
-1600001
-1700001
+0
+100000
+200000
+300000
+400000
+500000
+600000
+700000
+800000
+900000
+1000000
+1100000
+1200000
+1300000
+1400000
+1500000
+1600000
+1700000
 ~~~
 {: .output}
 
 Add the chromosome name, and the end position to each line (and make sure to separate with tabs):
 
 ~~~
-for i in {1..1800000..100000}
+for i in {0..1799999..100000}
 do
     start=$i
     end=`echo $i+99999 | bc`
@@ -264,24 +266,24 @@ done
 {: .bash}
 
 ~~~
-NZ_LS974444.1   1       100000
-NZ_LS974444.1   100001  200000
-NZ_LS974444.1   200001  300000
-NZ_LS974444.1   300001  400000
-NZ_LS974444.1   400001  500000
-NZ_LS974444.1   500001  600000
-NZ_LS974444.1   600001  700000
-NZ_LS974444.1   700001  800000
-NZ_LS974444.1   800001  900000
-NZ_LS974444.1   900001  1000000
-NZ_LS974444.1   1000001 1100000
-NZ_LS974444.1   1100001 1200000
-NZ_LS974444.1   1200001 1300000
-NZ_LS974444.1   1300001 1400000
-NZ_LS974444.1   1400001 1500000
-NZ_LS974444.1   1500001 1600000
-NZ_LS974444.1   1600001 1700000
-NZ_LS974444.1   1700001 1800000
+NZ_LS974444.1   0       99999
+NZ_LS974444.1   100000  199999
+NZ_LS974444.1   200000  299999
+NZ_LS974444.1   300000  399999
+NZ_LS974444.1   400000  499999
+NZ_LS974444.1   500000  599999
+NZ_LS974444.1   600000  699999
+NZ_LS974444.1   700000  799999
+NZ_LS974444.1   800000  899999
+NZ_LS974444.1   900000  999999
+NZ_LS974444.1   1000000 1099999
+NZ_LS974444.1   1100000 1199999
+NZ_LS974444.1   1200000 1299999
+NZ_LS974444.1   1300000 1399999
+NZ_LS974444.1   1400000 1499999
+NZ_LS974444.1   1500000 1599999
+NZ_LS974444.1   1600000 1699999
+NZ_LS974444.1   1700000 1799999
 ~~~
 {: .output}
 
@@ -293,7 +295,7 @@ regions in the bed file.
 I've generated a longer bed file, splitting the genome into 10Kb chunks. It can be found at:
 
 ```
-XXX
+as-100kb-chunks.bed
 ```
 
 ~~~
@@ -304,26 +306,26 @@ samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligne
 First 20 rows:
 
 ~~~
-NZ_LS974444.1   1       10001   1971347
-NZ_LS974444.1   10001   20001   1311504
-NZ_LS974444.1   20001   30001   1276725
-NZ_LS974444.1   30001   40001   1744593
-NZ_LS974444.1   40001   50001   1665792
-NZ_LS974444.1   50001   60001   420289
-NZ_LS974444.1   60001   70001   351003
-NZ_LS974444.1   70001   80001   1138855
-NZ_LS974444.1   80001   90001   1320247
-NZ_LS974444.1   90001   100001  1393315
-NZ_LS974444.1   100001  110001  415522
-NZ_LS974444.1   110001  120001  131402
-NZ_LS974444.1   120001  130001  189640
-NZ_LS974444.1   130001  140001  156247
-NZ_LS974444.1   140001  150001  154348
-NZ_LS974444.1   150001  160001  127926
-NZ_LS974444.1   160001  170001  105841
-NZ_LS974444.1   170001  180001  105905
-NZ_LS974444.1   180001  190001  61798
-NZ_LS974444.1   190001  200001  315722
+NZ_LS974444.1   0       9999    1971063
+NZ_LS974444.1   10000   19999   1311458
+NZ_LS974444.1   20000   29999   1276564
+NZ_LS974444.1   30000   39999   1744496
+NZ_LS974444.1   40000   49999   1665578
+NZ_LS974444.1   50000   59999   420445
+NZ_LS974444.1   60000   69999   350856
+NZ_LS974444.1   70000   79999   1138767
+NZ_LS974444.1   80000   89999   1320115
+NZ_LS974444.1   90000   99999   1393254
+NZ_LS974444.1   100000  109999  415558
+NZ_LS974444.1   110000  119999  131388
+NZ_LS974444.1   120000  129999  189621
+NZ_LS974444.1   130000  139999  156248
+NZ_LS974444.1   140000  149999  154235
+NZ_LS974444.1   150000  159999  127957
+NZ_LS974444.1   160000  169999  105826
+NZ_LS974444.1   170000  179999  105900
+NZ_LS974444.1   180000  189999  61800
+NZ_LS974444.1   190000  199999  315476
 ~~~
 {: .output}
 
@@ -335,41 +337,151 @@ samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligne
 {: .bash}
 
 
+### Another aside: complementing a bed file
+
+If you have a bed file containing genomic regions that have been used for adaptive sampling, it can be useful to create a second bed 
+file that containing the *complement* of these regions (i.e., the regions of the genome that were *not* being selected via adaptive sampling). 
+This can be used to check read depth at non-selected regions.
+
+To do this, we first index the reference genome using samtools:
+
 ~~~
-x = read.table('yog-as-100kb-chunks-bed-10k-cov.txt', header=FALSE, sep='\t')
+samtools faidx genome/streptococcus-thermophilus-strain-N4L.fa 
+~~~
+{: .bash}
+
+This produces the file: `streptococcus-thermophilus-strain-N4L.fa.fai`:
+
+~~~
+less genome/streptococcus-thermophilus-strain-N4L.fa.fai 
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   1831756 66      70      71
+~~~
+{: .output}
+
+We can use this to extract chromosome sizes (in this case, there is only one, but for multi-chromosome genomes - e.g., human - this is a 
+really useful approach):
+
+~~~
+cut -f 1,2 genome/streptococcus-thermophilus-strain-N4L.fa.fai | sort -n > genome/st-chrom-sizes.txt
+~~~
+{: .bash}
+
+~~~
+less genome/st-chrom-sizes.txt
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   1831756
+~~~
+{: .output}
+
+This information can then be used to create the complement bed file:
+
+~~~
+bedtools complement -i as-100kb-chunks.bed -g genome/st-chrom-sizes.txt > as-100k-chunks-complement.bed
+~~~
+{: .bash}
+
+~~~
+less as-100k-chunks-complement.bed
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   99999   200000
+NZ_LS974444.1   299999  400001
+NZ_LS974444.1   500000  600000
+NZ_LS974444.1   699999  800000
+NZ_LS974444.1   899999  1000000
+NZ_LS974444.1   1099999 1200000
+NZ_LS974444.1   1299999 1400000
+NZ_LS974444.1   1499999 1600000
+NZ_LS974444.1   1699999 1831756
+~~~
+{: .output}
+
+Check (visually) that this is the complement of the bed file I used for adaptive sampling:
+
+~~~
+less chunks-100k.bed
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   99999   200000
+NZ_LS974444.1   299999  400001
+NZ_LS974444.1   500000  600000
+NZ_LS974444.1   699999  800000
+NZ_LS974444.1   899999  1000000
+NZ_LS974444.1   1099999 1200000
+NZ_LS974444.1   1299999 1400000
+NZ_LS974444.1   1499999 1600000
+NZ_LS974444.1   1699999 1831756
+~~~
+{: .output}
+
+### Some quick analysis in R
+
+
+Load the `dplyr` and `ggplot2` packages:
+
+
+
+Load the text file that we generated usign `samtools bedcov`:
+
+
+~~~
+bedCov = read.table('yog-as-100kb-chunks-10k-cov.txt', header=FALSE, sep='\t')
 ~~~
 {: .language-r}
 
 
 
+Add some column names:
+
 
 ~~~
-names(x) = c("CHROM", "START", "END", "BASES")
-x$LENGTH = x$END - x$START
-x$DEPTH = x$BASES/x$LENGTH
+names(bedCov) = c("CHROM", "START", "END", "BASES")
+~~~
+{: .language-r}
 
-head(x)
+Add columns for region length (LENGTH) and then calculated average read depth (DEPTH):
+
+
+~~~
+bedCov = mutate(bedCov, LENGTH = END - START + 1)
+bedCov = mutate(bedCov, DEPTH = BASES / LENGTH)
+
+head(bedCov)
 ~~~
 {: .language-r}
 
 
 
 ~~~
-          CHROM START   END  BASES LENGTH   DEPTH
-1 NZ_LS974444.1     1 10001 145857  10000 14.5857
-2 NZ_LS974444.1 10001 20001  94887  10000  9.4887
-3 NZ_LS974444.1 20001 30001  97264  10000  9.7264
-4 NZ_LS974444.1 30001 40001 126374  10000 12.6374
-5 NZ_LS974444.1 40001 50001 119607  10000 11.9607
-6 NZ_LS974444.1 50001 60001  30406  10000  3.0406
+          CHROM START   END   BASES LENGTH    DEPTH
+1 NZ_LS974444.1     0  9999 1971063  10000 197.1063
+2 NZ_LS974444.1 10000 19999 1311458  10000 131.1458
+3 NZ_LS974444.1 20000 29999 1276564  10000 127.6564
+4 NZ_LS974444.1 30000 39999 1744496  10000 174.4496
+5 NZ_LS974444.1 40000 49999 1665578  10000 166.5578
+6 NZ_LS974444.1 50000 59999  420445  10000  42.0445
 ~~~
 {: .output}
 
 
 ~~~
 library(ggplot2)
-ggplot(x, aes(x=START, y=DEPTH)) + geom_line(linewidth=1)
+ggplot(bedCov, aes(x=START, y=DEPTH)) +
+  geom_line(linewidth=1) +
+  ggtitle("Read depth across S. Thermophils genome (reads > 1Kbp)") +
+  xlab("Base position") + ylab("Read depth")
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto auto auto 0;" />
+<img src="../fig/rmd-06-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto auto auto 0;" />
