@@ -56,7 +56,15 @@ Both `scp` and Jupyter methods are only really suitable for small data transfers
 
 ## `scp`
 
+From a terminal, `scp` can be used to transfer files to a remote computer.
+
+The documentation for how to use `scp` specifically with NeSI can be found at [https://support.nesi.org.nz/hc/en-gb/articles/360000578455-File-Transfer-with-SCP](https://support.nesi.org.nz/hc/en-gb/articles/360000578455-File-Transfer-with-SCP). There are some configuration steps that need to be done to make this a bit easier.
+
+The general format is `scp <local file to transfer> mahuika:<path to copy file to>` to send a file to NeSI, and `scp mahuika:<path to file> <local path to copy to>` to copy a file from NeSI to your machine.
+
 ## Jupyter
+
+
 
 ## Globus
 
