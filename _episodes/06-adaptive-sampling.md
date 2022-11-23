@@ -15,7 +15,361 @@ source: Rmd
 
 
 
-> possible example dataset of E coli available from https://zenodo.org/record/1257429
+## Let's learn about Adaptive Sampling...
+
+Mik will now talk at you.  :)
+
+
+## Now let's take a look at some data
+
+The folder XXX contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
+
+https://zenodo.org/record/2548026#.YLifQOuxXOQ
+
+### What did I do?
+
+The bulk fast5 file was used to simulate a MinION run.  Instead of just playing through the run file which would essentially 
+just regenerate the exact same data that the run produced initially), I used MinKNOW's built-in adaptive sampling functionality.
+
+1. Specified *S. thermophilus* as the target genome (1.8Mbp).
+
+2. Provided a bed file that listed 100Kbp regions, interspersed with 100Kbp gaps:
+
+```
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1600001 1700000
+```
+
+3. Specified that we wanted to *enrich* for these regions.
+
+Some caveats:
+
+1. We are *pretending* to do an adaptive sampling run, using data generated from a real 
+(non-AS) run, so when a pore is unblocked (i.e., a read mapping to a region that we *don't* 
+want to enrich for) in our simulation, we stop accumulating data for that read, but the pore 
+doesn't then become available for sequencing another read (because in the REAL run, the 
+pore continued to sequence that read).
+
+2. This sample had a LOT of short sequences, so in many cases, the read had been fully sequenced before 
+the software had a chance to map it to teh genome and determine whether or not to continue sequencing. 
+
+### Distribution of read lengths
+
+Here is the full distribution of read lengths without adaptive sampling turned on (i.e., I also ran a 
+simulation without adaptive sampling) - there are LOTS of reads that less than 1000bp long:
+
+<img src="../fig/06-non-as-reads.png" alt="plot of chunk unnamed-chunk-2" width="80%" style="display: block; margin: auto auto auto 0;" />
+
+Here is a zoomed in view:
+
+<img src="../fig/06-non-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-3" width="80%" style="display: block; margin: auto auto auto 0;" />
+
+### Adaptive sampling results
+
+Despite the caveats, it is fairly clear that the adaptive sampling algorithm worked (or at least that 
+it did *something*).  In the plots below, the green bars represent reads that were *not* unblocked (i.e., 
+the AS algorithm either: (1) decided the read mapped to a region in our bed file and continued sequencing 
+it until the end, or (2) completed sequenced before a decision had been made), while the purple bars represent 
+reads that were unblocked (i.e., the read was mapped in real-time, and the AS algorithm decided that it 
+*did not* come from a region in our bed file, so ejected the read from the pore).
+
+Here is the full distribution:
+
+<img src="../fig/06-as-reads.png" alt="plot of chunk unnamed-chunk-4" width="80%" style="display: block; margin: auto auto auto 0;" />
+
+And here is a close up:
+
+<img src="../fig/06-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-5" width="80%" style="display: block; margin: auto auto auto 0;" />
+
+It is clear from the plots that the length of reads receiving an "unblock" signal is around 800bp, reflecting the time that 
+the AS algorithm takes to make a decision about whether or not to reject a read.
+
+### Adaptive sampling details
+
+When adaptive sampling is enabled, an additional output file is created, providing information about every read that was processed.  
+It is stored in the `other_reports` folder within the run directory, and is in CSV format.  The naming convention is:
+
+```
+adaptive_sampling_XXX_YYY.csv
+```
+
+where XXC and YYY are flowcell and run identifiers (I think). 
+
+The format is:
+
+```
+batch_time,read_number,channel,num_samples,read_id,sequence_length,decision
+1669157044.6601431,499,3,4008,bc65b9b4-bc05-45c4-a7b3-4c199577c8c9,350,unblock
+1669157045.2247138,301,131,4000,1892041e-71a5-4121-9547-49122e247172,258,unblock
+1669157045.2247138,438,42,4002,6be52363-5315-445c-bcd4-3d3b32a829dc,312,stop_receiving
+1669157045.2247138,590,76,4001,e459305c-288d-47e7-9bbd-93224ee45074,264,unblock
+1669157045.2247138,280,95,4005,a15f9aef-9b60-4f8f-bb74-c96b6f4fa16f,360,stop_receiving
+1669157045.2247138,598,94,4001,8f615191-d1d4-42c5-a778-92c91411979b,357,unblock
+1669157045.2247138,554,125,4003,8e628f9d-ae37-499e-b32e-7842bcf1539f,364,stop_receiving
+1669157045.2247138,431,110,4003,12516158-8ed0-4bf2-bdff-f94171593996,378,unblock
+1669157045.2247138,414,102,4008,1cad751a-ddde-4700-bb06-9dcf8974185a,313,unblock
+```
+
+Or slightly nicer (commas exchanged for tabs):
+
+```
+batch_time      read_number     channel num_samples          read_id        sequence_length     decision
+1669157044.6601431      499     3       4008    bc65b9b4-bc05-45c4-a7b3-4c199577c8c9    350     unblock
+1669157045.2247138      301     131     4000    1892041e-71a5-4121-9547-49122e247172    258     unblock
+1669157045.2247138      438     42      4002    6be52363-5315-445c-bcd4-3d3b32a829dc    312     stop_receiving
+1669157045.2247138      590     76      4001    e459305c-288d-47e7-9bbd-93224ee45074    264     unblock
+1669157045.2247138      280     95      4005    a15f9aef-9b60-4f8f-bb74-c96b6f4fa16f    360     stop_receiving
+1669157045.2247138      598     94      4001    8f615191-d1d4-42c5-a778-92c91411979b    357     unblock
+1669157045.2247138      554     125     4003    8e628f9d-ae37-499e-b32e-7842bcf1539f    364     stop_receiving
+1669157045.2247138      431     110     4003    12516158-8ed0-4bf2-bdff-f94171593996    378     unblock
+1669157045.2247138      414     102     4008    1cad751a-ddde-4700-bb06-9dcf8974185a    313     unblock
+```
+
+## Processing adaptive sampling data
+
+Once the data have been generated, they are processed in exactly the same way:
+
+1. Basecalling with `guppy_basecaller`
+2. QA/QC with FastQC and/or NanoPlot
+3. Alignment with `minimap2`
+
+There are also a few additional things we can do to check how well the adaptive sampling has worked.
+
+### Filtering for read length
+
+Because there are so many short reads (i.e., < 1000 bases) it is actually quite difficult to see the effect of 
+adaptive sampling in this data set. To overcome this, we can remove these short reads from the data.
+
+To do this, we can filter the bam file:
+
+~~~
+samtools view -h bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort.bam | \
+   awk 'length($10) > 1000 || $1 ~ /^@/' | \
+   samtools view -bS - > bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: .bash}
+
+And then index it:
+
+~~~
+samtools index bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: bash}
+
+Now we have a new bam file that only contains aligned reads longer than 1000bp.
+
+
+### Checking the read depth of the selected regions
+
+We can use `samtools bedcov` to calculate how much sequence data was generated for specific regions of the genome.
+
+For this, we need a bed file.  This one breaks the 1.8Mbp *S. thermophilus* genome into 100Kbp chunks (admitedly, I missed
+a little bit of the end - after 1,800,000bp):
+
+```
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   100001  200000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   300001  400000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   500001  600000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   700001  800000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   900001  1000000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1100001 1200000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1300001 1400000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1500001 1600000
+NZ_LS974444.1   1600001 1700000
+NZ_LS974444.1   1700001 1800000
+```
+
+Note that NZ_LS974444.1 is the name of the single chromosome in the fasta file.
+
+### Aside: how can we generate a file like that?
+
+Let's build one with bash!
+
+First, let's write a loop that counts from 1 to 10 in steps of 2:
+
+~~~
+for i in {1 10 2}
+do
+    echo $i
+done    
+~~~
+{: .bash}
+
+~~~
+1
+3
+5
+7
+9
+~~~
+{: .output}
+
+Now lets do 1 to 1,800,000, in steps of 100,000:
+
+~~~
+for i in {1..1800000..100000}
+do
+    echo $i
+done    
+~~~
+{: .bash}
+
+~~~
+1
+100001
+200001
+300001
+400001
+500001
+600001
+700001
+800001
+900001
+1000001
+1100001
+1200001
+1300001
+1400001
+1500001
+1600001
+1700001
+~~~
+{: .output}
+
+Add the chromosome name, and the end position to each line (and make sure to separate with tabs):
+
+~~~
+for i in {1..1800000..100000}
+do
+    start=$i
+    end=`echo $i+99999 | bc`
+    echo -e NZ_LS974444.1'\t'$start'\t'$end
+done    
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   100001  200000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   300001  400000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   500001  600000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   700001  800000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   900001  1000000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1100001 1200000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1300001 1400000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1500001 1600000
+NZ_LS974444.1   1600001 1700000
+NZ_LS974444.1   1700001 1800000
+~~~
+{: .output}
+
+### Using samtools bedcov
+
+Once we've got a bed file, `samtools bedcov` can be used to calculate the amount of sequence generated for the 
+regions in the bed file.
+
+I've generated a longer bed file, splitting the genome into 10Kb chunks. It can be found at:
+
+```
+XXX
+```
+
+~~~
+samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: .bash}
+
+First 20 rows:
+
+~~~
+NZ_LS974444.1   1       10001   1971347
+NZ_LS974444.1   10001   20001   1311504
+NZ_LS974444.1   20001   30001   1276725
+NZ_LS974444.1   30001   40001   1744593
+NZ_LS974444.1   40001   50001   1665792
+NZ_LS974444.1   50001   60001   420289
+NZ_LS974444.1   60001   70001   351003
+NZ_LS974444.1   70001   80001   1138855
+NZ_LS974444.1   80001   90001   1320247
+NZ_LS974444.1   90001   100001  1393315
+NZ_LS974444.1   100001  110001  415522
+NZ_LS974444.1   110001  120001  131402
+NZ_LS974444.1   120001  130001  189640
+NZ_LS974444.1   130001  140001  156247
+NZ_LS974444.1   140001  150001  154348
+NZ_LS974444.1   150001  160001  127926
+NZ_LS974444.1   160001  170001  105841
+NZ_LS974444.1   170001  180001  105905
+NZ_LS974444.1   180001  190001  61798
+NZ_LS974444.1   190001  200001  315722
+~~~
+{: .output}
+
+Write it to a text file:
+
+~~~
+samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-10k-cov.txt 
+~~~
+{: .bash}
+
+
+~~~
+x = read.table('yog-as-100kb-chunks-bed-10k-cov.txt', header=FALSE, sep='\t')
+~~~
+{: .language-r}
 
 
 
+
+~~~
+names(x) = c("CHROM", "START", "END", "BASES")
+x$LENGTH = x$END - x$START
+x$DEPTH = x$BASES/x$LENGTH
+
+head(x)
+~~~
+{: .language-r}
+
+
+
+~~~
+          CHROM START   END  BASES LENGTH   DEPTH
+1 NZ_LS974444.1     1 10001 145857  10000 14.5857
+2 NZ_LS974444.1 10001 20001  94887  10000  9.4887
+3 NZ_LS974444.1 20001 30001  97264  10000  9.7264
+4 NZ_LS974444.1 30001 40001 126374  10000 12.6374
+5 NZ_LS974444.1 40001 50001 119607  10000 11.9607
+6 NZ_LS974444.1 50001 60001  30406  10000  3.0406
+~~~
+{: .output}
+
+
+~~~
+library(ggplot2)
+ggplot(x, aes(x=START, y=DEPTH)) + geom_line(linewidth=1)
+~~~
+{: .language-r}
+
+<img src="../fig/rmd-06-unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" width="612" style="display: block; margin: auto auto auto 0;" />
