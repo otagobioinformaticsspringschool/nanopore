@@ -142,4 +142,225 @@ batch_time      read_number     channel num_samples          read_id        sequ
 1669157045.2247138      414     102     4008    1cad751a-ddde-4700-bb06-9dcf8974185a    313     unblock
 ```
 
+## Processing adaptive sampling data
 
+Once the data have been generated, they are processed in exactly the same way:
+
+1. Basecalling with `guppy_basecaller`
+2. QA/QC with FastQC and/or NanoPlot
+3. Alignment with `minimap2`
+
+There are also a few additional things we can do to check how well the adaptive sampling has worked.
+
+### Filtering for read length
+
+Because there are so many short reads (i.e., < 1000 bases) it is actually quite difficult to see the effect of 
+adaptive sampling in this data set. To overcome this, we can remove these short reads from the data.
+
+To do this, we can filter the bam file:
+
+~~~
+samtools view -h bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort.bam | \
+   awk 'length($10) > 1000 || $1 ~ /^@/' | \
+   samtools view -bS - > bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: .bash}
+
+And then index it:
+
+~~~
+samtools index bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: bash}
+
+Now we have a new bam file that only contains aligned reads longer than 1000bp.
+
+
+### Checking the read depth of the selected regions
+
+We can use `samtools bedcov` to calculate how much sequence data was generated for specific regions of the genome.
+
+For this, we need a bed file.  This one breaks the 1.8Mbp *S. thermophilus* genome into 100Kbp chunks (admitedly, I missed
+a little bit of the end - after 1,800,000bp):
+
+```
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   100001  200000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   300001  400000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   500001  600000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   700001  800000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   900001  1000000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1100001 1200000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1300001 1400000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1500001 1600000
+NZ_LS974444.1   1600001 1700000
+NZ_LS974444.1   1700001 1800000
+```
+
+Note that NZ_LS974444.1 is the name of the single chromosome in the fasta file.
+
+### Aside: how can we generate a file like that?
+
+Let's build one with bash!
+
+First, let's write a loop that counts from 1 to 10 in steps of 2:
+
+~~~
+for i in {1 10 2}
+do
+    echo $i
+done    
+~~~
+{: .bash}
+
+~~~
+1
+3
+5
+7
+9
+~~~
+{: .output}
+
+Now lets do 1 to 1,800,000, in steps of 100,000:
+
+~~~
+for i in {1..1800000..100000}
+do
+    echo $i
+done    
+~~~
+{: .bash}
+
+~~~
+1
+100001
+200001
+300001
+400001
+500001
+600001
+700001
+800001
+900001
+1000001
+1100001
+1200001
+1300001
+1400001
+1500001
+1600001
+1700001
+~~~
+{: .output}
+
+Add the chromosome name, and the end position to each line (and make sure to separate with tabs):
+
+~~~
+for i in {1..1800000..100000}
+do
+    start=$i
+    end=`echo $i+99999 | bc`
+    echo -e NZ_LS974444.1'\t'$start'\t'$end
+done    
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   100001  200000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   300001  400000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   500001  600000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   700001  800000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   900001  1000000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1100001 1200000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1300001 1400000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1500001 1600000
+NZ_LS974444.1   1600001 1700000
+NZ_LS974444.1   1700001 1800000
+~~~
+{: .output}
+
+### Using samtools bedcov
+
+Once we've got a bed file, `samtools bedcov` can be used to calculate the amount of sequence generated for the 
+regions in the bed file.
+
+I've generated a longer bed file, splitting the genome into 10Kb chunks. It can be found at:
+
+```
+XXX
+```
+
+~~~
+samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+~~~
+{: .bash}
+
+First 20 rows:
+
+~~~
+NZ_LS974444.1   1       10001   1971347
+NZ_LS974444.1   10001   20001   1311504
+NZ_LS974444.1   20001   30001   1276725
+NZ_LS974444.1   30001   40001   1744593
+NZ_LS974444.1   40001   50001   1665792
+NZ_LS974444.1   50001   60001   420289
+NZ_LS974444.1   60001   70001   351003
+NZ_LS974444.1   70001   80001   1138855
+NZ_LS974444.1   80001   90001   1320247
+NZ_LS974444.1   90001   100001  1393315
+NZ_LS974444.1   100001  110001  415522
+NZ_LS974444.1   110001  120001  131402
+NZ_LS974444.1   120001  130001  189640
+NZ_LS974444.1   130001  140001  156247
+NZ_LS974444.1   140001  150001  154348
+NZ_LS974444.1   150001  160001  127926
+NZ_LS974444.1   160001  170001  105841
+NZ_LS974444.1   170001  180001  105905
+NZ_LS974444.1   180001  190001  61798
+NZ_LS974444.1   190001  200001  315722
+~~~
+{: .output}
+
+Write it to a text file:
+
+~~~
+samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-10k-cov.txt 
+~~~
+{: .bash}
+
+```{r, eval=FALSE, echo=TRUE}
+x = read.table('yog-as-100kb-chunks-bed-10k-cov.txt', header=FALSE, sep='\t')
+```
+
+```{r, eval=TRUE, echo=FALSE}
+x = read.table('../files/yog-as-100kb-chunks-bed-10k-cov.txt', header=FALSE, sep='\t')
+```
+
+```{r, echo=TRUE}
+names(x) = c("CHROM", "START", "END", "BASES")
+x$LENGTH = x$END - x$START
+x$DEPTH = x$BASES/x$LENGTH
+
+head(x)
+```
+
+```{r, echo=TRUE}
+library(ggplot2)
+ggplot(x, aes(x=START, y=DEPTH)) + geom_line(linewidth=1)
+```
