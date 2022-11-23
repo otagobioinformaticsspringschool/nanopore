@@ -20,6 +20,13 @@ source: Rmd
 
 
 
+Up until now all the data that we have used for the Otago Bioinformatics Spring School has been either already on NeSI or able to be downladed there from the internet. 
+With bioinformatics workflows we usually start with needing to get our data from our computer to the computers being used for processing and analysis and then once that is done, we need to transfer it back.
+
+There are three main ways to go about transferring data between your computer and NeSI. These are using `scp` on the commandline, through the upload/download option when running a Jupyter notebook session on NeSI, or through Globus.
+
+Both `scp` and Jupyter methods are only really suitable for small data transfers (< 1 GB). For anything larger, it is recommended to use Globus.
+
 ### Generating FASTQ data - basecalling
 
 During the ONT sequencing run, the data generated on the flowcell are stored in FAST5 format. In order to perform further analysis, the FAST5 data 
@@ -39,22 +46,31 @@ Today we will use NeSI for this.
 
 The first step in the process is to transfer the FAST5 data to NeSI.
 
-### Data transfer via Globus
 
-https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5
-
-This episode will discuss how to get data to/from NeSI
-
-Up until now all the data that we have used for the Otago Bioinformatics Spring School has been either already on NeSI or able to be downladed there from the internet. 
-With bioinformatics workflows we usually start with needing to get our data from our computer to the computers being used for processing and analysis and then once that is done, we need to transfer it back.
-
-There are three main ways to go about transferring data between your computer and NeSI. These are using `scp` on the commandline, through the upload/download option when running a Jupyter notebook session on NeSI, or through Globus.
-
-Both `scp` and Jupyter methods are only really suitable for small data transfers (< 1 GB). For anything larger, it is recommended to use Globus.
 
 ## `scp`
 
+From a terminal, `scp` can be used to transfer files to a remote computer.
+
+The documentation for how to use `scp` specifically with NeSI can be found at [https://support.nesi.org.nz/hc/en-gb/articles/360000578455-File-Transfer-with-SCP](https://support.nesi.org.nz/hc/en-gb/articles/360000578455-File-Transfer-with-SCP). There are some configuration steps that need to be done to make this a bit easier.
+
+The general format is `scp <local file to transfer> mahuika:<path to copy file to>` to send a file to NeSI, and `scp mahuika:<path to file> <local path to copy to>` to copy a file from NeSI to your machine.
+
 ## Jupyter
+
+Jupyter can be used to both upload and download data, however similar to `scp` it's not ideal for sending large quantities of data.
+
+### Downloading data
+
+To download a file using Jupyter, you will need to use the explorer panel and navigate to the file there. Then, right-click on th file and a menu will pop up. Select "Download" from this menu and your browser will start downloading it.
+
+![Downloading data in Jupyter](../fig/02-jupyter-download-circled.png)
+
+### Uploading data
+
+Similar to downloading through Juptyer, you first need to use the explorer panel to navigate to the directory where you would like the file to be uploaded to. From there click the upload button in the top left corner and select the file you wish to upload from your computer.
+
+![Uploading data in Jupyter](../fig/02-jupyter-upload-circled.png)
 
 ## Globus
 
