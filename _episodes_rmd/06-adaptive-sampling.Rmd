@@ -14,9 +14,132 @@ source: Rmd
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("06-")
+knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-> possible example dataset of E coli available from https://zenodo.org/record/1257429
+## Let's learn about Adaptive Sampling...
 
+Mik will now talk at you.  :)
+
+
+## Now let's take a look at some data
+
+The folder XXX contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
+
+https://zenodo.org/record/2548026#.YLifQOuxXOQ
+
+### What did I do?
+
+The bulk fast5 file was used to simulate a MinION run.  Instead of just playing through the run file which would essentially 
+just regenerate the exact same data that the run produced initially), I used MinKNOW's built-in adaptive sampling functionality.
+
+1. Specified *S. thermophilus* as the target genome (1.8Mbp).
+
+2. Provided a bed file that listed 100Kbp regions, interspersed with 100Kbp gaps:
+
+```
+NZ_LS974444.1   1       100000
+NZ_LS974444.1   200001  300000
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   600001  700000
+NZ_LS974444.1   800001  900000
+NZ_LS974444.1   1000001 1100000
+NZ_LS974444.1   1200001 1300000
+NZ_LS974444.1   1400001 1500000
+NZ_LS974444.1   1600001 1700000
+```
+
+3. Specified that we wanted to *enrich* for these regions.
+
+Some caveats:
+
+1. We are *pretending* to do an adaptive sampling run, using data generated from a real 
+(non-AS) run, so when a pore is unblocked (i.e., a read mapping to a region that we *don't* 
+want to enrich for) in our simulation, we stop accumulating data for that read, but the pore 
+doesn't then become available for sequencing another read (because in the REAL run, the 
+pore continued to sequence that read).
+
+2. This sample had a LOT of short sequences, so in many cases, the read had been fully sequenced before 
+the software had a chance to map it to teh genome and determine whether or not to continue sequencing. 
+
+### Distribution of read lengths
+
+Here is the full distribution of read lengths without adaptive sampling turned on (i.e., I also ran a 
+simulation without adaptive sampling) - there are LOTS of reads that less than 1000bp long:
+
+```{r, out.width="80%"}
+knitr::include_graphics("../fig/06-non-as-reads.png")
+```
+
+Here is a zoomed in view:
+
+```{r, out.width="80%"}
+knitr::include_graphics("../fig/06-non-as-reads-closeup.png")
+```
+
+### Adaptive sampling results
+
+Despite the caveats, it is fairly clear that the adaptive sampling algorithm worked (or at least that 
+it did *something*).  In the plots below, the green bars represent reads that were *not* unblocked (i.e., 
+the AS algorithm either: (1) decided the read mapped to a region in our bed file and continued sequencing 
+it until the end, or (2) completed sequenced before a decision had been made), while the purple bars represent 
+reads that were unblocked (i.e., the read was mapped in real-time, and the AS algorithm decided that it 
+*did not* come from a region in our bed file, so ejected the read from the pore).
+
+Here is the full distribution:
+
+```{r, out.width="80%"}
+knitr::include_graphics("../fig/06-as-reads.png")
+```
+
+And here is a close up:
+
+```{r, out.width="80%"}
+knitr::include_graphics("../fig/06-as-reads-closeup.png")
+```
+
+It is clear from the plots that the length of reads receiving an "unblock" signal is around 800bp, reflecting the time that 
+the AS algorithm takes to make a decision about whether or not to reject a read.
+
+### Adaptive sampling details
+
+When adaptive sampling is enabled, an additional output file is created, providing information about every read that was processed.  
+It is stored in the `other_reports` folder within the run directory, and is in CSV format.  The naming convention is:
+
+```
+adaptive_sampling_XXX_YYY.csv
+```
+
+where XXC and YYY are flowcell and run identifiers (I think). 
+
+The format is:
+
+```
+batch_time,read_number,channel,num_samples,read_id,sequence_length,decision
+1669157044.6601431,499,3,4008,bc65b9b4-bc05-45c4-a7b3-4c199577c8c9,350,unblock
+1669157045.2247138,301,131,4000,1892041e-71a5-4121-9547-49122e247172,258,unblock
+1669157045.2247138,438,42,4002,6be52363-5315-445c-bcd4-3d3b32a829dc,312,stop_receiving
+1669157045.2247138,590,76,4001,e459305c-288d-47e7-9bbd-93224ee45074,264,unblock
+1669157045.2247138,280,95,4005,a15f9aef-9b60-4f8f-bb74-c96b6f4fa16f,360,stop_receiving
+1669157045.2247138,598,94,4001,8f615191-d1d4-42c5-a778-92c91411979b,357,unblock
+1669157045.2247138,554,125,4003,8e628f9d-ae37-499e-b32e-7842bcf1539f,364,stop_receiving
+1669157045.2247138,431,110,4003,12516158-8ed0-4bf2-bdff-f94171593996,378,unblock
+1669157045.2247138,414,102,4008,1cad751a-ddde-4700-bb06-9dcf8974185a,313,unblock
+```
+
+Or slightly nicer (commas exchanged for tabs):
+
+```
+batch_time      read_number     channel num_samples          read_id        sequence_length     decision
+1669157044.6601431      499     3       4008    bc65b9b4-bc05-45c4-a7b3-4c199577c8c9    350     unblock
+1669157045.2247138      301     131     4000    1892041e-71a5-4121-9547-49122e247172    258     unblock
+1669157045.2247138      438     42      4002    6be52363-5315-445c-bcd4-3d3b32a829dc    312     stop_receiving
+1669157045.2247138      590     76      4001    e459305c-288d-47e7-9bbd-93224ee45074    264     unblock
+1669157045.2247138      280     95      4005    a15f9aef-9b60-4f8f-bb74-c96b6f4fa16f    360     stop_receiving
+1669157045.2247138      598     94      4001    8f615191-d1d4-42c5-a778-92c91411979b    357     unblock
+1669157045.2247138      554     125     4003    8e628f9d-ae37-499e-b32e-7842bcf1539f    364     stop_receiving
+1669157045.2247138      431     110     4003    12516158-8ed0-4bf2-bdff-f94171593996    378     unblock
+1669157045.2247138      414     102     4008    1cad751a-ddde-4700-bb06-9dcf8974185a    313     unblock
+```
 
 
