@@ -24,7 +24,8 @@ Mik will now talk at you.  :)
 
 The folder XXX contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
 
-https://zenodo.org/record/2548026#.YLifQOuxXOQ
+[https://zenodo.org/record/2548026#.YLifQOuxXOQ](https://zenodo.org/record/2548026#.YLifQOuxXOQ)
+
 
 ### What did I do?
 
@@ -295,7 +296,7 @@ regions in the bed file.
 I've generated a longer bed file, splitting the genome into 10Kb chunks. It can be found at:
 
 ```
-as-100kb-chunks.bed
+chunks-10k.bed
 ```
 
 ~~~
@@ -336,6 +337,9 @@ samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligne
 ~~~
 {: .bash}
 
+We'll use this to make a plot of read depth across the genome in R.
+
+But first...
 
 ### Another aside: complementing a bed file
 
@@ -383,12 +387,12 @@ NZ_LS974444.1   1831756
 This information can then be used to create the complement bed file:
 
 ~~~
-bedtools complement -i as-100kb-chunks.bed -g genome/st-chrom-sizes.txt > as-100k-chunks-complement.bed
+bedtools complement -i as-100kb-chunks.bed -g genome/st-chrom-sizes.txt > as-100kb-chunks-complement.bed
 ~~~
 {: .bash}
 
 ~~~
-less as-100k-chunks-complement.bed
+less as-100kb-chunks-complement.bed
 ~~~
 {: .bash}
 
@@ -408,25 +412,82 @@ NZ_LS974444.1   1699999 1831756
 Check (visually) that this is the complement of the bed file I used for adaptive sampling:
 
 ~~~
-less chunks-100k.bed
+less as-100kb-chunks.bed
 ~~~
 {: .bash}
 
 ~~~
-NZ_LS974444.1   99999   200000
-NZ_LS974444.1   299999  400001
-NZ_LS974444.1   500000  600000
-NZ_LS974444.1   699999  800000
-NZ_LS974444.1   899999  1000000
-NZ_LS974444.1   1099999 1200000
-NZ_LS974444.1   1299999 1400000
-NZ_LS974444.1   1499999 1600000
-NZ_LS974444.1   1699999 1831756
+NZ_LS974444.1   0       99999
+NZ_LS974444.1   200000  299999
+NZ_LS974444.1   400001  500000
+NZ_LS974444.1   600000  699999
+NZ_LS974444.1   800000  899999
+NZ_LS974444.1   1000000 1099999
+NZ_LS974444.1   1200000 1299999
+NZ_LS974444.1   1400000 1499999
+NZ_LS974444.1   1600000 1699999
 ~~~
 {: .output}
 
+We could use these files with `samtools bedcov` to generate read depth information separately for the 
+selected and non-selected regions (handy if you AS selection is somewhat complex - e.g., all exons, a specific set of genes etc).
+
+Coverage info for selected regions:
+
+~~~
+samtools bedcov as-100kb-chunks.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-SELECTED-cov.txt 
+~~~
+{: .bash}
+
+Coverage info for non-selected regions:
+
+~~~
+samtools bedcov as-100kb-chunks-complement.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-NONSELECTED-cov.txt 
+~~~
+{: .bash}
+
+
+~~~
+less yog-as-100kb-chunks-SELECTED-cov.txt
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   0       99999   12593594
+NZ_LS974444.1   200000  299999  14610340
+NZ_LS974444.1   400001  500000  12060875
+NZ_LS974444.1   600000  699999  14714058
+NZ_LS974444.1   800000  899999  16128475
+NZ_LS974444.1   1000000 1099999 15793991
+NZ_LS974444.1   1200000 1299999 17615309
+NZ_LS974444.1   1400000 1499999 13341368
+NZ_LS974444.1   1600000 1699999 16061631
+~~~
+{: .output}
+
+~~~
+less yog-as-100kb-chunks-NONSELECTED-cov.txt
+~~~
+{: .bash}
+
+~~~
+NZ_LS974444.1   99999   200000  1764394
+NZ_LS974444.1   299999  400001  1738930
+NZ_LS974444.1   500000  600000  1736284
+NZ_LS974444.1   699999  800000  1602761
+NZ_LS974444.1   899999  1000000 1739915
+NZ_LS974444.1   1099999 1200000 2134827
+NZ_LS974444.1   1299999 1400000 4654002
+NZ_LS974444.1   1499999 1600000 3945477
+NZ_LS974444.1   1699999 1831756 2277969
+~~~
+{: .output}
+
+
 ### Some quick analysis in R
 
+
+#### Genome-wide read-depth
 
 Load the `dplyr` and `ggplot2` packages:
 
@@ -485,3 +546,60 @@ ggplot(bedCov, aes(x=START, y=DEPTH)) +
 {: .language-r}
 
 <img src="../fig/rmd-06-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto auto auto 0;" />
+
+#### Average read-depth in selected and non-selected regions
+
+
+
+~~~
+bedCovSelected = read.table('yog-as-100kb-chunks-SELECTED-cov.txt', header=FALSE, sep='\t')
+~~~
+{: .language-r}
+
+
+
+
+~~~
+names(bedCovSelected) = c("CHROM", "START", "END", "BASES")
+bedCovSelected = mutate(bedCovSelected, LENGTH = END - START + 1)
+bedCovSelected = mutate(bedCovSelected, DEPTH = BASES / LENGTH)
+~~~
+{: .language-r}
+
+Calculate average read depth for selected regions:
+
+
+~~~
+mean(bedCovSelected$DEPTH)
+~~~
+{: .language-r}
+
+
+
+~~~
+[1] 147.6885
+~~~
+{: .output}
+
+> ## Exercise: calculating read-depth 
+>
+> - Repeat the average read depth calculation for the non-selected regions.  
+> - Was the average read depth different between the two regions?
+>
+>> ## Solution
+>>
+>> ```
+>> bedCovNonSelected = read.table('yog-as-100kb-chunks-NONSELECTED-cov.txt', header=FALSE, sep='\t')
+>> 
+>> names(bedCovNonSelected) = c("CHROM", "START", "END", "BASES")
+>>
+>> bedCovNonSelected = mutate(bedCovNonSelected, LENGTH = END - START + 1)
+>> bedCovNonSelected = mutate(bedCovNonSelected, DEPTH = BASES / LENGTH)
+>>
+>> mean(bedCovNonSelected$DEPTH)
+>> ```
+>> Average read depth for non-selected regions is: 23.38
+>> 
+>> This is A LOT less than the average read depth for the selected regions: 147.69
+> {: .solution}
+{: .challenge}
