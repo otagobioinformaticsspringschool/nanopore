@@ -8,7 +8,7 @@ objectives:
 - "Assess the quality of reads."
 - "Generate summary metrics."
 keypoints:
-- "FastQC and NanoPore provide pre-formatted reports on run characteristics and read quality."
+- "FastQC and NanoPlot provide pre-formatted reports on run characteristics and read quality."
 - "Bioawk can be used to generate summary metrics and ask specific questions about the read data."
 source: Rmd
 ---
