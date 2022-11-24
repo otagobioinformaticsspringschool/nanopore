@@ -22,7 +22,7 @@ Mik will now talk at you.  :)
 
 ## Now let's take a look at some data
 
-The folder XXX contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
+The folder `adaptive-sampling` contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
 
 [https://zenodo.org/record/2548026#.YLifQOuxXOQ](https://zenodo.org/record/2548026#.YLifQOuxXOQ)
 
@@ -36,7 +36,7 @@ just regenerate the exact same data that the run produced initially), I used Min
 
 2. Provided a bed file that listed 100Kbp regions, interspersed with 100Kbp gaps:
 
-```
+~~~
 NZ_LS974444.1   0       99999
 NZ_LS974444.1   200000  299999
 NZ_LS974444.1   400001  500000
@@ -46,7 +46,7 @@ NZ_LS974444.1   1000000 1099999
 NZ_LS974444.1   1200000 1299999
 NZ_LS974444.1   1400000 1499999
 NZ_LS974444.1   1600000 1699999
-```
+~~~
 
 Note that NZ_LS974444.1 is the name of the single chromosome in the fasta file.
 
@@ -109,7 +109,7 @@ where XXC and YYY are flowcell and run identifiers (I think).
 
 The format is:
 
-```
+~~~
 batch_time,read_number,channel,num_samples,read_id,sequence_length,decision
 1669157044.6601431,499,3,4008,bc65b9b4-bc05-45c4-a7b3-4c199577c8c9,350,unblock
 1669157045.2247138,301,131,4000,1892041e-71a5-4121-9547-49122e247172,258,unblock
@@ -120,11 +120,11 @@ batch_time,read_number,channel,num_samples,read_id,sequence_length,decision
 1669157045.2247138,554,125,4003,8e628f9d-ae37-499e-b32e-7842bcf1539f,364,stop_receiving
 1669157045.2247138,431,110,4003,12516158-8ed0-4bf2-bdff-f94171593996,378,unblock
 1669157045.2247138,414,102,4008,1cad751a-ddde-4700-bb06-9dcf8974185a,313,unblock
-```
+~~~
 
 Or slightly nicer (commas exchanged for tabs):
 
-```
+~~~
 batch_time      read_number     channel num_samples          read_id        sequence_length     decision
 1669157044.6601431      499     3       4008    bc65b9b4-bc05-45c4-a7b3-4c199577c8c9    350     unblock
 1669157045.2247138      301     131     4000    1892041e-71a5-4121-9547-49122e247172    258     unblock
@@ -135,7 +135,7 @@ batch_time      read_number     channel num_samples          read_id        sequ
 1669157045.2247138      554     125     4003    8e628f9d-ae37-499e-b32e-7842bcf1539f    364     stop_receiving
 1669157045.2247138      431     110     4003    12516158-8ed0-4bf2-bdff-f94171593996    378     unblock
 1669157045.2247138      414     102     4008    1cad751a-ddde-4700-bb06-9dcf8974185a    313     unblock
-```
+~~~
 
 ## Processing adaptive sampling data
 
@@ -144,6 +144,12 @@ Once the data have been generated, they are processed in exactly the same way:
 1. Basecalling with `guppy_basecaller`
 2. QA/QC with FastQC and/or NanoPlot
 3. Alignment with `minimap2`
+
+I've done the above, and a bam file (wih an annoyingly long name) can be found at:
+
+~~~
+bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort.bam
+~~~
 
 There are also a few additional things we can do to check how well the adaptive sampling has worked.
 
@@ -166,7 +172,7 @@ And then index it:
 ~~~
 samtools index bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
 ~~~
-{: bash}
+{: .bash}
 
 Now we have a new bam file that only contains aligned reads longer than 1000bp.
 
@@ -178,7 +184,7 @@ We can use `samtools bedcov` to calculate how much sequence data was generated f
 For this, we need a bed file.  This one breaks the 1.8Mbp *S. thermophilus* genome into 100Kbp chunks (admitedly, I missed
 a little bit of the end - after 1,800,000bp):
 
-```
+~~~
 NZ_LS974444.1   0       99999
 NZ_LS974444.1   100000  199999
 NZ_LS974444.1   200000  299999
@@ -197,7 +203,7 @@ NZ_LS974444.1   1400000 1499999
 NZ_LS974444.1   1500000 1599999
 NZ_LS974444.1   1600000 1699999
 NZ_LS974444.1   1700000 1799999
-```
+~~~
 
 ### Aside: how can we generate a file like that?
 
@@ -296,11 +302,14 @@ regions in the bed file.
 I've generated a longer bed file, splitting the genome into 10Kb chunks. It can be found at:
 
 ```
-chunks-10k.bed
+bed-files/chunks-10k.bed
 ```
 
+Now let's use this file with `samtools bedcov`:
+
 ~~~
-samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
+samtools bedcov bed-files/chunks-10k.bed \
+   bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
 ~~~
 {: .bash}
 
@@ -333,7 +342,10 @@ NZ_LS974444.1   190000  199999  315476
 Write it to a text file:
 
 ~~~
-samtools bedcov chunks-10k.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-10k-cov.txt 
+mkdir coverage-files
+samtools bedcov bed-files/chunks-10k.bed \
+   bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > \
+   coverage-files/yog-as-100kb-chunks-10k-cov.txt 
 ~~~
 {: .bash}
 
@@ -357,7 +369,7 @@ samtools faidx genome/streptococcus-thermophilus-strain-N4L.fa
 This produces the file: `streptococcus-thermophilus-strain-N4L.fa.fai`:
 
 ~~~
-less genome/streptococcus-thermophilus-strain-N4L.fa.fai 
+more genome/streptococcus-thermophilus-strain-N4L.fa.fai 
 ~~~
 {: .bash}
 
@@ -370,12 +382,17 @@ We can use this to extract chromosome sizes (in this case, there is only one, bu
 really useful approach):
 
 ~~~
-cut -f 1,2 genome/streptococcus-thermophilus-strain-N4L.fa.fai | sort -n > genome/st-chrom-sizes.txt
+cut -f 1,2 genome/streptococcus-thermophilus-strain-N4L.fa.fai > genome/st-chrom-sizes.txt
 ~~~
 {: .bash}
 
+The `cut` command splits lines of text into separate "fields" - by default, "tab" is used as the delimiter (others can be specified).
+In this case, the code just takes the first two fields, which are the chromosome name and length.
+
+Check what it produced:
+
 ~~~
-less genome/st-chrom-sizes.txt
+more genome/st-chrom-sizes.txt
 ~~~
 {: .bash}
 
@@ -387,19 +404,23 @@ NZ_LS974444.1   1831756
 This information can then be used to create the complement bed file:
 
 ~~~
-bedtools complement -i as-100kb-chunks.bed -g genome/st-chrom-sizes.txt > as-100kb-chunks-complement.bed
+module load BEDTools
+~~~
+
+~~~
+bedtools complement -i bed-files/as-100kb-chunks.bed -g genome/st-chrom-sizes.txt > bed-files/as-100kb-chunks-complement.bed
 ~~~
 {: .bash}
 
 ~~~
-less as-100kb-chunks-complement.bed
+more bed-files/as-100kb-chunks-complement.bed
 ~~~
 {: .bash}
 
 ~~~
 NZ_LS974444.1   99999   200000
-NZ_LS974444.1   299999  400001
-NZ_LS974444.1   500000  600000
+NZ_LS974444.1   299999  400000
+NZ_LS974444.1   499999  600000
 NZ_LS974444.1   699999  800000
 NZ_LS974444.1   899999  1000000
 NZ_LS974444.1   1099999 1200000
@@ -412,14 +433,14 @@ NZ_LS974444.1   1699999 1831756
 Check (visually) that this is the complement of the bed file I used for adaptive sampling:
 
 ~~~
-less as-100kb-chunks.bed
+more bed-files/as-100kb-chunks.bed
 ~~~
 {: .bash}
 
 ~~~
 NZ_LS974444.1   0       99999
 NZ_LS974444.1   200000  299999
-NZ_LS974444.1   400001  500000
+NZ_LS974444.1   400000  499999
 NZ_LS974444.1   600000  699999
 NZ_LS974444.1   800000  899999
 NZ_LS974444.1   1000000 1099999
@@ -429,33 +450,37 @@ NZ_LS974444.1   1600000 1699999
 ~~~
 {: .output}
 
-We could use these files with `samtools bedcov` to generate read depth information separately for the 
+We can use these files with `samtools bedcov` to generate read depth information separately for the 
 selected and non-selected regions (handy if you AS selection is somewhat complex - e.g., all exons, a specific set of genes etc).
 
 Coverage info for selected regions:
 
 ~~~
-samtools bedcov as-100kb-chunks.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-SELECTED-cov.txt 
+samtools bedcov bed-files/as-100kb-chunks.bed \
+   bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > \
+   coverage-files/yog-as-100kb-chunks-SELECTED-cov.txt 
 ~~~
 {: .bash}
 
 Coverage info for non-selected regions:
 
 ~~~
-samtools bedcov as-100kb-chunks-complement.bed bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > yog-as-100kb-chunks-NONSELECTED-cov.txt 
+samtools bedcov bed-files/as-100kb-chunks-complement.bed \
+   bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam > \
+   coverage-files/yog-as-100kb-chunks-NONSELECTED-cov.txt 
 ~~~
 {: .bash}
 
 
 ~~~
-less yog-as-100kb-chunks-SELECTED-cov.txt
+more coverage-files/yog-as-100kb-chunks-SELECTED-cov.txt
 ~~~
 {: .bash}
 
 ~~~
 NZ_LS974444.1   0       99999   12593594
 NZ_LS974444.1   200000  299999  14610340
-NZ_LS974444.1   400001  500000  12060875
+NZ_LS974444.1   400000  499999  12060688
 NZ_LS974444.1   600000  699999  14714058
 NZ_LS974444.1   800000  899999  16128475
 NZ_LS974444.1   1000000 1099999 15793991
@@ -466,14 +491,14 @@ NZ_LS974444.1   1600000 1699999 16061631
 {: .output}
 
 ~~~
-less yog-as-100kb-chunks-NONSELECTED-cov.txt
+more coverage-files/yog-as-100kb-chunks-NONSELECTED-cov.txt
 ~~~
 {: .bash}
 
 ~~~
 NZ_LS974444.1   99999   200000  1764394
-NZ_LS974444.1   299999  400001  1738930
-NZ_LS974444.1   500000  600000  1736284
+NZ_LS974444.1   299999  400000  1738930
+NZ_LS974444.1   499999  600000  1736471
 NZ_LS974444.1   699999  800000  1602761
 NZ_LS974444.1   899999  1000000 1739915
 NZ_LS974444.1   1099999 1200000 2134827
@@ -486,6 +511,7 @@ NZ_LS974444.1   1699999 1831756 2277969
 
 ### Some quick analysis in R
 
+Choose "New Launcher" from the file menu, and start an RStudio session.
 
 #### Genome-wide read-depth
 
@@ -493,15 +519,36 @@ Load the `dplyr` and `ggplot2` packages:
 
 
 
-Load the text file that we generated usign `samtools bedcov`:
+Load the text file that we generated using `samtools bedcov`:
 
 
 ~~~
-bedCov = read.table('yog-as-100kb-chunks-10k-cov.txt', header=FALSE, sep='\t')
+bedCov = read.table('coverage-files/yog-as-100kb-chunks-10k-cov.txt', header=FALSE, sep='\t')
 ~~~
 {: .language-r}
 
 
+
+Take a look at the data:
+
+
+~~~
+head(bedCov)
+~~~
+{: .language-r}
+
+
+
+~~~
+             V1    V2    V3      V4
+1 NZ_LS974444.1     0  9999 1971063
+2 NZ_LS974444.1 10000 19999 1311458
+3 NZ_LS974444.1 20000 29999 1276564
+4 NZ_LS974444.1 30000 39999 1744496
+5 NZ_LS974444.1 40000 49999 1665578
+6 NZ_LS974444.1 50000 59999  420445
+~~~
+{: .output}
 
 Add some column names:
 
@@ -537,22 +584,21 @@ head(bedCov)
 
 
 ~~~
-library(ggplot2)
 ggplot(bedCov, aes(x=START, y=DEPTH)) +
-  geom_line(linewidth=1) +
+  geom_line() +
   ggtitle("Read depth across S. Thermophils genome (reads > 1Kbp)") +
   xlab("Base position") + ylab("Read depth")
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-11-1.png" alt="plot of chunk unnamed-chunk-11" width="612" style="display: block; margin: auto auto auto 0;" />
+<img src="../fig/rmd-06-unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto auto auto 0;" />
 
 #### Average read-depth in selected and non-selected regions
 
 
 
 ~~~
-bedCovSelected = read.table('yog-as-100kb-chunks-SELECTED-cov.txt', header=FALSE, sep='\t')
+bedCovSelected = read.table('coverage-files/yog-as-100kb-chunks-SELECTED-cov.txt', header=FALSE, sep='\t')
 ~~~
 {: .language-r}
 
@@ -577,7 +623,7 @@ mean(bedCovSelected$DEPTH)
 
 
 ~~~
-[1] 147.6885
+[1] 147.6883
 ~~~
 {: .output}
 
@@ -589,7 +635,7 @@ mean(bedCovSelected$DEPTH)
 >> ## Solution
 >>
 >> ```
->> bedCovNonSelected = read.table('yog-as-100kb-chunks-NONSELECTED-cov.txt', header=FALSE, sep='\t')
+>> bedCovNonSelected = read.table('coverage-files/yog-as-100kb-chunks-NONSELECTED-cov.txt', header=FALSE, sep='\t')
 >> 
 >> names(bedCovNonSelected) = c("CHROM", "START", "END", "BASES")
 >>

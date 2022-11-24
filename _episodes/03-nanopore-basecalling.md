@@ -84,8 +84,6 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 [http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
 
 
-
-
 <img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" width="80%" style="display: block; margin: auto auto auto 0;" />
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
@@ -107,11 +105,52 @@ http://en.wikipedia.org/wiki/FASTQ_format
 
 ## E coli data set on NeSI
 
-FAST5 files from sequencing *E. coli* are available in your NeSI directory:
+For this part of the workshop we are working at:
 
-```
-~/obss_2022/nanopore/fast5_pass_subset
-```
+~~~
+~/obss_2022/nanopore/ecoli-data/
+~~~
+{: .output}
+
+Let's change to that directory now:
+
+~~~
+cd ~/obss_2022/nanopore/ecoli-data/
+~~~
+{: .bash}
+
+FAST5 files from sequencing *E. coli* are available in the directory:
+
+~~~
+fast5_pass
+~~~
+{: .output}
+
+~~~
+ls -1 fast5_pass
+~~~
+{: .bash}
+
+~~~
+ecoli_pass_0.fast5
+ecoli_pass_10.fast5
+ecoli_pass_11.fast5
+ecoli_pass_12.fast5
+ecoli_pass_13.fast5
+ecoli_pass_14.fast5
+ecoli_pass_15.fast5
+ecoli_pass_1.fast5
+ecoli_pass_2.fast5
+ecoli_pass_3.fast5
+ecoli_pass_4.fast5
+ecoli_pass_5.fast5
+ecoli_pass_6.fast5
+ecoli_pass_7.fast5
+ecoli_pass_8.fast5
+ecoli_pass_9.fast5
+~~~
+{: .output}
+
 
 ### Basecalling: `guppy`
 
@@ -158,7 +197,7 @@ Command line parameters:
 ~~~
 {: .output}
 
-### USing `guppy` on NeSI
+### Using `guppy` on NeSI
 
 The `guppy_basecaller` software can use GPUs to speed up the basecalling process.
 
@@ -167,12 +206,18 @@ On NeSI, we can access the A100 GPUs by submitting a job to the cluster using a 
 The slurm script we will use can be found at:
 
 ~~~
-~/obss_2022/nanopore/scripts/guppy_fastmodel.sl
+scripts/guppy_fastmodel.sl
 ~~~
-{: .bash}
+{: .output}
 
 
 Let's have a look at the content:
+
+~~~
+more scripts/guppy_fastmodel.sl
+~~~
+{: .bash}
+
 
 ~~~
 #!/bin/bash -e 
@@ -192,7 +237,7 @@ guppy_basecaller -i fast5_pass  -s fastq_fastmodel \
  --config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg  \
  --device auto  --recursive --records_per_fastq 4000 --min_qscore 7 --compress_fastq
 ~~~
-{: .bash}
+{: .output}
 
  - The `SBATCH` commands are providing information to the `slurm` job scheduler: job name, maximum run time, memory allocation etc
  - The `module` commands are making sure the necessary modules are available to the script (here we are specifying version 6.2.1 of `ont-guppy-gpu` - the GPU-enabled version of ONT's guppy software).
@@ -211,8 +256,7 @@ guppy_basecaller \
   --min_qscore 7 \
   --compress_fastq
 ~~~
-{: .bash}
-
+{: .output}
 
 Options used:
 
@@ -225,10 +269,12 @@ Options used:
  - `--min_qscore 7`: minimum average base quality score to considered a read to have "passed" QC.
  - `--compress_fastq`: create compressed (`.fastq.gz`) files.
 
-To submit the script, we use the `sbatch` command, and run it from the `~/obss_2022/nanopore/` directory:
+To submit the script, we use the `sbatch` command, and run it from the `~/obss_2022/nanopore/ecoli-data` directory. You can check 
+if you are in that directory with `pwd`.  If not: `cd ~/obss_2022/nanopore/ecoli-data`.
+
+To run the script:
 
 ~~~
-cd ~/obss_2022/nanopore/
 sbatch scripts/guppy_fastmodel.sl
 ~~~
 {: .bash}
@@ -250,7 +296,9 @@ JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME    
 {: .output}
 
 
-It will also write progress to a log file that contains the job ID (represented by `XXXXXXX` in the code below). You can check the file name using `ls -ltr` (list file details, in reverse time order).  Using the `tail -f` command, we can watch the progress (use control-c to exit):
+It will also write progress to a log file that contains the job ID (represented by `XXXXXXX` in the code below). 
+You can check the file name using `ls -ltr` (list file details, in reverse time order).  
+Using the `tail -f` command, we can watch the progress (use control-c to exit):
 
 ~~~
 ls -ltr
@@ -274,6 +322,8 @@ Init time: 847 ms
 ~~~
 {: .output}
 
+Use "Control-c" to exit (it's okay, it won't kill the job).
+
 The job should take around 6 minutes to run.
 
 Once the job has completed successfully, the `.fastq` files can be found at `fastq_fastmodel`:
@@ -286,7 +336,7 @@ ls -1 fastq_fastmodel
 Note that `pass` and `fail` subfolders have been created.
 
 ~~~
-ls -1 fastq_fastmodel/pass/
+ls -l fastq_fastmodel/pass/
 ~~~
 {: .bash}
 

@@ -52,7 +52,7 @@ Command syntax:
 - `-p ecoli_fastmodel_subset_`: prefix (`-p`) to be appended to start of each filename in the output folder.
 - `--fastq fastq_fastmodel/pass/fastq_runid_*.gz`: the `.fastq.gz` files to process with NanoPlot.
 
-Let's check what outoput was generated:
+Let's check what output was generated:
 
 ~~~
 ls -1 nanoplot_fastmodel/
@@ -291,5 +291,5 @@ bioawk -c fastx '{print (length($seq) > 5000)}' ecoli-pass.fastq.gz | paste -sd+
 ~~~
 {: .output}
 
-So, of our 14112 reads, 8700 of them are longer than 10,000 bases.
+So, of our 14,112 reads, 8700 of them are longer than 10,000 bases.
 

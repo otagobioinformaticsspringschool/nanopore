@@ -85,15 +85,6 @@ samtools index bam-files/ecoli-pass-aligned-sort.bam
 ~~~
 {: .bash}
 
-Run NanoPlot on the bam file (adds additional output to NanoPlot report):
-
-~~~
-NanoPlot -o nanoplot_fastmodel_bam/ \
-  -p ecoli_bam_subset_ \
-  --bam bam-files/ecoli-pass-aligned-sort.bam 
-~~~
-{: .bash}
-
 Generate basic mapping information using samtools:
 
 ~~~
@@ -128,7 +119,7 @@ mkdir bcf-files
 ~~~
 {: .bash}
 
-Generate a "pileup" file to enable variant calling:
+Generate a "pileup" file to enable variant calling (might take a little bit of time):
 
 ~~~
 bcftools mpileup -B -Q5 --max-BQ 30 -I \
@@ -154,11 +145,15 @@ bcftools call --ploidy 1 -m -v \
 ~~~
 {: .bash}
 
-Use `vcfutils.pl` to *filter* the variants:
+Use `vcfutils.pl` to *filter* the variants (in this case, everything gets kept):
 
 ~~~
 vcfutils.pl varFilter vcf-files/ecoli-variants.vcf  > vcf-files/ecoli-final-variants.vcf
 ~~~
 {: .bash}
 
+~~~
+more vcf-files/ecoli-final-variants.vcf
+~~~
+{: .bash}
 
