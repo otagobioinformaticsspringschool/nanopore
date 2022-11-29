@@ -74,8 +74,11 @@ Similar to downloading through Juptyer, you first need to use the explorer panel
 
 ## Globus
 
-The documentation for using globus with NeSI is found at [https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5](https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5).
-
 Globus is specialised software that can handle the transfer of large amounts of data between two 'endpoints'. As part of the transfer it can automatically perform the file integrity checks to ensure the file was correctly transferred.
+The documentation for using Globus with NeSI is found at [https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5](https://support.nesi.org.nz/hc/en-gb/articles/4405623380751-Data-Transfer-using-Globus-V5).
 
 NeSI provides an endpoint, and you need to provide the second - this might be the globus software running on a different server, or the globus software running on your computer.
+
+### Globus Personal Connect
+
+If you need to transfer data from your own machine, you can create your own endpoint by installing and running the Globus Personal Connect software avaiable from [https://www.globus.org/globus-connect-personal](https://www.globus.org/globus-connect-personal).
