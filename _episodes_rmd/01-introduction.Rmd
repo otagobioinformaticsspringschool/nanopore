@@ -48,17 +48,16 @@ knitr::include_graphics("../fig/01-oxnano_2022.png")
 
 [http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724](http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724)
 
- - It's a USB stick sequencer!!
  - Rough specs (2014)
    - 6-8 hour run time
    - sequence per run: ~110Mbp
    - average read length: 5,400bp
    - reads up to 10kbp
    
- - 2022 specs: 
+ - 2023 specs: 
    - can run for up to 72 hours
-   - Max yield per run: 50Gbp
-   - Max read length recorded: >4Mbp
+   - Maximum (theoretical) yield per run: 50Gbp
+   - Maximum read length recorded: >4Mbp
 
 ```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-minion.png")
@@ -103,10 +102,21 @@ knitr::include_graphics("../fig/01-minion-mk1c.png")
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
-
 ```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-mk1c-spec-top.png")
 ```
+
+### The MinION Mk1D
+
+- The next iteration of portable sequencing devices is the Mk1D.
+- Tablet-based (plug-in).
+- Currently details are limited, but developer versions ~~are~~ were scheduled to be released during 2023: "Further details on specifications will be provided in 2023."
+
+```{r, out.width="50%"}
+knitr::include_graphics("../fig/01-minion-mk1d.png")
+```
+
+[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
 
 ### The GridION
 
@@ -161,7 +171,7 @@ knitr::include_graphics("../fig/01-promethion-flowcell.jpg")
 
 
 
-### Coming ~~soon~~ now: the P2
+### A "mini-PromethION": the P2
 
 
 
@@ -177,11 +187,13 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 
-### MinION flowcell characteristics
+### Flowcell characteristics
 
- - MinION flowcells typically have ~1200-1800 active pores (ONT guarantees at least 800 active pores).
- - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*)
- - BUT: pores are not constantly active, and can become blocked during the run 
+ - Pores are arranged in sets of four to form a “channel”. Periodically during the sequencing run, the ONT software decides which of the four pores to use from each channel (called a “mux scan”).
+   - MinION flowcells have 512 channels, so 2048 pores: typically ~1200-1800 are "active" (usable pre-run) (ONT guarantees at least 800 active pores).
+   - PromethION flowcells have 3000 channels, so 12,000 pores (ONT guarantees at least 5000 active pores).
+ - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*), although other speeds are now possible (can prioritise data volume vs accuracy).
+ - NOTE: pores are not constantly active, and can become blocked during the run 
  
  * [https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell](https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell)
 
