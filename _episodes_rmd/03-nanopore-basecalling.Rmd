@@ -6,10 +6,10 @@ questions:
 - "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
 - "Understand FASTQ format."
-- "Use guppy_basecaller on NeSI to generate FASTQ data from FAST5 output files."   
+- "Use dorado on NeSI to generate basecalled data from POD5 or FAST5 output files."   
 keypoints:
-- "FAST5 data can be converted to FASTQ via the guppy_basecaller software."
-- "guppy_basecaller has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
+- "POD5/FAST5 data can be converted to BAM or FASTQ via the dorado software."
+- "dorado has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
 - "Once bascalling has been done, standard tasks such as QA/QC, mapping and variant calling can be performed."
 source: Rmd
 ---
