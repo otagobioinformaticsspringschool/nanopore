@@ -43,16 +43,17 @@ source: Rmd
 
 [http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724](http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724)
 
+ - It's a USB stick sequencer!!
  - Rough specs (2014)
    - 6-8 hour run time
    - sequence per run: ~110Mbp
    - average read length: 5,400bp
    - reads up to 10kbp
    
- - 2023 specs: 
+ - 2022 specs: 
    - can run for up to 72 hours
-   - Maximum (theoretical) yield per run: 50Gbp
-   - Maximum read length recorded: >4Mbp
+   - Max yield per run: 50Gbp
+   - Max read length recorded: >4Mbp
 
 <img src="../fig/01-minion.png" alt="plot of chunk unnamed-chunk-3" width="50%" style="display: block; margin: auto auto auto 0;" />
 
@@ -87,15 +88,8 @@ source: Rmd
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
-### The MinION Mk1D
 
-- The next iteration of portable sequencing devices is the Mk1D.
-- Tablet-based (plug-in).
-- Currently details are limited, but developer versions ~~are~~ were scheduled to be released during 2023: "Further details on specifications will be provided in 2023."
-
-<img src="../fig/01-minion-mk1d.png" alt="plot of chunk unnamed-chunk-8" width="50%" style="display: block; margin: auto auto auto 0;" />
-
-[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
+<img src="../fig/01-mk1c-spec-top.png" alt="plot of chunk unnamed-chunk-8" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 ### The GridION
 
@@ -142,7 +136,7 @@ source: Rmd
 
 
 
-### A "mini-PromethION": the P2
+### Coming ~~soon~~ now: the P2
 
 
 
@@ -159,7 +153,6 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 ### MinION flowcell characteristics
 
  - MinION flowcells typically have ~1200-1800 active pores (ONT guarantees at least 800 active pores).
- - PromethION flowcells have 
  - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*)
  - BUT: pores are not constantly active, and can become blocked during the run 
  
