@@ -152,10 +152,6 @@ knitr::include_graphics("../fig/01-flongle.png")
 
  - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
 
-
-
-
-
 ```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-promethion48.jpg")
 ```
@@ -237,6 +233,12 @@ For more detailed information about ONT sequencing:
  - Since its introduction, nanopore sequencing has seen a number of improvements.
  - The initial product was realtively slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
  - Incremental improvements have led to major advances in both speed and accuracy.
+
+```{r, out.width="80%"}
+knitr::include_graphics("../fig/01-ont-screening.png")
+```
+
+[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
 
  
 ### 2D sequencing (prior to 2017)
@@ -344,16 +346,6 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 
 
 
-### Making improvements
-
-```{r, out.width="80%"}
-knitr::include_graphics("../fig/01-ont-screening.png")
-```
-
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
-
-
-
 ### Q20+ and Kit 14
 
 ```{r, out.width=480}
@@ -382,38 +374,28 @@ knitr::include_graphics("../fig/01-ont-accuracy.png")
 knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 ```
 
-What aren't they telling us about those duplex reads...? 
+Duplex reads *sound* cool - what else do we need to know...?
 
 [https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
 
 
 
-### Coming... sometime - the Mk1D
 
-
-
-```{r, out.width="70%"}
-knitr::include_graphics("../fig/01-ont-mk1d.png")
-```
-
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
-[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
-
-
-### More Nanopore: London Calling 2022
+### More Nanopore: London Calling 2023
 
 
 
 ```{r, out.width="50%", fig.cap="a figure caption"}
 
-knitr::include_graphics("../fig/01-lc22.png")
+knitr::include_graphics("../fig/01-lc23.png")
 ```
 
- - Online conference held in May 2022
+ - Online conference held in May 2023
  - Talk videos available online
  - LOTS of really cool announcements and research applications
+ - Can also watch presentations from previous years.
 
-[https://nanoporetech.com/lc22](https://nanoporetech.com/lc22)
+[https://nanoporetech.com/lc23](https://nanoporetech.com/lc23)
 
 
 
