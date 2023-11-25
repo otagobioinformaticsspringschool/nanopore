@@ -191,7 +191,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - Pores are arranged in sets of four to form a “channel”. Periodically during the sequencing run, the ONT software decides which of the four pores to use from each channel (called a “mux scan”).
    - MinION flowcells have 512 channels, so 2048 pores: typically ~1200-1800 are "active" (usable pre-run) (ONT guarantees at least 800 active pores).
-   - PromethION flowcells have 3000 channels, so 12,000 pores (ONT guarantees at least 5000 active pores).
+   - PromethION flowcells have 2675 channels, so 10,700 pores (ONT guarantees at least 5000 active pores).
  - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*), although other speeds are now possible (can prioritise data volume vs accuracy).
  - NOTE: pores are not constantly active, and can become blocked during the run 
  
