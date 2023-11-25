@@ -345,40 +345,97 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
+### FAST5 / HDF5 data
 
-### Q20+ and Kit 14
+ - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
+ - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
 
-```{r, out.width=480}
-knitr::include_graphics("../fig/01-ont-q20.png")
+“Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
+
+[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
+ 
+### POD5 format
+
+ - Over the past year (or so) ONT have introduced the POD5 format for storing data.
+ - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
+ - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
+ - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
+
+```{r, out.width="50%", fig.align="center"}
+knitr::include_graphics("../fig/01-pod5-format.png")
+```
+
+[https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
+
+## Nanopore workflow
+
+<center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
+
+ - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
+ - Once the raw FAST5 (or POD5) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+
+<BR>
+
+### https://nanoporetech.com/nanopore-sequencing-data-analysis
+
+
+
+### Basecalling: `guppy`
+
+ - `guppy` is a neural network based basecaller.
+    - analyses the electrical trace data and predicts base 
+    - it is GPU-aware, and can basecall in real time 
+    - can also call base modifications (e.g., 5mC, 6mA)
+    - high accuracy (HAC) mode (slower) and super-high accuracy (SUP) mode (even slower) can improve basecalls post-sequencing
+ - MANY other machine learning basecallers have been proposed.
+ - Output is the standard "FASTQ" format for sequence data.
+ - `guppy` has now been "retired" by ONT, and replaced with `dorado`.
+
+
+### Basecalling: `dorado`
+
+ - ONT has recently released a new base caller: `dorado`
+ - Optimised for 10.4.1 flowcells (but there are basecalling models for 9.4.1)
+ - Designed to support Apple GPUs (M1/M2/M3)
+ - Like Guppy, can call base modifications
+ - Also has FAST, HAC and SUP modes for basecalling.
+
+### 10.4.1 flowcells + v14 chemistry: accuracy
+
+```{r, out.width="50%", fig.align="center"}
+knitr::include_graphics("../fig/01-ont-accurarcy-1.png")
+```
+
+<BR> 
+
+```{r, out.width="50%", fig.align="center"}
+knitr::include_graphics("../fig/01-ont-accurarcy-2.png")
+```
+
+[https://nanoporetech.com/accuracy](https://nanoporetech.com/accuracy)
+
+
+## 10.4.1 flowcells + v14 chemistry: simplex
+
+- The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
+
+```{r, out.width="50%", fig.align="center"}
+knitr::include_graphics("../fig/01-ont-simplex-q20.png")
 ```
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
 
+### 10.4.1 flowcells + v14 chemistry: duplex
 
-### Nanopore accuracy
+- The quality is even higher for duplex reads: mean of 30
+- BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
 
-
-```{r, out.width="50%"}
-knitr::include_graphics("../fig/01-ont-accuracy.png")
-```
-
-[https://nanoporetech.com/accuracy](https://nanoporetech.com/q20plus-chemistry)
-
-
-
-### Duplex (and simplex) accuracy
-
-
-```{r, out.width="80%"}
+```{r, out.width="50%", fig.align="center"}
 knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 ```
 
-Duplex reads *sound* cool - what else do we need to know...?
-
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
-
-
+[https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
 
 ### More Nanopore: London Calling 2023
