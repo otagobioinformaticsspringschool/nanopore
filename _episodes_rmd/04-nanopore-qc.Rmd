@@ -150,7 +150,7 @@ Run FastQC on our data:
 #     FastQC allocates 250Mb per thread. Can't remember how 
 #     to specify more memory for java...
 
-fastqc -t 2 -o fastqc_fastmodel ecoli-pass.fastq.gz
+fastqc -t 2 -o fastqc_fastmodel ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
@@ -159,7 +159,7 @@ Command syntax:
 - `fastqc`: run the `fastqc` command
 - `-t 2`: use two cpus (see my note about memory usage above) - the `-t` is for "threads".
 - `-o fastqc_fastmodel`: specify output folder.
-- `ecoli-pass.fastq.gz`: FASTQ data to analyse.
+- `ecoli-pod5-pass-basecalls.bam`: data file to analyse.
 
 Check the output:
 
@@ -169,8 +169,8 @@ ls -1 fastqc_fastmodel
 {: .bash}
 
 ~~~
-ecoli-pass_fastqc.html
-ecoli-pass_fastqc.zip
+ecoli-pod5-pass-basecalls_fastqc.html
+ecoli-pod5-pass-basecalls_fastqc.zip
 ~~~
 {: .output}
 
@@ -194,6 +194,35 @@ Load the bioawk module.
 module load bioawk
 ~~~
 {: .bash}
+
+~~~
+bioawk 
+~~~
+{: .bash}
+
+~~~
+usage: bioawk [-F fs] [-v var=value] [-c fmt] [-tH] [-f progfile | 'prog'] [file ...]
+~~~
+{: .output}
+
+~~~
+bioawk -c help
+~~~
+{: .bash}
+
+~~~
+bed:
+        1:chrom 2:start 3:end 4:name 5:score 6:strand 7:thickstart 8:thickend 9:rgb 10:blockcount 11:blocksizes 12:blockstarts 
+sam:
+        1:qname 2:flag 3:rname 4:pos 5:mapq 6:cigar 7:rnext 8:pnext 9:tlen 10:seq 11:qual 
+vcf:
+        1:chrom 2:pos 3:id 4:ref 5:alt 6:qual 7:filter 8:info 
+gff:
+        1:seqname 2:source 3:feature 4:start 5:end 6:score 7:filter 8:strand 9:group 10:attribute 
+fastx:
+        1:name 2:seq 3:qual 4:comment  
+~~~
+{: .output}
 
 Extract read name and length:
 
