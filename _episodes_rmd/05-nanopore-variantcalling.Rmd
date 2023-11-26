@@ -36,14 +36,7 @@ knitr_fig_path("05-")
  - For long-read data, ONT provides the Minimap2 aligner (but there are also a number of other options).
 
 
-## Alignment with `minimap2` on NeSI
-
-Load the minimap2 module:
-
-~~~
-module load minimap2
-~~~
-{: .bash}
+## Alignment with `dorado` and `minimap2` on NeSI
  
 Check that we've got a reference genome:
 
@@ -61,6 +54,13 @@ Load the SAMtools module:
 
 ~~~
 module load SAMtools
+~~~
+{: .bash}
+
+Load the Dorado module:
+
+~~~
+module load Dorado
 ~~~
 {: .bash}
 
