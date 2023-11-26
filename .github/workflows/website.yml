@@ -91,16 +91,16 @@ jobs:
         run: make site
 
       - name: Checkout github pages
-        # if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0 && github.ref != 'refs/heads/gh-pages'}}
-        if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0}}
+        if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0 && github.ref != 'refs/heads/gh-pages'}}
+        # if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0}}
         uses: actions/checkout@v4
         with:
           ref: gh-pages
           path: gh-pages
 
       - name: Commit and Push
-#        if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0 && github.ref != 'refs/heads/gh-pages'}}
-        if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0}}
+        if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0 && github.ref != 'refs/heads/gh-pages'}}
+        # if: ${{ github.event_name == 'push' && steps.check-rmd.outputs.count != 0}}
         run: |
           # clean up gh-pages
           cd gh-pages
