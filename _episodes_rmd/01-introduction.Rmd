@@ -345,34 +345,12 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
-### FAST5 / HDF5 data
-
- - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
- - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
-
-“Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
-
-[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
- 
-### POD5 format
-
- - Over the past year (or so) ONT have introduced the POD5 format for storing data.
- - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
- - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
- - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
-
-```{r, out.width="50%", fig.align="center"}
-knitr::include_graphics("../fig/01-pod5-format.png")
-```
-
-[https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
-
 ## Nanopore workflow
 
 <center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
- - Once the raw FAST5 (or POD5) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+ - Once the raw (POD5 or FAST5 - see next section) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
 <BR>
 
@@ -380,7 +358,7 @@ knitr::include_graphics("../fig/01-pod5-format.png")
 
 
 
-### Basecalling: `guppy`
+### Basecalling: `guppy` (deprecated)
 
  - `guppy` is a neural network based basecaller.
     - analyses the electrical trace data and predicts base 
