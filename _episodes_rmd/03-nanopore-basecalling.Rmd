@@ -414,19 +414,20 @@ squeue --me
 
 ~~~
 JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
-31430356      michael. nesi02659 spawner-jupy   2      4G infill  2022-11-20T0     1:23:52 RUNNING  wbl004              
-31431766      michael. nesi02659 guppy_baseca   2      4G gpu     2022-11-20T0        6:28 RUNNING  wbl001 
+41491249      michael. nesi02659 dorado_basec   4      6G gpu     2023-11-26T0        8:31 RUNNING  wbl001              
+41491302      michael. nesi02659 spawner-jupy   4      8G interac 2023-11-26T0       28:44 RUNNING  wbn001      
 ~~~
 {: .output}
 
 
-It will also write progress to a log file that contains the job ID (represented by `XXXXXXX` in the code below). 
+It will also write "progress" output to a log file that contains the job ID (represented by `XXXXXXX` in the code below), although (unlike with the 
+older `guppy` software, you don't get any information about how far through the processing you are).
 You can check the file name using `ls -ltr` (list file details, in reverse time order).  
-Using the `tail -f` command, we can watch the progress (use control-c to exit):
+Using the `tail -f` command, we can watch the "progress" (use control-c to exit):
 
 ~~~
 ls -ltr
-tail -f guppy_XXXXXXX.out
+tail -f dorado_XXXXXXX.out
 ~~~
 {: .bash}
 
@@ -434,61 +435,23 @@ tail -f guppy_XXXXXXX.out
 Example of output:
 
 ~~~
-Use of this software is permitted solely under the terms of the end user license agreement (EULA).By running, copying or accessing this software, you are demonstrating your acceptance of the EULA.
-The EULA may be found in /scale_wlg_persistent/filesets/opt_nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/bin
-
-Found 16 fast5 files to process.
-Init time: 847 ms
-
-0%   10   20   30   40   50   60   70   80   90   100%
-|----|----|----|----|----|----|----|----|----|----|
-****************************
+[2023-11-26 02:01:36.919] [info] > Creating basecall pipeline
+[2023-11-26 02:01:46.687] [info]  - set batch size for cuda:0 to 768
+[2023-11-26 02:03:33.567] [info] > Simplex reads basecalled: 13000
+[2023-11-26 02:03:33.570] [info] > Basecalled @ Samples/s: 2.007616e+07
+[2023-11-26 02:03:33.674] [info] > Finished
 ~~~
 {: .output}
 
 Use "Control-c" to exit (it's okay, it won't kill the job).
 
-The job should take around 6 minutes to run.
+The job should take a few minutes to run.
 
-Once the job has completed successfully, the `.fastq` files can be found at `fastq_fastmodel`:
+Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam` will have been created 
+in the current directory (`~/obss_2023/nanopore/ecoli-data`).
 
 ~~~
-ls -1 fastq_fastmodel
+ls -ltr 
 ~~~
 {: .bash}
 
-Note that `pass` and `fail` subfolders have been created.
-
-~~~
-ls -l fastq_fastmodel/pass/
-~~~
-{: .bash}
-
-~~~
-ls -l fastq_fastmodel/fail/
-~~~
-{: .bash}
-
-Note that both directories (`pass` and `fail`) contain the same number of files, and they have exactly the same names.  BUT, their content is different: the `.fastq.gz` files in the `pass` folder contain data for the reads that have passed QC (average base quality above threshold), and the `fail` folder contains those that failed. The files in the `pass` folder should be (hopefully!) much larger those their counterparts in the `fail` folder.
-
-~~~
-ls -lh fastq_fastmodel/pass/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .bash}
-
-~~~
--rw-rw----+ 1 michael.black nesi02659 5.7M Nov 20 00:58 fastq_fastmodel/pass/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .output}
-
-~~~
-ls -lh fastq_fastmodel/fail/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .bash}
-
-~~~
--rw-rw----+ 1 michael.black nesi02659 672K Nov 20 00:58 fastq_fastmodel/fail/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .output}
-
-Here the first `.fastq.gz` file (in the `pass` folder) contains 5.7M of data, whereas the one in the `fail` folder only contains 672K (i.e., it is about 1/12 of the size).
