@@ -12,13 +12,12 @@ If you are attempting to work through this material on a non-NeSI compute system
 
 | Software  | Version | Manual      | Description 	|
 |-----------|---------|-------------|---------------|
-| BCFtools  | 1.15.1  | [link](https://samtools.github.io/bcftools/) | Variant calling | 
+| BCFtools  | 1.16  | [link](https://samtools.github.io/bcftools/) | Variant calling | 
 | bioawk    | 20110810| [link](https://github.com/lh3/bioawk) | awk for biological data | 
-| FastQC    | 0.11.9  | [link](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)| Read QA/QC |
-| guppy (GPU) | 6.2.1   | [link](https://community.nanoporetech.com/downloads) (requires login) | GPU basecaller for ONT fast5 data |
-| minimap2  | 2.24-r1122 |  [link](https://github.com/lh3/minimap2) | ONT read alignment |
-| Nanoplot  | 1.38.0 | [link](https://github.com/wdecoster/NanoPlot) | QA/QC for ONT reads | 
-| SAMtools  | 1.15.1  | [link](http://www.htslib.org/doc/samtools.html) | Read mapping |
+| FastQC    | 0.12.1  | [link](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)| Read QA/QC |
+| dorado | 6.2.1   | [link](https://github.com/nanoporetech/dorado) | GPU basecaller for ONT POD5/FAST5 data |
+| Nanoplot  | 1.41.0 | [link](https://github.com/wdecoster/NanoPlot) | QA/QC for ONT reads | 
+| SAMtools  | 1.16.1  | [link](http://www.htslib.org/doc/samtools.html) | Read mapping |
 
 
 ## Data availability
@@ -39,6 +38,8 @@ Also worth noting - the original data format was one fast5 file per read, wherea
 
 was used here to convert the single-read fast5 data to multi-read fast5.
 
+The fast5 files were then coverted to pod5 format via ONT's `pod5` tool:
 
+[https://github.com/nanoporetech/pod5-file-format](https://github.com/nanoporetech/pod5-file-format)
 
 {% include links.md %}
