@@ -24,7 +24,7 @@ Mik will now talk at you.  :)
 
 ## Now let's take a look at some data
 
-The folder `adaptive-sampling` contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
+The folder `adaptive-sampling` (inside the `nanopore` directory) contains data from a **SIMULATED** adaptive sampling run using David Eccles' yoghurt data:
 
 [https://zenodo.org/record/2548026#.YLifQOuxXOQ](https://zenodo.org/record/2548026#.YLifQOuxXOQ)
 
@@ -151,9 +151,9 @@ batch_time      read_number     channel num_samples          read_id        sequ
 
 Once the data have been generated, they are processed in exactly the same way:
 
-1. Basecalling with `guppy_basecaller`
+1. Basecalling with `dorado`
 2. QA/QC with FastQC and/or NanoPlot
-3. Alignment with `minimap2`
+3. Alignment with `minimap2` (via `dorado`)
 
 I've done the above, and a bam file (wih an annoyingly long name) can be found at:
 
