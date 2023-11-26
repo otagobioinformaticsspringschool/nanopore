@@ -38,7 +38,7 @@ source: Rmd
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-oxnano_2022.png" alt="plot of chunk unnamed-chunk-2" width="80%" />
+<img src="../fig/01-oxnano_2022.png" width="80%" />
 <p class="caption">plot of chunk unnamed-chunk-2</p>
 </div>
 
@@ -58,12 +58,12 @@ source: Rmd
    - Maximum read length recorded: >4Mbp
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-minion.png" alt="plot of chunk unnamed-chunk-3" width="50%" />
+<img src="../fig/01-minion.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-3</p>
 </div>
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-animation.gif" alt="plot of chunk unnamed-chunk-4" width="50%" />
+<img src="../fig/01-nanopore-animation.gif" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-4</p>
 </div>
 
@@ -77,7 +77,7 @@ source: Rmd
  - Connects to a computer via USB.
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-minion-usb.png" alt="plot of chunk unnamed-chunk-5" width="50%" />
+<img src="../fig/01-minion-usb.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-5</p>
 </div>
 
@@ -88,7 +88,7 @@ source: Rmd
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1b.png" alt="plot of chunk unnamed-chunk-6" width="50%" />
+<img src="../fig/01-minion-mk1b.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-6</p>
 </div>
 
@@ -99,14 +99,14 @@ source: Rmd
 
 <BR><BR><BR>
 <div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1c.png" alt="plot of chunk unnamed-chunk-7" width="50%" />
+<img src="../fig/01-minion-mk1c.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-7</p>
 </div>
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-mk1c-spec-top.png" alt="plot of chunk unnamed-chunk-8" width="50%" />
+<img src="../fig/01-mk1c-spec-top.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-8</p>
 </div>
 
@@ -117,7 +117,7 @@ source: Rmd
 - Currently details are limited, but developer versions ~~are~~ were scheduled to be released during 2023: "Further details on specifications will be provided in 2023."
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1d.png" alt="plot of chunk unnamed-chunk-9" width="50%" />
+<img src="../fig/01-minion-mk1d.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-9</p>
 </div>
 
@@ -133,7 +133,7 @@ source: Rmd
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-gridion.png" alt="plot of chunk unnamed-chunk-10" width="50%" />
+<img src="../fig/01-gridion.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-10</p>
 </div>
 
@@ -147,7 +147,7 @@ source: Rmd
  - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-flongle.png" alt="plot of chunk unnamed-chunk-11" width="50%" />
+<img src="../fig/01-flongle.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-11</p>
 </div>
 
@@ -160,7 +160,7 @@ source: Rmd
  - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-promethion48.jpg" alt="plot of chunk unnamed-chunk-12" width="50%" />
+<img src="../fig/01-promethion48.jpg" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-12</p>
 </div>
 
@@ -170,7 +170,7 @@ source: Rmd
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-promethion-flowcell.jpg" alt="plot of chunk unnamed-chunk-13" width="50%" />
+<img src="../fig/01-promethion-flowcell.jpg" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-13</p>
 </div>
 
@@ -181,7 +181,7 @@ source: Rmd
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-p2.png" alt="plot of chunk unnamed-chunk-14" width="70%" />
+<img src="../fig/01-p2.png" width="70%" />
 <p class="caption">plot of chunk unnamed-chunk-14</p>
 </div>
 
@@ -210,7 +210,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore.png" alt="plot of chunk unnamed-chunk-15" width="70%" />
+<img src="../fig/01-nanopore.png" width="70%" />
 <p class="caption">plot of chunk unnamed-chunk-15</p>
 </div>
 
@@ -223,7 +223,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
  - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-sequencing-animated_0.gif" alt="plot of chunk unnamed-chunk-16" width="60%" />
+<img src="../fig/01-sequencing-animated_0.gif" width="60%" />
 <p class="caption">plot of chunk unnamed-chunk-16</p>
 </div>
 
@@ -247,7 +247,7 @@ For more detailed information about ONT sequencing:
  - Incremental improvements have led to major advances in both speed and accuracy.
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-ont-screening.png" alt="plot of chunk unnamed-chunk-17" width="80%" />
+<img src="../fig/01-ont-screening.png" width="80%" />
 <p class="caption">plot of chunk unnamed-chunk-17</p>
 </div>
 
@@ -264,7 +264,7 @@ For more detailed information about ONT sequencing:
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-2d-reads.png" alt="plot of chunk unnamed-chunk-18" width="50%" />
+<img src="../fig/01-nanopore-2d-reads.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-18</p>
 </div>
 
@@ -278,7 +278,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-2d-reads.png" alt="plot of chunk unnamed-chunk-19" width="50%" />
+<img src="../fig/01-2d-reads.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-19</p>
 </div>
 
@@ -292,7 +292,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-europe-lawsuit.png" alt="plot of chunk unnamed-chunk-20" width="50%" />
+<img src="../fig/01-europe-lawsuit.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-20</p>
 </div>
 
@@ -310,7 +310,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-1D2-accuracy.png" alt="plot of chunk unnamed-chunk-21" width="50%" />
+<img src="../fig/01-1D2-accuracy.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-21</p>
 </div>
 
@@ -329,7 +329,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-r10-pore.png" alt="plot of chunk unnamed-chunk-22" width="50%" />
+<img src="../fig/01-r10-pore.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-22</p>
 </div>
 
@@ -342,7 +342,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
  - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-r10.3-results.png" alt="plot of chunk unnamed-chunk-23" width="70%" />
+<img src="../fig/01-r10.3-results.png" width="70%" />
 <p class="caption">plot of chunk unnamed-chunk-23</p>
 </div>
 
@@ -358,42 +358,19 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-lawsuit2020.png" alt="plot of chunk unnamed-chunk-24" width="50%" />
+<img src="../fig/01-lawsuit2020.png" width="50%" />
 <p class="caption">plot of chunk unnamed-chunk-24</p>
 </div>
 
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
-### FAST5 / HDF5 data
-
- - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
- - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
-
-“Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
-
-[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
- 
-### POD5 format
-
- - Over the past year (or so) ONT have introduced the POD5 format for storing data.
- - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
- - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
- - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
-
-<div class="figure" style="text-align: center">
-<img src="../fig/01-pod5-format.png" alt="plot of chunk unnamed-chunk-25" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-25</p>
-</div>
-
-[https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
-
 ## Nanopore workflow
 
 <center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
- - Once the raw FAST5 (or POD5) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+ - Once the raw (POD5 or FAST5 - see next section) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
 <BR>
 
@@ -401,7 +378,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-### Basecalling: `guppy`
+### Basecalling: `guppy` (deprecated)
 
  - `guppy` is a neural network based basecaller.
     - analyses the electrical trace data and predicts base 
@@ -424,15 +401,15 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 ### 10.4.1 flowcells + v14 chemistry: accuracy
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-ont-accurarcy-1.png" alt="plot of chunk unnamed-chunk-26" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-26</p>
+<img src="../fig/01-ont-accurarcy-1.png" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-25</p>
 </div>
 
 <BR> 
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-ont-accurarcy-2.png" alt="plot of chunk unnamed-chunk-27" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-27</p>
+<img src="../fig/01-ont-accurarcy-2.png" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-26</p>
 </div>
 
 [https://nanoporetech.com/accuracy](https://nanoporetech.com/accuracy)
@@ -443,8 +420,8 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-ont-simplex-q20.png" alt="plot of chunk unnamed-chunk-28" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-28</p>
+<img src="../fig/01-ont-simplex-q20.png" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-27</p>
 </div>
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
@@ -456,8 +433,8 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
 
 <div class="figure" style="text-align: center">
-<img src="../fig/01-ont-duplex-q30.png" alt="plot of chunk unnamed-chunk-29" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-29</p>
+<img src="../fig/01-ont-duplex-q30.png" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-28</p>
 </div>
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
@@ -468,7 +445,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-lc23.png" alt="a figure caption" width="50%" />
+<img src="../fig/01-lc23.png" width="50%" />
 <p class="caption">a figure caption</p>
 </div>
 

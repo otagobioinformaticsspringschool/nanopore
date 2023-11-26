@@ -7,7 +7,7 @@ exercises: 10
 questions:
 - "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
-- "Understand FASTQ format."
+- "Understand POD5/FASTQ format."
 - "Use dorado on NeSI to generate basecalled data from POD5 or FAST5 output files."   
 keypoints:
 - "POD5/FAST5 data can be converted to BAM or FASTQ via the dorado software."
@@ -18,54 +18,54 @@ source: Rmd
 
 
 
-### Data generation
+### FAST5 / HDF5 data
 
-During the sequencing run, the electric trace ("squiggle") data are stored in `.fast5` files, which utilse the HDF5 file format:
- 
-"Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally 
-developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose 
-mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF."
+ - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
+ - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
+
+“Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
 
 [https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
+ 
+### POD5 format
 
- - A single ONT flowcell produces a large amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), 
- but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run 
- (a 30Gbp run will typically generate 300-400GB of `.fast5` files).
+ - Over the past year (or so) ONT have introduced the POD5 format for storing data.
+ - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
+ - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
+ - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
- - As the data are generated, they are saved as `.fast5` files in either the `fast5_pass` or `fast5_fail` folders, depending on whether reads 
- passed or failed the quality assessment process, based on the criteria that were specified when setting up the run in MinKNOW. 
+<div class="figure" style="text-align: center">
+<img src="../fig/01-pod5-format.png" alt="plot of chunk unnamed-chunk-2" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-2</p>
+</div>
 
- - Each `.fast5` file contains squiggle data for 1000 reads, so MANY files are created in a single sequencing run (e.g., a run generating five millions reads 
- will produce 5000 `.fast5` files, which are split across the `fast5_pass` and `fast5_fail` folders).
-
- - If realtime basecalling is performed during the run, then there will also be the equivalent number of `.fastq` files generated (1000 reads per file), 
- split across the `fastq_pass` and `fastq_fail` folders.
+[https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
 
 
 ### Basecalling workflow
 
-In order to analyse the data from a sequencing run, the FAST5 "squiggle" data needs to be converted to base calls.
-The ONT software application "guppy" can be used to process FAST5 data into FASTQ format - this is the de facto standard 
-for storage of sequence data and associated base-level quality scores.
+In order to analyse the data from a sequencing run, the POD5/FAST5 "squiggle" data needs to be converted to base calls.
+The ONT software application `dorado` can be used to process POD5/FAST5 data and generate basecalls and quality information.
+
+Previously this was outoput as FASTQ - a widely used format for storage of sequence data and associated base-level quality scores.  This
+same information is now stored in (unaligned) BAM format (BAM is a binary version of SAM format, which was created for storing aligment information, along with sequence data and quality scores for reads, but it can also be used to stored unaligned data: basecalls and quality scores).
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-2" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-2</p>
+<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-3" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-3</p>
 </div>
 
- - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
- - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+ - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `dorado` basecaller).
+ - Once the raw data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
 [https://nanoporetech.com/nanopore-sequencing-data-analysis](https://nanoporetech.com/nanopore-sequencing-data-analysis)
 
-The current version of the Guppy software can be downloaded from the "Software Downloads" section of the Nanopore Community website:
+The current version of the `dorado` software can be downloaded from GitHub:
 
-https://community.nanoporetech.com/downloads
+[https://github.com/nanoporetech/dorado](https://github.com/nanoporetech/dorado)
 
-Note that you will need to create a login to access the website.  
-
-Today we will be using `guppy_basecaller` on the NeSI system to generate FASTQ data from a set of FAST5 files.
+Today we will be using `dorado` on the NeSI system to generate FASTQ data from a set of POD5 files.
 
 
 
@@ -75,16 +75,16 @@ Today we will be using `guppy_basecaller` on the NeSI system to generate FASTQ d
 ### Assessing sequence quality: phred scores
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-3" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-3</p>
+<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-4" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-4</p>
 </div>
 
 Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-4" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-4</p>
+<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-5" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-5</p>
 </div>
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
@@ -94,8 +94,8 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-5</p>
+<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-6" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-6</p>
 </div>
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
@@ -105,8 +105,8 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 FASTQ format:
 
 <div class="figure" style="text-align: left">
-<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" width="60%" />
-<p class="caption">plot of chunk unnamed-chunk-6</p>
+<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-7" width="60%" />
+<p class="caption">plot of chunk unnamed-chunk-7</p>
 </div>
 
 http://en.wikipedia.org/wiki/FASTQ_format
@@ -116,6 +116,14 @@ http://en.wikipedia.org/wiki/FASTQ_format
  - Line 3: '+' character, optionally followed by the same sequence identifier (and description) again.
  - Line 4: quality scores
 
+
+### BAM instead of FASTQ
+
+`dorado` outputs sequence and quality information to BAM format by default.  
+
+BAM is a binary (compressed) version of the text-based SAM format (warning, not a thrilling read):
+
+[https://samtools.github.io/hts-specs/SAMv1.pdf](https://samtools.github.io/hts-specs/SAMv1.pdf)
 
 
 ## E coli data set on NeSI
@@ -134,7 +142,7 @@ cd ~/obss_2023/nanopore/ecoli-data/
 ~~~
 {: .bash}
 
-FAST5 files from sequencing *E. coli* are available in the directory:
+POD5 files from sequencing *E. coli* are available in the directory:
 
 ~~~
 pod5_pass
@@ -384,7 +392,7 @@ dorado basecaller  \
   --device 'cuda:all' \
   dorado-models/dna_r9.4.1_e8_fast@v3.4 \
   pod5_pass \
-  > ecoli-pod5-pass-basecalls.bam
+  > bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .output}
 
@@ -394,7 +402,14 @@ Options used:
  - `-s fastq_fastmodel`: the name of the folder where the .fastq files will be written to.
  - `dorado-models/dna_r9.4.1_e8_fast@v3.4`: this specifies the model (and its location, relative to wheer we call the script from) that is being used to perform the basecalling.  In this case we are using the "fast" model (rather than high-accuracy (hac) or super-high accuracy (sup)) to save time, and `dna` denotes that we sequenced... DNA. `r9.4.1` refers to the flowcell version that was used to generate the data, and e8 is the kit chemistry that was used for library generation (e8 is kit9 or kit 10, e8.2 is kit 14).
  - `pod5_pass`: this is the directory containing the `.pod5` (or `.fast5` - `dorado` with process either type) files that we would like to process.
- - `ecoli-pod5-pass-basecalls.bam`: output file (not that the ">" character sends the output from `dorado` to this file).
+ - `bam-unaligned/ecoli-pod5-pass-basecalls.bam`: output file location (not that the ">" character sends the output from `dorado` to this file).
+
+Before running the script, we need to create the directory where the output files will be written:
+
+~~~
+mkdir bam-unaligned
+~~~
+{: .bash}
 
 To submit the script, we use the `sbatch` command, and run it from the `~/obss_2023/nanopore/ecoli-data` directory. You can check 
 if you are in that directory with `pwd`.  If not: `cd ~/obss_2023/nanopore/ecoli-data`.
@@ -451,10 +466,10 @@ Use "Control-c" to exit (it's okay, it won't kill the job).
 The job should take a few minutes to run.
 
 Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam` will have been created 
-in the current directory (`~/obss_2023/nanopore/ecoli-data`).
+in the directory `~/obss_2023/nanopore/ecoli-data/bam-unaligned/`.
 
 ~~~
-ls -ltr 
+ls -ltr bam-unaligned/
 ~~~
 {: .bash}
 
