@@ -1,5 +1,5 @@
 current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext
-/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231126-10368-1o2zvot.rb extconf.rb
+/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231126-10405-dw7fyt.rb extconf.rb
 checking for -lstdc++... yes
 creating Makefile
 
@@ -7,82 +7,82 @@ current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0
 make "DESTDIR=" clean
 make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
 Makefile:176: warning: overriding recipe for target 'clean'
-ĞÚ4ÍnU:176: warning: ignoring old recipe for target 'clean'
+P:.wU:176: warning: ignoring old recipe for target 'clean'
 Makefile:183: warning: overriding recipe for target 'distclean'
-ĞÚ4ÍnU:183: warning: ignoring old recipe for target 'distclean'
+P:.wU:183: warning: ignoring old recipe for target 'distclean'
 Makefile:191: warning: overriding recipe for target 'install-so'
-ĞÚ4ÍnU:191: warning: ignoring old recipe for target 'install-so'
+P:.wU:191: warning: ignoring old recipe for target 'install-so'
 Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-ĞÚ4ÍnU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+P:.wU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
 Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-ĞÚ4ÍnU:203: warning: ignoring old recipe for target '.sitearchdir.time'
+P:.wU:203: warning: ignoring old recipe for target '.sitearchdir.time'
 Makefile:213: warning: overriding recipe for target '.cc.o'
-ĞÚ4ÍnU:213: warning: ignoring old recipe for target '.cc.o'
+P:.wU:213: warning: ignoring old recipe for target '.cc.o'
 Makefile:217: warning: overriding recipe for target '.cc.S'
-ĞÚ4ÍnU:217: warning: ignoring old recipe for target '.cc.S'
+P:.wU:217: warning: ignoring old recipe for target '.cc.S'
 Makefile:221: warning: overriding recipe for target '.mm.o'
-ĞÚ4ÍnU:221: warning: ignoring old recipe for target '.mm.o'
+P:.wU:221: warning: ignoring old recipe for target '.mm.o'
 Makefile:225: warning: overriding recipe for target '.mm.S'
-ĞÚ4ÍnU:225: warning: ignoring old recipe for target '.mm.S'
+P:.wU:225: warning: ignoring old recipe for target '.mm.S'
 Makefile:229: warning: overriding recipe for target '.cxx.o'
-ĞÚ4ÍnU:229: warning: ignoring old recipe for target '.cxx.o'
+P:.wU:229: warning: ignoring old recipe for target '.cxx.o'
 Makefile:233: warning: overriding recipe for target '.cxx.S'
-ĞÚ4ÍnU:233: warning: ignoring old recipe for target '.cxx.S'
+P:.wU:233: warning: ignoring old recipe for target '.cxx.S'
 Makefile:237: warning: overriding recipe for target '.cpp.o'
-ĞÚ4ÍnU:237: warning: ignoring old recipe for target '.cpp.o'
+P:.wU:237: warning: ignoring old recipe for target '.cpp.o'
 Makefile:241: warning: overriding recipe for target '.cpp.S'
-ĞÚ4ÍnU:241: warning: ignoring old recipe for target '.cpp.S'
+P:.wU:241: warning: ignoring old recipe for target '.cpp.S'
 Makefile:245: warning: overriding recipe for target '.c.o'
-ĞÚ4ÍnU:245: warning: ignoring old recipe for target '.c.o'
+P:.wU:245: warning: ignoring old recipe for target '.c.o'
 Makefile:249: warning: overriding recipe for target '.c.S'
-ĞÚ4ÍnU:249: warning: ignoring old recipe for target '.c.S'
+P:.wU:249: warning: ignoring old recipe for target '.c.S'
 Makefile:253: warning: overriding recipe for target '.m.o'
-ĞÚ4ÍnU:253: warning: ignoring old recipe for target '.m.o'
+P:.wU:253: warning: ignoring old recipe for target '.m.o'
 Makefile:257: warning: overriding recipe for target '.m.S'
-ĞÚ4ÍnU:257: warning: ignoring old recipe for target '.m.S'
+P:.wU:257: warning: ignoring old recipe for target '.m.S'
 Makefile:261: warning: overriding recipe for target 'unf_ext.so'
-ĞÚ4ÍnU:261: warning: ignoring old recipe for target 'unf_ext.so'
+P:.wU:261: warning: ignoring old recipe for target 'unf_ext.so'
 make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
 
 current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext
 make "DESTDIR="
 make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
 Makefile:176: warning: overriding recipe for target 'clean'
-Ğºïú^U:176: warning: ignoring old recipe for target 'clean'
+PZsÖäU:176: warning: ignoring old recipe for target 'clean'
 Makefile:183: warning: overriding recipe for target 'distclean'
-Ğºïú^U:183: warning: ignoring old recipe for target 'distclean'
+PZsÖäU:183: warning: ignoring old recipe for target 'distclean'
 Makefile:191: warning: overriding recipe for target 'install-so'
-Ğºïú^U:191: warning: ignoring old recipe for target 'install-so'
+PZsÖäU:191: warning: ignoring old recipe for target 'install-so'
 Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-Ğºïú^U:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+PZsÖäU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
 Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-Ğºïú^U:203: warning: ignoring old recipe for target '.sitearchdir.time'
+PZsÖäU:203: warning: ignoring old recipe for target '.sitearchdir.time'
 Makefile:213: warning: overriding recipe for target '.cc.o'
-Ğºïú^U:213: warning: ignoring old recipe for target '.cc.o'
+PZsÖäU:213: warning: ignoring old recipe for target '.cc.o'
 Makefile:217: warning: overriding recipe for target '.cc.S'
-Ğºïú^U:217: warning: ignoring old recipe for target '.cc.S'
+PZsÖäU:217: warning: ignoring old recipe for target '.cc.S'
 Makefile:221: warning: overriding recipe for target '.mm.o'
-Ğºïú^U:221: warning: ignoring old recipe for target '.mm.o'
+PZsÖäU:221: warning: ignoring old recipe for target '.mm.o'
 Makefile:225: warning: overriding recipe for target '.mm.S'
-Ğºïú^U:225: warning: ignoring old recipe for target '.mm.S'
+PZsÖäU:225: warning: ignoring old recipe for target '.mm.S'
 Makefile:229: warning: overriding recipe for target '.cxx.o'
-Ğºïú^U:229: warning: ignoring old recipe for target '.cxx.o'
+PZsÖäU:229: warning: ignoring old recipe for target '.cxx.o'
 Makefile:233: warning: overriding recipe for target '.cxx.S'
-Ğºïú^U:233: warning: ignoring old recipe for target '.cxx.S'
+PZsÖäU:233: warning: ignoring old recipe for target '.cxx.S'
 Makefile:237: warning: overriding recipe for target '.cpp.o'
-Ğºïú^U:237: warning: ignoring old recipe for target '.cpp.o'
+PZsÖäU:237: warning: ignoring old recipe for target '.cpp.o'
 Makefile:241: warning: overriding recipe for target '.cpp.S'
-Ğºïú^U:241: warning: ignoring old recipe for target '.cpp.S'
+PZsÖäU:241: warning: ignoring old recipe for target '.cpp.S'
 Makefile:245: warning: overriding recipe for target '.c.o'
-Ğºïú^U:245: warning: ignoring old recipe for target '.c.o'
+PZsÖäU:245: warning: ignoring old recipe for target '.c.o'
 Makefile:249: warning: overriding recipe for target '.c.S'
-Ğºïú^U:249: warning: ignoring old recipe for target '.c.S'
+PZsÖäU:249: warning: ignoring old recipe for target '.c.S'
 Makefile:253: warning: overriding recipe for target '.m.o'
-Ğºïú^U:253: warning: ignoring old recipe for target '.m.o'
+PZsÖäU:253: warning: ignoring old recipe for target '.m.o'
 Makefile:257: warning: overriding recipe for target '.m.S'
-Ğºïú^U:257: warning: ignoring old recipe for target '.m.S'
+PZsÖäU:257: warning: ignoring old recipe for target '.m.S'
 Makefile:261: warning: overriding recipe for target 'unf_ext.so'
-Ğºïú^U:261: warning: ignoring old recipe for target 'unf_ext.so'
+PZsÖäU:261: warning: ignoring old recipe for target 'unf_ext.so'
 compiling unf.cc
 linking shared-object unf_ext.so
 make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
@@ -91,40 +91,40 @@ current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0
 make "DESTDIR=" install
 make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
 Makefile:176: warning: overriding recipe for target 'clean'
-ĞºgÏU:176: warning: ignoring old recipe for target 'clean'
+Púî1V:176: warning: ignoring old recipe for target 'clean'
 Makefile:183: warning: overriding recipe for target 'distclean'
-ĞºgÏU:183: warning: ignoring old recipe for target 'distclean'
+Púî1V:183: warning: ignoring old recipe for target 'distclean'
 Makefile:191: warning: overriding recipe for target 'install-so'
-ĞºgÏU:191: warning: ignoring old recipe for target 'install-so'
+Púî1V:191: warning: ignoring old recipe for target 'install-so'
 Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-ĞºgÏU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+Púî1V:201: warning: ignoring old recipe for target 'pre-install-rb-default'
 Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-ĞºgÏU:203: warning: ignoring old recipe for target '.sitearchdir.time'
+Púî1V:203: warning: ignoring old recipe for target '.sitearchdir.time'
 Makefile:213: warning: overriding recipe for target '.cc.o'
-ĞºgÏU:213: warning: ignoring old recipe for target '.cc.o'
+Púî1V:213: warning: ignoring old recipe for target '.cc.o'
 Makefile:217: warning: overriding recipe for target '.cc.S'
-ĞºgÏU:217: warning: ignoring old recipe for target '.cc.S'
+Púî1V:217: warning: ignoring old recipe for target '.cc.S'
 Makefile:221: warning: overriding recipe for target '.mm.o'
-ĞºgÏU:221: warning: ignoring old recipe for target '.mm.o'
+Púî1V:221: warning: ignoring old recipe for target '.mm.o'
 Makefile:225: warning: overriding recipe for target '.mm.S'
-ĞºgÏU:225: warning: ignoring old recipe for target '.mm.S'
+Púî1V:225: warning: ignoring old recipe for target '.mm.S'
 Makefile:229: warning: overriding recipe for target '.cxx.o'
-ĞºgÏU:229: warning: ignoring old recipe for target '.cxx.o'
+Púî1V:229: warning: ignoring old recipe for target '.cxx.o'
 Makefile:233: warning: overriding recipe for target '.cxx.S'
-ĞºgÏU:233: warning: ignoring old recipe for target '.cxx.S'
+Púî1V:233: warning: ignoring old recipe for target '.cxx.S'
 Makefile:237: warning: overriding recipe for target '.cpp.o'
-ĞºgÏU:237: warning: ignoring old recipe for target '.cpp.o'
+Púî1V:237: warning: ignoring old recipe for target '.cpp.o'
 Makefile:241: warning: overriding recipe for target '.cpp.S'
-ĞºgÏU:241: warning: ignoring old recipe for target '.cpp.S'
+Púî1V:241: warning: ignoring old recipe for target '.cpp.S'
 Makefile:245: warning: overriding recipe for target '.c.o'
-ĞºgÏU:245: warning: ignoring old recipe for target '.c.o'
+Púî1V:245: warning: ignoring old recipe for target '.c.o'
 Makefile:249: warning: overriding recipe for target '.c.S'
-ĞºgÏU:249: warning: ignoring old recipe for target '.c.S'
+Púî1V:249: warning: ignoring old recipe for target '.c.S'
 Makefile:253: warning: overriding recipe for target '.m.o'
-ĞºgÏU:253: warning: ignoring old recipe for target '.m.o'
+Púî1V:253: warning: ignoring old recipe for target '.m.o'
 Makefile:257: warning: overriding recipe for target '.m.S'
-ĞºgÏU:257: warning: ignoring old recipe for target '.m.S'
+Púî1V:257: warning: ignoring old recipe for target '.m.S'
 Makefile:261: warning: overriding recipe for target 'unf_ext.so'
-ĞºgÏU:261: warning: ignoring old recipe for target 'unf_ext.so'
-/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20231126-10368-q7clyq
+Púî1V:261: warning: ignoring old recipe for target 'unf_ext.so'
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20231126-10405-xln7nt
 make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/unf_ext-0.0.9.1/ext/unf_ext'
