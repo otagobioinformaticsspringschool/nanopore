@@ -35,14 +35,7 @@ source: Rmd
  - For long-read data, ONT provides the Minimap2 aligner (but there are also a number of other options).
 
 
-## Alignment with `minimap2` on NeSI
-
-Load the minimap2 module:
-
-~~~
-module load minimap2
-~~~
-{: .bash}
+## Alignment with `dorado` and `minimap2` on NeSI
  
 Check that we've got a reference genome:
 
@@ -63,38 +56,50 @@ module load SAMtools
 ~~~
 {: .bash}
 
+Load the Dorado module:
+
+~~~
+module load Dorado
+~~~
+{: .bash}
+
 Make a folder for our aligned data:
 
 ~~~
-mkdir bam-files
+mkdir bam-aligned
 ~~~
+{: .bash}
 
-Use minimap2 followed by samtools to generate aligned data in `.bam` format:
+We can use `dorado` again to align the reads to our reference genome (note, this can also be done as part of the basecalling process, but that means you're performing alignemnt prior to having done any QC checking).
+
+`dorado` uses the `minimap2` aligner (another software tool from ONT).  The syntac for performing alignemnt on basecalled data is:
 
 ~~~
-minimap2 -ax map-ont genome/e-coli-k12-MG1655.fasta \
-   fastq_fastmodel/pass/*.gz | \
-   samtools sort -o bam-files/ecoli-pass-aligned-sort.bam
+dorado aligner \
+  genome/e-coli-k12-MG1655.fasta \
+  bam-unaligned/ecoli-pod5-pass-basecalls.bam | \
+  samtools sort -o bam-aligned/ecoli-pod5-pass-aligned-sort.bam 
 ~~~
 {: .bash}
 
 Index the bam file:
 
 ~~~
-samtools index bam-files/ecoli-pass-aligned-sort.bam
+
+samtools index bam-aligned/ecoli-pod5-pass-aligned-sort.bam
 ~~~
 {: .bash}
 
 Generate basic mapping information using samtools:
 
 ~~~
-samtools coverage bam-files/ecoli-pass-aligned-sort.bam
+samtools coverage bam-aligned/ecoli-pod5-pass-aligned-sort.bam
 ~~~
 {: .bash}
 
 ~~~
 #rname      startpos     endpos   numreads   covbases    coverage    meandepth   meanbaseq   meanmapq
-U00096.3           1    4641652      14273    4641652         100        28.93        17.3       59.8
+U00096.3           1    4641652      12139    4641652         100      24.8486        15.4       59.5
 ~~~
 {: .output}
 
@@ -125,7 +130,7 @@ Generate a "pileup" file to enable variant calling (might take a little bit of t
 bcftools mpileup -B -Q5 --max-BQ 30 -I \
    -o bcf-files/ecoli-pass.bcf \
    -f genome/e-coli-k12-MG1655.fasta  \
-   bam-files/ecoli-pass-aligned-sort.bam
+   bam-aligned/ecoli-pod5-pass-aligned-sort.bam
 ~~~
 {: .bash}
 

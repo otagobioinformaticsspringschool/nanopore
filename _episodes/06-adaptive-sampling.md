@@ -70,11 +70,17 @@ the software had a chance to map it to the genome and determine whether or not t
 Here is the full distribution of read lengths without adaptive sampling turned on (i.e., I also ran a 
 simulation without adaptive sampling) - there are LOTS of reads that less than 1000bp long:
 
-<img src="../fig/06-non-as-reads.png" alt="plot of chunk unnamed-chunk-2" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/06-non-as-reads.png" alt="plot of chunk unnamed-chunk-2" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-2</p>
+</div>
 
 Here is a zoomed in view:
 
-<img src="../fig/06-non-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-3" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/06-non-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-3" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-3</p>
+</div>
 
 ### Adaptive sampling results
 
@@ -87,11 +93,17 @@ reads that were unblocked (i.e., the read was mapped in real-time, and the AS al
 
 Here is the full distribution:
 
-<img src="../fig/06-as-reads.png" alt="plot of chunk unnamed-chunk-4" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/06-as-reads.png" alt="plot of chunk unnamed-chunk-4" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-4</p>
+</div>
 
 And here is a close up:
 
-<img src="../fig/06-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-5" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/06-as-reads-closeup.png" alt="plot of chunk unnamed-chunk-5" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-5</p>
+</div>
 
 It is clear from the plots that the length of reads receiving an "unblock" signal is around 800bp, reflecting the time that 
 the AS algorithm takes to make a decision about whether or not to reject a read.
@@ -591,7 +603,10 @@ ggplot(bedCov, aes(x=START, y=DEPTH)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" width="612" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/rmd-06-unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12" width="612" />
+<p class="caption">plot of chunk unnamed-chunk-12</p>
+</div>
 
 #### Average read-depth in selected and non-selected regions
 

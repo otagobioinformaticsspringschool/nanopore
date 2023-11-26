@@ -8,10 +8,10 @@ questions:
 - "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
 - "Understand FASTQ format."
-- "Use guppy_basecaller on NeSI to generate FASTQ data from FAST5 output files."   
+- "Use dorado on NeSI to generate basecalled data from POD5 or FAST5 output files."   
 keypoints:
-- "FAST5 data can be converted to FASTQ via the guppy_basecaller software."
-- "guppy_basecaller has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
+- "POD5/FAST5 data can be converted to BAM or FASTQ via the dorado software."
+- "dorado has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
 - "Once bascalling has been done, standard tasks such as QA/QC, mapping and variant calling can be performed."
 source: Rmd
 ---
@@ -49,7 +49,10 @@ The ONT software application "guppy" can be used to process FAST5 data into FAST
 for storage of sequence data and associated base-level quality scores.
 
 
-<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-2" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-2" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-2</p>
+</div>
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` basecaller).
  - Once the raw FAST5 data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
@@ -71,12 +74,18 @@ Today we will be using `guppy_basecaller` on the NeSI system to generate FASTQ d
 
 ### Assessing sequence quality: phred scores
 
-<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-3" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-3" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-3</p>
+</div>
 
 Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
-<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-4" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-4" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-4</p>
+</div>
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
  - Quality score of 38 becomes 38+33=71: “G” 
@@ -84,7 +93,10 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 [http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
 
 
-<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-5" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-5</p>
+</div>
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
  - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
@@ -92,7 +104,10 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 FASTQ format:
 
-<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" width="60%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-6" width="60%" />
+<p class="caption">plot of chunk unnamed-chunk-6</p>
+</div>
 
 http://en.wikipedia.org/wiki/FASTQ_format
 
@@ -108,105 +123,224 @@ http://en.wikipedia.org/wiki/FASTQ_format
 For this part of the workshop we are working at:
 
 ~~~
-~/obss_2022/nanopore/ecoli-data/
+~/obss_2023/nanopore/ecoli-data/
 ~~~
 {: .output}
 
 Let's change to that directory now:
 
 ~~~
-cd ~/obss_2022/nanopore/ecoli-data/
+cd ~/obss_2023/nanopore/ecoli-data/
 ~~~
 {: .bash}
 
 FAST5 files from sequencing *E. coli* are available in the directory:
 
 ~~~
-fast5_pass
+pod5_pass
 ~~~
 {: .output}
 
 ~~~
-ls -1 fast5_pass
+ls -1 pod5_pass
 ~~~
 {: .bash}
 
 ~~~
-ecoli_pass_0.fast5
-ecoli_pass_10.fast5
-ecoli_pass_11.fast5
-ecoli_pass_12.fast5
-ecoli_pass_13.fast5
-ecoli_pass_14.fast5
-ecoli_pass_15.fast5
-ecoli_pass_1.fast5
-ecoli_pass_2.fast5
-ecoli_pass_3.fast5
-ecoli_pass_4.fast5
-ecoli_pass_5.fast5
-ecoli_pass_6.fast5
-ecoli_pass_7.fast5
-ecoli_pass_8.fast5
-ecoli_pass_9.fast5
+ecoli_pass_0.pod5
+ecoli_pass_10.pod5
+ecoli_pass_11.pod5
+ecoli_pass_12.pod5
+ecoli_pass_14.pod5
+ecoli_pass_15.pod5
+ecoli_pass_1.pod5
+ecoli_pass_2.pod5
+ecoli_pass_3.pod5
+ecoli_pass_4.pod5
+ecoli_pass_5.pod5
+ecoli_pass_6.pod5
+ecoli_pass_8.pod5
 ~~~
 {: .output}
 
 
-### Basecalling: `guppy`
+### Basecalling: `dorado`
 
- - `guppy` is a neural network based basecaller.
+ - `dorado` is a neural network based basecaller.
     - analyses the electrical trace data and predicts base 
     - it is GPU-aware, and can basecall in real time 
-    - can also call base modifications (e.g., 5mC, 6mA)
-    - high accuracy mode (slower) and super-high accuracy mode (even slower) can improve basecalls post-sequencing
- - The software is provided by ONT, and the source code is available via a developer agreement.
- - Output is the standard "FASTQ" format for sequence data.
+    - can also call base modifications (e.g., 5mC, 5hmC, 6mA)
+    - common to use the "fast" basecalling model to generate basecalls and quality scores during sequening run.
+    - high accuracy mode (HAC: slower) and super-high accuracy mode (SUP: even slower) can improve basecalls post-sequencing
+ - Output is unaligned BAM format.
 
 On NeSI:
 
 ~~~
-module load ont-guppy-gpu/6.2.1
-
-guppy_basecaller --help
+module spider Dorado
 ~~~
 {: .bash}
 
 ~~~
-: Guppy Basecalling Software, (C) Oxford Nanopore Technologies plc. Version 6.2.1+6588110, minimap2 version 2.22-r1101
+------------------------------------------------------------------------------
+  Dorado:
+------------------------------------------------------------------------------
+    Description:
+      High-performance, easy-to-use, open source basecaller for Oxford
+      Nanopore reads.
 
-Use of this software is permitted solely under the terms of the end user license agreement (EULA).By running, copying or accessing this software, you are demonstrating your acceptance of the EULA.
-The EULA may be found in /scale_wlg_persistent/filesets/opt_nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/bin
+     Versions:
+        Dorado/0.2.1
+        Dorado/0.2.4
+        Dorado/0.3.0
+        Dorado/0.3.1
+        Dorado/0.3.2
+        Dorado/0.3.4-rc2
+        Dorado/0.3.4
+        Dorado/0.4.0
+        Dorado/0.4.1
+        Dorado/0.4.2
+        Dorado/0.4.3
 
-Usage:
+------------------------------------------------------------------------------
+  For detailed information about a specific "Dorado" module (including how to load the modules) use the module's full name.
+  For example:
 
-With config file:
-  guppy_basecaller -i <input path> -s <save path> -c <config file> [options]
-With flowcell and kit name:
-  guppy_basecaller -i <input path> -s <save path> --flowcell <flowcell name>
-    --kit <kit name>
-List supported flowcells and kits:
-  guppy_basecaller --print_workflows
-
-Use GPU for basecalling:
-  guppy_basecaller -i <input path> -s <save path> -c <config file>
-    --device <cuda device name> [options]
-
-Command line parameters:
-
-[ TRUNCATED - this goes on for a long time... ]
+     $ module spider Dorado/0.4.3
+------------------------------------------------------------------------------
 ~~~
 {: .output}
 
-### Using `guppy` on NeSI
+~~~
+module load Dorado/0.4.3
 
-The `guppy_basecaller` software can use GPUs to speed up the basecalling process.
+dorado --help
+~~~
+{: .bash}
+
+~~~
+Usage: dorado [options] subcommand
+
+Positional arguments:
+aligner
+basecaller
+demux
+download
+duplex
+summary
+
+Optional arguments:
+-h --help               shows help message and exits
+-v --version            prints version information and exits
+-vv                     prints verbose version information and exits
+~~~
+{: .output}
+
+### Using `dorado` on NeSI
+
+Information about using `dorado` on NeSI can be found at:
+
+[https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado](https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado)
+
+In order to use `dorado` to generate basecalls from POD5 of FAST5 data, we need to select a "model". 
+
+Each model has been trained to generate specific types of basecalls (i.e., unmodified DNA, RNA, modified DNA: 5mC, 5hmC, 6mA), for specific types of data (flowcell version: 9.4.1, 10.4.1; *plex: simplex, duplex; speed: 260bps, 400bps or 70bps/130bp for RNA), at differing levels of accuracy (FAST, HAC, SUP).
+
+We can see what models are available via:
+
+~~~
+dorado download --list
+~~~
+{: .bash}
+
+~~~
+[2023-11-26 01:37:39.797] [info] > modification models
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v3.5.2_5mCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.0.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.1.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC@v2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v3.1
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC_5hmC@v1
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v3
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4_5mCG_5hmCG@v0
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3_5mCG@v0.1
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3_5mCG_5hmCG@v0
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3_5mCG@v0.1
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3_5mCG_5hmCG@v0
+[2023-11-26 01:37:39.798] [info]  - rna004_130bps_sup@v3.0.1_m6A_DRACH@v1
+[2023-11-26 01:37:39.798] [info] > stereo models
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_4khz_stereo@v1.1
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.1
+[2023-11-26 01:37:39.798] [info] > simplex models
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v3.5.2
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.0.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.1.0
+[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3
+[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.6
+[2023-11-26 01:37:39.798] [info]  - rna002_70bps_fast@v3
+[2023-11-26 01:37:39.798] [info]  - rna002_70bps_hac@v3
+[2023-11-26 01:37:39.799] [info]  - rna004_130bps_fast@v3.0.1
+[2023-11-26 01:37:39.799] [info]  - rna004_130bps_hac@v3.0.1
+[2023-11-26 01:37:39.799] [info]  - rna004_130bps_sup@v3.0.1
+~~~
+{: .output}
+
+We can ask dorado to download a specific model via:
+
+~~~
+mkidr dorado-models
+dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
+~~~
+{ :bash}
+
+`dorado` can use GPUs to speed up the basecalling process.
 
 On NeSI, we can access the A100 GPUs by submitting a job to the cluster using a slurm script.
 
 The slurm script we will use can be found at:
 
 ~~~
-scripts/guppy_fastmodel.sl
+scripts/dorado_fastmodel.sl
 ~~~
 {: .output}
 
@@ -214,68 +348,61 @@ scripts/guppy_fastmodel.sl
 Let's have a look at the content:
 
 ~~~
-more scripts/guppy_fastmodel.sl
+more scripts/dorado_fastmodel.sl
 ~~~
 {: .bash}
-
 
 ~~~
 #!/bin/bash -e 
 
-#SBATCH --job-name      guppy_basecalling
+#SBATCH --job-name      dorado_basecalling
 #SBATCH --time          00:10:00
-#SBATCH --mem           4G
-#SBATCH --cpus-per-task 2
-#SBATCH --output        guppy_%j.out
+#SBATCH --mem           6G
+#SBATCH --cpus-per-task 4
+#SBATCH --output        dorado_%j.out
 #SBATCH --account       nesi02659
 #SBATCH --gpus-per-node A100-1g.5gb:1
 
 module purge
-module load ont-guppy-gpu/6.2.1
+module load Dorado/0.4.3
 
-guppy_basecaller -i fast5_pass  -s fastq_fastmodel \
- --config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg  \
- --device auto  --recursive --records_per_fastq 4000 --min_qscore 7 --compress_fastq
+dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
+
+dorado basecaller  --device 'cuda:all' dorado-models/dna_r9.4.1_e8_fast@v3.4 pod5_pass/ > ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .output}
 
  - The `SBATCH` commands are providing information to the `slurm` job scheduler: job name, maximum run time, memory allocation etc
- - The `module` commands are making sure the necessary modules are available to the script (here we are specifying version 6.2.1 of `ont-guppy-gpu` - the GPU-enabled version of ONT's guppy software).
- - The `guppy_basecaller` command is what is doing the work (i.e., converted the .fast5 data to .fastq).
+ - The `module` commands are making sure the necessary modules are available to the script (here we are specifying version 0.4.3 of `Dorado` - the GPU-enabled version of ONT's dorado software).
+ - The `dorado download` command downloads the model that we want to use for basecalling, and saves it to the `dorado-models` directory.
+ - The `dorado basecaller` command is what is doing the work (i.e., converting the .pod5 data to unaligned .bam).
 
- Let's have a closer look at the `guppy_basecaller` command:
+Let's have a closer look at the `dorado basecaller` command:
 
 ~~~
-guppy_basecaller \
-  -i fast5_pass_subset  \
-  -s fastq_fastmodel \
-  --config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg  \
-  --device auto \ 
-  --recursive \
-  --records_per_fastq 4000 \
-  --min_qscore 7 \
-  --compress_fastq
+dorado basecaller  \
+  --device 'cuda:all' \
+  dorado-models/dna_r9.4.1_e8_fast@v3.4 \
+  pod5_pass \
+  > ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .output}
 
 Options used:
 
- - `-i fast5_pass_subset`: where to find the fast5 files (note the we are assuming that the script in run from the directory: `~/obss_2022/nanopore/`)
+ - `--device 'cuda:all'`: this refers to which GPU device should be used (here we let the software select use `all` available devices, but it can sometimes be useful to select specific GPU devices).
  - `-s fastq_fastmodel`: the name of the folder where the .fastq files will be written to.
- - `-config /opt/nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/data/dna_r9.4.1_450bps_fast.cfg`: this specifies the model that is being used to perform the basecalling.  In this case we are using the "fast" model (rather than high-accuracy (hac) or super-high accuracy (sup)) to save time, and `dna` denotes that we sequenced... DNA. `r9.4.1` refers to the flowcell version that was used to generate the data, and 450bps is the speed at which the DNA passes through the pore (450 bases per second).
- - `--device auto`: this refers to which GPU device should be used (here we let the software select `auto`matically, but it can sometimes be useful to select specific GPU devices).
- - `--recursive`: search recursively for `.fast5` files (actually all our `.fast5` files are in the folder, so this isn't needed here).
- - `--records_per_fastq 4000`: number of reads to include per `.fastq` file.
- - `--min_qscore 7`: minimum average base quality score to considered a read to have "passed" QC.
- - `--compress_fastq`: create compressed (`.fastq.gz`) files.
+ - `dorado-models/dna_r9.4.1_e8_fast@v3.4`: this specifies the model (and its location, relative to wheer we call the script from) that is being used to perform the basecalling.  In this case we are using the "fast" model (rather than high-accuracy (hac) or super-high accuracy (sup)) to save time, and `dna` denotes that we sequenced... DNA. `r9.4.1` refers to the flowcell version that was used to generate the data, and e8 is the kit chemistry that was used for library generation (e8 is kit9 or kit 10, e8.2 is kit 14).
+ - `pod5_pass`: this is the directory containing the `.pod5` (or `.fast5` - `dorado` with process either type) files that we would like to process.
+ - `ecoli-pod5-pass-basecalls.bam`: output file (not that the ">" character sends the output from `dorado` to this file).
 
-To submit the script, we use the `sbatch` command, and run it from the `~/obss_2022/nanopore/ecoli-data` directory. You can check 
-if you are in that directory with `pwd`.  If not: `cd ~/obss_2022/nanopore/ecoli-data`.
+To submit the script, we use the `sbatch` command, and run it from the `~/obss_2023/nanopore/ecoli-data` directory. You can check 
+if you are in that directory with `pwd`.  If not: `cd ~/obss_2023/nanopore/ecoli-data`.
 
 To run the script:
 
 ~~~
-sbatch scripts/guppy_fastmodel.sl
+sbatch scripts/dorado_fastmodel.sl
 ~~~
 {: .bash}
 
@@ -290,19 +417,20 @@ squeue --me
 
 ~~~
 JOBID         USER     ACCOUNT   NAME        CPUS MIN_MEM PARTITI START_TIME     TIME_LEFT STATE    NODELIST(REASON)    
-31430356      michael. nesi02659 spawner-jupy   2      4G infill  2022-11-20T0     1:23:52 RUNNING  wbl004              
-31431766      michael. nesi02659 guppy_baseca   2      4G gpu     2022-11-20T0        6:28 RUNNING  wbl001 
+41491249      michael. nesi02659 dorado_basec   4      6G gpu     2023-11-26T0        8:31 RUNNING  wbl001              
+41491302      michael. nesi02659 spawner-jupy   4      8G interac 2023-11-26T0       28:44 RUNNING  wbn001      
 ~~~
 {: .output}
 
 
-It will also write progress to a log file that contains the job ID (represented by `XXXXXXX` in the code below). 
+It will also write "progress" output to a log file that contains the job ID (represented by `XXXXXXX` in the code below), although (unlike with the 
+older `guppy` software, you don't get any information about how far through the processing you are).
 You can check the file name using `ls -ltr` (list file details, in reverse time order).  
-Using the `tail -f` command, we can watch the progress (use control-c to exit):
+Using the `tail -f` command, we can watch the "progress" (use control-c to exit):
 
 ~~~
 ls -ltr
-tail -f guppy_XXXXXXX.out
+tail -f dorado_XXXXXXX.out
 ~~~
 {: .bash}
 
@@ -310,61 +438,23 @@ tail -f guppy_XXXXXXX.out
 Example of output:
 
 ~~~
-Use of this software is permitted solely under the terms of the end user license agreement (EULA).By running, copying or accessing this software, you are demonstrating your acceptance of the EULA.
-The EULA may be found in /scale_wlg_persistent/filesets/opt_nesi/CS400_centos7_bdw/ont-guppy-gpu/6.2.1/bin
-
-Found 16 fast5 files to process.
-Init time: 847 ms
-
-0%   10   20   30   40   50   60   70   80   90   100%
-|----|----|----|----|----|----|----|----|----|----|
-****************************
+[2023-11-26 02:01:36.919] [info] > Creating basecall pipeline
+[2023-11-26 02:01:46.687] [info]  - set batch size for cuda:0 to 768
+[2023-11-26 02:03:33.567] [info] > Simplex reads basecalled: 13000
+[2023-11-26 02:03:33.570] [info] > Basecalled @ Samples/s: 2.007616e+07
+[2023-11-26 02:03:33.674] [info] > Finished
 ~~~
 {: .output}
 
 Use "Control-c" to exit (it's okay, it won't kill the job).
 
-The job should take around 6 minutes to run.
+The job should take a few minutes to run.
 
-Once the job has completed successfully, the `.fastq` files can be found at `fastq_fastmodel`:
+Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam` will have been created 
+in the current directory (`~/obss_2023/nanopore/ecoli-data`).
 
 ~~~
-ls -1 fastq_fastmodel
+ls -ltr 
 ~~~
 {: .bash}
 
-Note that `pass` and `fail` subfolders have been created.
-
-~~~
-ls -l fastq_fastmodel/pass/
-~~~
-{: .bash}
-
-~~~
-ls -l fastq_fastmodel/fail/
-~~~
-{: .bash}
-
-Note that both directories (`pass` and `fail`) contain the same number of files, and they have exactly the same names.  BUT, their content is different: the `.fastq.gz` files in the `pass` folder contain data for the reads that have passed QC (average base quality above threshold), and the `fail` folder contains those that failed. The files in the `pass` folder should be (hopefully!) much larger those their counterparts in the `fail` folder.
-
-~~~
-ls -lh fastq_fastmodel/pass/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .bash}
-
-~~~
--rw-rw----+ 1 michael.black nesi02659 5.7M Nov 20 00:58 fastq_fastmodel/pass/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .output}
-
-~~~
-ls -lh fastq_fastmodel/fail/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .bash}
-
-~~~
--rw-rw----+ 1 michael.black nesi02659 672K Nov 20 00:58 fastq_fastmodel/fail/fastq_runid_15ca037c8ec4904bf5408d8ae5a1abecb8458aee_0_0.fastq.gz
-~~~
-{: .output}
-
-Here the first `.fastq.gz` file (in the `pass` folder) contains 5.7M of data, whereas the one in the `fail` folder only contains 672K (i.e., it is about 1/12 of the size).

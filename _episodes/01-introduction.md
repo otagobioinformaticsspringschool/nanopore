@@ -37,27 +37,35 @@ source: Rmd
 ### ONT platforms
 
 
-<img src="../fig/01-oxnano_2022.png" alt="plot of chunk unnamed-chunk-2" width="80%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-oxnano_2022.png" alt="plot of chunk unnamed-chunk-2" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-2</p>
+</div>
 
 ### The MinION
 
 [http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724](http://www.nature.com/news/data-from-pocket-sized-genome-sequencer-unveiled-1.14724)
 
- - It's a USB stick sequencer!!
  - Rough specs (2014)
    - 6-8 hour run time
    - sequence per run: ~110Mbp
    - average read length: 5,400bp
    - reads up to 10kbp
    
- - 2022 specs: 
+ - 2023 specs: 
    - can run for up to 72 hours
-   - Max yield per run: 50Gbp
-   - Max read length recorded: >4Mbp
+   - Maximum (theoretical) yield per run: 50Gbp
+   - Maximum read length recorded: >4Mbp
 
-<img src="../fig/01-minion.png" alt="plot of chunk unnamed-chunk-3" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-minion.png" alt="plot of chunk unnamed-chunk-3" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-3</p>
+</div>
 
-<img src="../fig/01-nanopore-animation.gif" alt="plot of chunk unnamed-chunk-4" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-nanopore-animation.gif" alt="plot of chunk unnamed-chunk-4" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-4</p>
+</div>
 
 [https://nanoporetech.com](https://nanoporetech.com)
 [https://nanoporetech.com/products/specifications](https://nanoporetech.com/products/specifications)
@@ -68,7 +76,10 @@ source: Rmd
  - The MinION Mk1B is the current version of ONT's original sequencer.
  - Connects to a computer via USB.
 
-<img src="../fig/01-minion-usb.png" alt="plot of chunk unnamed-chunk-5" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-minion-usb.png" alt="plot of chunk unnamed-chunk-5" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-5</p>
+</div>
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
@@ -76,7 +87,10 @@ source: Rmd
 <BR><BR><BR><BR>
 
 
-<img src="../fig/01-minion-mk1b.png" alt="plot of chunk unnamed-chunk-6" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-minion-mk1b.png" alt="plot of chunk unnamed-chunk-6" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-6</p>
+</div>
 
 ### The MinION Mk1C
 
@@ -84,12 +98,30 @@ source: Rmd
  - For the price, however, the hardware is not particularly impressive.
 
 <BR><BR><BR>
-<img src="../fig/01-minion-mk1c.png" alt="plot of chunk unnamed-chunk-7" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-minion-mk1c.png" alt="plot of chunk unnamed-chunk-7" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-7</p>
+</div>
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
+<div class="figure" style="text-align: left">
+<img src="../fig/01-mk1c-spec-top.png" alt="plot of chunk unnamed-chunk-8" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-8</p>
+</div>
 
-<img src="../fig/01-mk1c-spec-top.png" alt="plot of chunk unnamed-chunk-8" width="50%" style="display: block; margin: auto auto auto 0;" />
+### The MinION Mk1D
+
+- The next iteration of portable sequencing devices is the Mk1D.
+- Tablet-based (plug-in).
+- Currently details are limited, but developer versions ~~are~~ were scheduled to be released during 2023: "Further details on specifications will be provided in 2023."
+
+<div class="figure" style="text-align: left">
+<img src="../fig/01-minion-mk1d.png" alt="plot of chunk unnamed-chunk-9" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-9</p>
+</div>
+
+[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
 
 ### The GridION
 
@@ -100,7 +132,10 @@ source: Rmd
 
 
 
-<img src="../fig/01-gridion.png" alt="plot of chunk unnamed-chunk-9" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-gridion.png" alt="plot of chunk unnamed-chunk-10" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-10</p>
+</div>
 
 [https://nanoporetech.com/products/gridion](https://nanoporetech.com/products/gridion)
 
@@ -111,7 +146,10 @@ source: Rmd
  - The Flongle uses an adapter to allow a smaller (and cheaper) flow cell to be used in the MinION and GridION devices.
  - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
 
-<img src="../fig/01-flongle.png" alt="plot of chunk unnamed-chunk-10" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-flongle.png" alt="plot of chunk unnamed-chunk-11" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-11</p>
+</div>
 
 [https://nanoporetech.com/products/flongle](https://nanoporetech.com/products/flongle)
 
@@ -121,26 +159,31 @@ source: Rmd
 
  - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
 
-
-
-
-
-<img src="../fig/01-promethion48.jpg" alt="plot of chunk unnamed-chunk-11" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-promethion48.jpg" alt="plot of chunk unnamed-chunk-12" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-12</p>
+</div>
 
 [https://nanoporetech.com/products/promethion](https://nanoporetech.com/products/promethion)
 
 <BR>
 
 
-<img src="../fig/01-promethion-flowcell.jpg" alt="plot of chunk unnamed-chunk-12" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-promethion-flowcell.jpg" alt="plot of chunk unnamed-chunk-13" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-13</p>
+</div>
 
 
 
-### Coming ~~soon~~ now: the P2
+### A "mini-PromethION": the P2
 
 
 
-<img src="../fig/01-p2.png" alt="plot of chunk unnamed-chunk-13" width="70%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-p2.png" alt="plot of chunk unnamed-chunk-14" width="70%" />
+<p class="caption">plot of chunk unnamed-chunk-14</p>
+</div>
 
 
 Smaller device (standalone or connect to host computer) that can run Promethion flow cells.
@@ -150,11 +193,13 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 
-### MinION flowcell characteristics
+### Flowcell characteristics
 
- - MinION flowcells typically have ~1200-1800 active pores (ONT guarantees at least 800 active pores).
- - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*)
- - BUT: pores are not constantly active, and can become blocked during the run 
+ - Pores are arranged in sets of four to form a “channel”. Periodically during the sequencing run, the ONT software decides which of the four pores to use from each channel (called a “mux scan”).
+   - MinION flowcells have 512 channels, so 2048 pores: typically ~1200-1800 are "active" (usable pre-run) (ONT guarantees at least 800 active pores).
+   - PromethION flowcells have 2675 channels, so 10,700 pores (ONT guarantees at least 5000 active pores).
+ - Sequencing occurs at roughly 450 bases per second (ONT recommends keeping speed above 300 bases per second - additional reagents can be added to "refuel" the flowcell*), although other speeds are now possible (can prioritise data volume vs accuracy).
+ - NOTE: pores are not constantly active, and can become blocked during the run 
  
  * [https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell](https://community.nanoporetech.com/protocols/experiment-companion-minknow/v/mke_1013_v1_revbm_11apr2016/refuelling-your-flow-cell)
 
@@ -164,7 +209,10 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 
-<img src="../fig/01-nanopore.png" alt="plot of chunk unnamed-chunk-14" width="70%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-nanopore.png" alt="plot of chunk unnamed-chunk-15" width="70%" />
+<p class="caption">plot of chunk unnamed-chunk-15</p>
+</div>
 
 [https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
@@ -174,7 +222,10 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
 
-<img src="../fig/01-sequencing-animated_0.gif" alt="plot of chunk unnamed-chunk-15" width="60%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-sequencing-animated_0.gif" alt="plot of chunk unnamed-chunk-16" width="60%" />
+<p class="caption">plot of chunk unnamed-chunk-16</p>
+</div>
 
 [https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
@@ -195,6 +246,13 @@ For more detailed information about ONT sequencing:
  - The initial product was realtively slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
  - Incremental improvements have led to major advances in both speed and accuracy.
 
+<div class="figure" style="text-align: left">
+<img src="../fig/01-ont-screening.png" alt="plot of chunk unnamed-chunk-17" width="80%" />
+<p class="caption">plot of chunk unnamed-chunk-17</p>
+</div>
+
+[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
+
  
 ### 2D sequencing (prior to 2017)
 
@@ -205,7 +263,10 @@ For more detailed information about ONT sequencing:
 
 
 
-<img src="../fig/01-nanopore-2d-reads.png" alt="plot of chunk unnamed-chunk-16" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-nanopore-2d-reads.png" alt="plot of chunk unnamed-chunk-18" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-18</p>
+</div>
 
 Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). 
 [https://doi.org/10.1186/s13059-016-1103-0](https://doi.org/10.1186/s13059-016-1103-0)
@@ -216,7 +277,10 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<img src="../fig/01-2d-reads.png" alt="plot of chunk unnamed-chunk-17" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/01-2d-reads.png" alt="plot of chunk unnamed-chunk-19" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-19</p>
+</div>
 
 [https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528](https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528)
 
@@ -227,7 +291,10 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
 
-<img src="../fig/01-europe-lawsuit.png" alt="plot of chunk unnamed-chunk-18" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/01-europe-lawsuit.png" alt="plot of chunk unnamed-chunk-20" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-20</p>
+</div>
 
 
 [https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe](https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe)
@@ -242,7 +309,10 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<img src="../fig/01-1D2-accuracy.png" alt="plot of chunk unnamed-chunk-19" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-1D2-accuracy.png" alt="plot of chunk unnamed-chunk-21" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-21</p>
+</div>
 
  - Video at link below:
 
@@ -258,7 +328,10 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<img src="../fig/01-r10-pore.png" alt="plot of chunk unnamed-chunk-20" width="50%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-r10-pore.png" alt="plot of chunk unnamed-chunk-22" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-22</p>
+</div>
 
 [https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
@@ -268,7 +341,10 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
  - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
 
-<img src="../fig/01-r10.3-results.png" alt="plot of chunk unnamed-chunk-21" width="70%" style="display: block; margin: auto auto auto 0;" />
+<div class="figure" style="text-align: left">
+<img src="../fig/01-r10.3-results.png" alt="plot of chunk unnamed-chunk-23" width="70%" />
+<p class="caption">plot of chunk unnamed-chunk-23</p>
+</div>
 
 [https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
@@ -281,69 +357,127 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - Upgrade includes a return to the "2D" approach.
 
 
-<img src="../fig/01-lawsuit2020.png" alt="plot of chunk unnamed-chunk-22" width="50%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="../fig/01-lawsuit2020.png" alt="plot of chunk unnamed-chunk-24" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-24</p>
+</div>
 
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
+### FAST5 / HDF5 data
 
-### Making improvements
+ - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
+ - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
 
-<img src="../fig/01-ont-screening.png" alt="plot of chunk unnamed-chunk-23" width="80%" style="display: block; margin: auto auto auto 0;" />
+“Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
 
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
+[https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5](https://www.neonscience.org/resources/learning-hub/tutorials/about-hdf5)
+ 
+### POD5 format
+
+ - Over the past year (or so) ONT have introduced the POD5 format for storing data.
+ - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
+ - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
+ - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
+
+<div class="figure" style="text-align: center">
+<img src="../fig/01-pod5-format.png" alt="plot of chunk unnamed-chunk-25" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-25</p>
+</div>
+
+[https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
+
+## Nanopore workflow
+
+<center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
+
+ - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
+ - Once the raw FAST5 (or POD5) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
+
+<BR>
+
+### https://nanoporetech.com/nanopore-sequencing-data-analysis
 
 
 
-### Q20+ and Kit 14
+### Basecalling: `guppy`
 
-<img src="../fig/01-ont-q20.png" alt="plot of chunk unnamed-chunk-24" width="480" style="display: block; margin: auto auto auto 0;" />
+ - `guppy` is a neural network based basecaller.
+    - analyses the electrical trace data and predicts base 
+    - it is GPU-aware, and can basecall in real time 
+    - can also call base modifications (e.g., 5mC, 6mA)
+    - high accuracy (HAC) mode (slower) and super-high accuracy (SUP) mode (even slower) can improve basecalls post-sequencing
+ - MANY other machine learning basecallers have been proposed.
+ - Output is the standard "FASTQ" format for sequence data.
+ - `guppy` has now been "retired" by ONT, and replaced with `dorado`.
+
+
+### Basecalling: `dorado`
+
+ - ONT has recently released a new base caller: `dorado`
+ - Optimised for 10.4.1 flowcells (but there are basecalling models for 9.4.1)
+ - Designed to support Apple GPUs (M1/M2/M3)
+ - Like Guppy, can call base modifications
+ - Also has FAST, HAC and SUP modes for basecalling.
+
+### 10.4.1 flowcells + v14 chemistry: accuracy
+
+<div class="figure" style="text-align: center">
+<img src="../fig/01-ont-accurarcy-1.png" alt="plot of chunk unnamed-chunk-26" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-26</p>
+</div>
+
+<BR> 
+
+<div class="figure" style="text-align: center">
+<img src="../fig/01-ont-accurarcy-2.png" alt="plot of chunk unnamed-chunk-27" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-27</p>
+</div>
+
+[https://nanoporetech.com/accuracy](https://nanoporetech.com/accuracy)
+
+
+## 10.4.1 flowcells + v14 chemistry: simplex
+
+- The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
+
+<div class="figure" style="text-align: center">
+<img src="../fig/01-ont-simplex-q20.png" alt="plot of chunk unnamed-chunk-28" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-28</p>
+</div>
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
 
+### 10.4.1 flowcells + v14 chemistry: duplex
 
-### Nanopore accuracy
+- The quality is even higher for duplex reads: mean of 30
+- BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
+
+<div class="figure" style="text-align: center">
+<img src="../fig/01-ont-duplex-q30.png" alt="plot of chunk unnamed-chunk-29" width="50%" />
+<p class="caption">plot of chunk unnamed-chunk-29</p>
+</div>
+
+[https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
 
-<img src="../fig/01-ont-accuracy.png" alt="plot of chunk unnamed-chunk-25" width="50%" style="display: block; margin: auto auto auto 0;" />
-
-[https://nanoporetech.com/accuracy](https://nanoporetech.com/q20plus-chemistry)
-
-
-
-### Duplex (and simplex) accuracy
-
-
-<img src="../fig/01-ont-duplex-q30.png" alt="plot of chunk unnamed-chunk-26" width="80%" style="display: block; margin: auto auto auto 0;" />
-
-What aren't they telling us about those duplex reads...? 
-
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
+### More Nanopore: London Calling 2023
 
 
 
-### Coming... sometime - the Mk1D
+<div class="figure" style="text-align: left">
+<img src="../fig/01-lc23.png" alt="a figure caption" width="50%" />
+<p class="caption">a figure caption</p>
+</div>
 
-
-
-<img src="../fig/01-ont-mk1d.png" alt="plot of chunk unnamed-chunk-27" width="70%" style="display: block; margin: auto auto auto 0;" />
-
-[https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
-[https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
-
-
-### More Nanopore: London Calling 2022
-
-
-
-<img src="../fig/01-lc22.png" alt="a figure caption" width="50%" style="display: block; margin: auto auto auto 0;" />
-
- - Online conference held in May 2022
+ - Online conference held in May 2023
  - Talk videos available online
  - LOTS of really cool announcements and research applications
+ - Can also watch presentations from previous years.
 
-[https://nanoporetech.com/lc22](https://nanoporetech.com/lc22)
+[https://nanoporetech.com/lc23](https://nanoporetech.com/lc23)
 
 
 

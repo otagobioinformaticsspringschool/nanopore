@@ -26,7 +26,7 @@ In this part of the module, we'll look at software applications that can be used
 
 ## NanoPlot
 
-Let's use the NanoPlot software to assess the quality of our `.fastq` data.  We can run NanoPlot interactively (i.e., we don't need to submit it as a slurm job), and it wil produce an HTML-based report that can be viewed in a browser.
+Let's use the NanoPlot software to assess the quality of our unaligned `.bam` data.  We can run NanoPlot interactively (i.e., we don't need to submit it as a slurm job), and it wil produce an HTML-based report that can be viewed in a browser.
 
 Load the NanoPlot module:
 
@@ -35,12 +35,12 @@ module load NanoPlot
 ~~~
 {: .bash}
 
-Run NanoPlot on passed fastq data (i.e., just the files in the `pass` folder):
+Run NanoPlot on `.bam` file:
 
 ~~~
 NanoPlot -o nanoplot_fastmodel \
-         -p ecoli_fastmodel_subset_ \
-         --fastq fastq_fastmodel/pass/fastq_runid_*.gz
+         -p ecoli_fastmodel_ \
+         --ubam ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
@@ -48,8 +48,15 @@ Command syntax:
 
 - `NanoPlot`: run the NanoPlot command (note that the capital N and P are required).
 - `-o nanoplot_fastmodel`: folder for output (`-o`) to be written.
-- `-p ecoli_fastmodel_subset_`: prefix (`-p`) to be appended to start of each filename in the output folder.
-- `--fastq fastq_fastmodel/pass/fastq_runid_*.gz`: the `.fastq.gz` files to process with NanoPlot.
+- `-p ecoli_fastmodel_`: prefix (`-p`) to be appended to start of each filename in the output folder.
+- `--ubam ecoli-pod5-pass-basecalls.bam`: the unaligned bam (`ubam`) file to process with NanoPlot.
+
+Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs:
+
+~~~
+E::idx_find_and_load] Could not retrieve index file for 'ecoli-pod5-pass-basecalls.bam'
+~~~
+{: .output}
 
 Let's check what output was generated:
 
@@ -59,25 +66,50 @@ ls -1 nanoplot_fastmodel/
 {: .bash}
 
 ~~~
-ecoli_fastmodel_subset_LengthvsQualityScatterPlot_dot.html
-ecoli_fastmodel_subset_LengthvsQualityScatterPlot_kde.html
-ecoli_fastmodel_subset_NanoPlot_20221120_2127.log
-ecoli_fastmodel_subset_NanoPlot-report.html
-ecoli_fastmodel_subset_NanoStats.txt
-ecoli_fastmodel_subset_Non_weightedHistogramReadlength.html
-ecoli_fastmodel_subset_Non_weightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_subset_WeightedHistogramReadlength.html
-ecoli_fastmodel_subset_WeightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_subset_Yield_By_Length.html
+ecoli_fastmodel_LengthvsQualityScatterPlot_dot.html
+ecoli_fastmodel_LengthvsQualityScatterPlot_dot.png
+ecoli_fastmodel_LengthvsQualityScatterPlot_kde.html
+ecoli_fastmodel_LengthvsQualityScatterPlot_kde.png
+ecoli_fastmodel_NanoPlot_20231126_0241.log
+ecoli_fastmodel_NanoPlot-report.html
+ecoli_fastmodel_NanoStats.txt
+ecoli_fastmodel_Non_weightedHistogramReadlength.html
+ecoli_fastmodel_Non_weightedHistogramReadlength.png
+ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.png
+ecoli_fastmodel_WeightedHistogramReadlength.html
+ecoli_fastmodel_WeightedHistogramReadlength.png
+ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.png
+ecoli_fastmodel_Yield_By_Length.html
+ecoli_fastmodel_Yield_By_Length.png
+[michael.black@wbn001 ecoli-data]$ ls -1 nanoplot_fastmodel/
+ecoli_fastmodel_LengthvsQualityScatterPlot_dot.html
+ecoli_fastmodel_LengthvsQualityScatterPlot_dot.png
+ecoli_fastmodel_LengthvsQualityScatterPlot_kde.html
+ecoli_fastmodel_LengthvsQualityScatterPlot_kde.png
+ecoli_fastmodel_NanoPlot_20231126_0241.log
+ecoli_fastmodel_NanoPlot-report.html
+ecoli_fastmodel_NanoStats.txt
+ecoli_fastmodel_Non_weightedHistogramReadlength.html
+ecoli_fastmodel_Non_weightedHistogramReadlength.png
+ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.png
+ecoli_fastmodel_WeightedHistogramReadlength.html
+ecoli_fastmodel_WeightedHistogramReadlength.png
+ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.html
+ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.png
+ecoli_fastmodel_Yield_By_Length.html
+ecoli_fastmodel_Yield_By_Length.png
 ~~~
 {: .output}
 
-The file that we are interested in is the HTML report: `ecoli_fastmodel_subset_NanoPlot-report.html`
+The file that we are interested in is the HTML report: `ecoli_fastmodel_NanoPlot-report.html`
 
 To view this in your browser:
 
 1. Use the file browser (left panel of Jupyter window) to navigate to the `nanoplot_fastmodel` folder.
-2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli_fastmodel_subset_NanoPlot-report.html" file and choose "Open in New Browser Tab".
+2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli_fastmodel_NanoPlot-report.html" file and choose "Open in New Browser Tab".
 3. The report should now be displayed in a new tab in your browser.
 
 ## FastQC
@@ -117,7 +149,7 @@ Run FastQC on our data:
 #     FastQC allocates 250Mb per thread. Can't remember how 
 #     to specify more memory for java...
 
-fastqc -t 2 -o fastqc_fastmodel ecoli-pass.fastq.gz
+fastqc -t 2 -o fastqc_fastmodel ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
@@ -126,7 +158,7 @@ Command syntax:
 - `fastqc`: run the `fastqc` command
 - `-t 2`: use two cpus (see my note about memory usage above) - the `-t` is for "threads".
 - `-o fastqc_fastmodel`: specify output folder.
-- `ecoli-pass.fastq.gz`: FASTQ data to analyse.
+- `ecoli-pod5-pass-basecalls.bam`: data file to analyse.
 
 Check the output:
 
@@ -136,8 +168,8 @@ ls -1 fastqc_fastmodel
 {: .bash}
 
 ~~~
-ecoli-pass_fastqc.html
-ecoli-pass_fastqc.zip
+ecoli-pod5-pass-basecalls_fastqc.html
+ecoli-pod5-pass-basecalls_fastqc.zip
 ~~~
 {: .output}
 
@@ -161,6 +193,35 @@ Load the bioawk module.
 module load bioawk
 ~~~
 {: .bash}
+
+~~~
+bioawk 
+~~~
+{: .bash}
+
+~~~
+usage: bioawk [-F fs] [-v var=value] [-c fmt] [-tH] [-f progfile | 'prog'] [file ...]
+~~~
+{: .output}
+
+~~~
+bioawk -c help
+~~~
+{: .bash}
+
+~~~
+bed:
+        1:chrom 2:start 3:end 4:name 5:score 6:strand 7:thickstart 8:thickend 9:rgb 10:blockcount 11:blocksizes 12:blockstarts 
+sam:
+        1:qname 2:flag 3:rname 4:pos 5:mapq 6:cigar 7:rnext 8:pnext 9:tlen 10:seq 11:qual 
+vcf:
+        1:chrom 2:pos 3:id 4:ref 5:alt 6:qual 7:filter 8:info 
+gff:
+        1:seqname 2:source 3:feature 4:start 5:end 6:score 7:filter 8:strand 9:group 10:attribute 
+fastx:
+        1:name 2:seq 3:qual 4:comment  
+~~~
+{: .output}
 
 Extract read name and length:
 
