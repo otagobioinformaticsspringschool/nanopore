@@ -92,14 +92,14 @@ defaults:
       layout: page
 
 # Files and directories that are not to be copied.
-exclude:
-  - Makefile
-  # - bin/
-  - .Rproj.user/
-  - .vendor/
-  - vendor/
-  - .docker-vendor/
-  - existing_material/
+#exclude:
+#  - Makefile
+#  - bin/
+#  - .Rproj.user/
+#  - .vendor/
+#  - vendor/
+#  - .docker-vendor/
+#  - existing_material/
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
