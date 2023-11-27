@@ -226,7 +226,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<img src="../fig/01-2d-reads.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-2d-reads.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528](https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528)
 
@@ -237,7 +237,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
 
-<img src="../fig/01-europe-lawsuit.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-europe-lawsuit.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 
 [https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe](https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe)
@@ -291,21 +291,19 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - Upgrade includes a return to the "2D" approach.
 
 
-<img src="../fig/01-lawsuit2020.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-lawsuit2020.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
-## Nanopore workflow
+### Nanopore workflow
 
-<center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
+<img src="../fig/01-nanopore-workflow.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
  - Once the raw (POD5 or FAST5 - see next section) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
-<BR>
-
-### https://nanoporetech.com/nanopore-sequencing-data-analysis
+[https://nanoporetech.com/nanopore-sequencing-data-analysis](https://nanoporetech.com/nanopore-sequencing-data-analysis)
 
 
 
@@ -331,11 +329,11 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 ### 10.4.1 flowcells + v14 chemistry: accuracy
 
-<img src="../fig/01-ont-accurarcy-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-ont-accurarcy-1.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 <BR> 
 
-<img src="../fig/01-ont-accurarcy-2.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-ont-accurarcy-2.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/accuracy](https://nanoporetech.com/accuracy)
 
@@ -344,7 +342,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 - The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
 
-<img src="../fig/01-ont-simplex-q20.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-ont-simplex-q20.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
@@ -354,7 +352,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - The quality is even higher for duplex reads: mean of 30
 - BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
 
-<img src="../fig/01-ont-duplex-q30.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-ont-duplex-q30.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 

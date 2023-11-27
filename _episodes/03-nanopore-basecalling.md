@@ -34,7 +34,7 @@ source: Rmd
  - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
  - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
-<img src="../fig/01-pod5-format.png" width="50%" style="display: block; margin: auto;" />
+<img src="../fig/01-pod5-format.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
 
