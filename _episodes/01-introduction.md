@@ -37,10 +37,7 @@ source: Rmd
 ### ONT platforms
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-oxnano_2022.png" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-2</p>
-</div>
+<img src="../fig/01-oxnano_2022.png" width="80%" style="display: block; margin: auto auto auto 0;" />
 
 ### The MinION
 
@@ -57,15 +54,9 @@ source: Rmd
    - Maximum (theoretical) yield per run: 50Gbp
    - Maximum read length recorded: >4Mbp
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-minion.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-3</p>
-</div>
+<img src="../fig/01-minion.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-animation.gif" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-4</p>
-</div>
+<img src="../fig/01-nanopore-animation.gif" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com](https://nanoporetech.com)
 [https://nanoporetech.com/products/specifications](https://nanoporetech.com/products/specifications)
@@ -76,10 +67,7 @@ source: Rmd
  - The MinION Mk1B is the current version of ONT's original sequencer.
  - Connects to a computer via USB.
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-minion-usb.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-5</p>
-</div>
+<img src="../fig/01-minion-usb.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
@@ -87,10 +75,7 @@ source: Rmd
 <BR><BR><BR><BR>
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1b.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-6</p>
-</div>
+<img src="../fig/01-minion-mk1b.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 ### The MinION Mk1C
 
@@ -98,17 +83,11 @@ source: Rmd
  - For the price, however, the hardware is not particularly impressive.
 
 <BR><BR><BR>
-<div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1c.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-7</p>
-</div>
+<img src="../fig/01-minion-mk1c.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/minion](https://nanoporetech.com/products/minion)
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-mk1c-spec-top.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-8</p>
-</div>
+<img src="../fig/01-mk1c-spec-top.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 ### The MinION Mk1D
 
@@ -116,10 +95,7 @@ source: Rmd
 - Tablet-based (plug-in).
 - Currently details are limited, but developer versions ~~are~~ were scheduled to be released during 2023: "Further details on specifications will be provided in 2023."
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-minion-mk1d.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-9</p>
-</div>
+<img src="../fig/01-minion-mk1d.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/minion-mk1d](https://nanoporetech.com/products/minion-mk1d)
 
@@ -132,10 +108,7 @@ source: Rmd
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-gridion.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-10</p>
-</div>
+<img src="../fig/01-gridion.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/gridion](https://nanoporetech.com/products/gridion)
 
@@ -146,10 +119,7 @@ source: Rmd
  - The Flongle uses an adapter to allow a smaller (and cheaper) flow cell to be used in the MinION and GridION devices.
  - Single-use system provides low-cost option for targeted sequencing (e.g., diagnostic applications).
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-flongle.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-11</p>
-</div>
+<img src="../fig/01-flongle.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/flongle](https://nanoporetech.com/products/flongle)
 
@@ -159,20 +129,14 @@ source: Rmd
 
  - The higher throughout PromethION uses a smaller cartridge-like flow cell. Two options: 24 or 48 flow cells.
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-promethion48.jpg" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-12</p>
-</div>
+<img src="../fig/01-promethion48.jpg" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/products/promethion](https://nanoporetech.com/products/promethion)
 
 <BR>
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-promethion-flowcell.jpg" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-13</p>
-</div>
+<img src="../fig/01-promethion-flowcell.jpg" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 
 
@@ -180,10 +144,7 @@ source: Rmd
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-p2.png" width="70%" />
-<p class="caption">plot of chunk unnamed-chunk-14</p>
-</div>
+<img src="../fig/01-p2.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 
 Smaller device (standalone or connect to host computer) that can run Promethion flow cells.
@@ -209,10 +170,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore.png" width="70%" />
-<p class="caption">plot of chunk unnamed-chunk-15</p>
-</div>
+<img src="../fig/01-nanopore.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
@@ -222,10 +180,7 @@ Smaller device (standalone or connect to host computer) that can run Promethion 
 
  - A motor protein (green) passes a strand of DNA through a nanopore (blue). The current is changed as the bases G, A, T and C pass through the pore in different combinations.
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-sequencing-animated_0.gif" width="60%" />
-<p class="caption">plot of chunk unnamed-chunk-16</p>
-</div>
+<img src="../fig/01-sequencing-animated_0.gif" width="60%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/how-it-works](https://nanoporetech.com/how-it-works)
 
@@ -246,10 +201,7 @@ For more detailed information about ONT sequencing:
  - The initial product was realtively slow, expensive (per base sequenced) and error prone (i.e., incorrect bases calls).
  - Incremental improvements have led to major advances in both speed and accuracy.
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-ont-screening.png" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-17</p>
-</div>
+<img src="../fig/01-ont-screening.png" width="80%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies](https://nanoporetech.com/resource-centre/london-calling-2022-update-oxford-nanopore-technologies)
 
@@ -263,10 +215,7 @@ For more detailed information about ONT sequencing:
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-2d-reads.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-18</p>
-</div>
+<img src="../fig/01-nanopore-2d-reads.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the genomics community. Genome Biol 17, 239 (2016). 
 [https://doi.org/10.1186/s13059-016-1103-0](https://doi.org/10.1186/s13059-016-1103-0)
@@ -277,10 +226,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-2d-reads.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-19</p>
-</div>
+<img src="../fig/01-2d-reads.png" width="50%" style="display: block; margin: auto;" />
 
 [https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528](https://bioinformatics.stackexchange.com/questions/5525/what-are-2d-reads-in-the-oxford-minion/5528)
 
@@ -291,10 +237,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-europe-lawsuit.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-20</p>
-</div>
+<img src="../fig/01-europe-lawsuit.png" width="50%" style="display: block; margin: auto;" />
 
 
 [https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe](https://www.genomeweb.com/sequencing/pacbio-oxford-nanopore-settle-patent-dispute-europe)
@@ -309,10 +252,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-1D2-accuracy.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-21</p>
-</div>
+<img src="../fig/01-1D2-accuracy.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
  - Video at link below:
 
@@ -328,10 +268,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-r10-pore.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-22</p>
-</div>
+<img src="../fig/01-r10-pore.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
@@ -341,10 +278,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
  - With a bit more tweaking (to get to R10.3) ONT improved 1D (i.e., single-strand) sequencing accuracy, although throughput is still not as high as the R.9.4.1 pore.
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-r10.3-results.png" width="70%" />
-<p class="caption">plot of chunk unnamed-chunk-23</p>
-</div>
+<img src="../fig/01-r10.3-results.png" width="70%" style="display: block; margin: auto auto auto 0;" />
 
 [https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store](https://nanoporetech.com/about-us/news/r103-newest-nanopore-high-accuracy-nanopore-sequencing-now-available-store)
 
@@ -357,10 +291,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - Upgrade includes a return to the "2D" approach.
 
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-lawsuit2020.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-24</p>
-</div>
+<img src="../fig/01-lawsuit2020.png" width="50%" style="display: block; margin: auto;" />
 
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
@@ -400,17 +331,11 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 ### 10.4.1 flowcells + v14 chemistry: accuracy
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-ont-accurarcy-1.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-25</p>
-</div>
+<img src="../fig/01-ont-accurarcy-1.png" width="50%" style="display: block; margin: auto;" />
 
 <BR> 
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-ont-accurarcy-2.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-26</p>
-</div>
+<img src="../fig/01-ont-accurarcy-2.png" width="50%" style="display: block; margin: auto;" />
 
 [https://nanoporetech.com/accuracy](https://nanoporetech.com/accuracy)
 
@@ -419,10 +344,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 - The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-ont-simplex-q20.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-27</p>
-</div>
+<img src="../fig/01-ont-simplex-q20.png" width="50%" style="display: block; margin: auto;" />
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
@@ -432,10 +354,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - The quality is even higher for duplex reads: mean of 30
 - BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-ont-duplex-q30.png" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-28</p>
-</div>
+<img src="../fig/01-ont-duplex-q30.png" width="50%" style="display: block; margin: auto;" />
 
 [https://nanoporetech.com/q20plus-chemistry](https://nanoporetech.com/q20plus-chemistry)
 
@@ -444,10 +363,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-lc23.png" width="50%" />
-<p class="caption">a figure caption</p>
-</div>
+<img src="../fig/01-lc23.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
  - Online conference held in May 2023
  - Talk videos available online
