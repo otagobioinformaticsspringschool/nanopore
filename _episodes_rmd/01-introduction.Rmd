@@ -263,7 +263,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
 
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-2d-reads.png")
 ```
 
@@ -276,7 +276,7 @@ knitr::include_graphics("../fig/01-2d-reads.png")
  - PacBio (competitor in the long-read space) and ONT have filed a number of lawsuits against each other over the past few years.
 
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-europe-lawsuit.png")
 ```
 
@@ -338,23 +338,23 @@ knitr::include_graphics("../fig/01-r10.3-results.png")
 - Upgrade includes a return to the "2D" approach.
 
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-lawsuit2020.png")
 ```
 
 [https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI](https://www.genomeweb.com/sequencing/jury-invalidates-pacific-biosciences-patents-lawsuit-against-oxford-nanopore#.YOt8e26xXUI)
 
 
-## Nanopore workflow
+### Nanopore workflow
 
-<center><img src="PNG_lec10/nanopore-workflow.png" height="180"></center>
+```{r, out.width="70%"}
+knitr::include_graphics("../fig/01-nanopore-workflow.png")
+```
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `guppy` and `dorado` basecallers).
  - Once the raw (POD5 or FAST5 - see next section) data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
 
-<BR>
-
-### https://nanoporetech.com/nanopore-sequencing-data-analysis
+[https://nanoporetech.com/nanopore-sequencing-data-analysis](https://nanoporetech.com/nanopore-sequencing-data-analysis)
 
 
 
@@ -380,13 +380,13 @@ knitr::include_graphics("../fig/01-lawsuit2020.png")
 
 ### 10.4.1 flowcells + v14 chemistry: accuracy
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-ont-accurarcy-1.png")
 ```
 
 <BR> 
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-ont-accurarcy-2.png")
 ```
 
@@ -397,7 +397,7 @@ knitr::include_graphics("../fig/01-ont-accurarcy-2.png")
 
 - The new chemistry (v14) and updated flowcells (10.4.1) have moved the quality up to ON AVERAGE 1 error per 100 bases (Q20) for simplex reads (single strand).
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-ont-simplex-q20.png")
 ```
 
@@ -409,7 +409,7 @@ knitr::include_graphics("../fig/01-ont-simplex-q20.png")
 - The quality is even higher for duplex reads: mean of 30
 - BUT: less than 50% of reads are duplex (i.e., you don't always manage to read both strands)
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 ```
 

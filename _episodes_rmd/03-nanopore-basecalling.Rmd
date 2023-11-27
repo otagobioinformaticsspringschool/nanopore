@@ -36,7 +36,7 @@ knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning
  - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
  - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
-```{r, out.width="50%", fig.align="center"}
+```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-pod5-format.png")
 ```
 
