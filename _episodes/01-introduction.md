@@ -244,9 +244,9 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 
  
 
-### 1D$^2$ sequencing
+### 1D<sup>2</sup> sequencing
 
- - In 2017 ONT announced the new 1D$^2$ chemistry
+ - In 2017 ONT announced the new 1D<sup>2</sup> chemistry
  - Showed higher accuracy that 1D (and SAID it was better than 2D)
  - It didn't last long... 
 
@@ -290,6 +290,7 @@ Jain, et al. The Oxford Nanopore MinION: delivery of nanopore sequencing to the 
 - The new "Q20+" products are now available  - moves to less than 1 error per 100 bases (a little more respectable, but still well below short-read technologies like Illumina).
 - Upgrade includes a return to the "2D" approach.
 
+<br>
 
 <img src="../fig/01-lawsuit2020.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 

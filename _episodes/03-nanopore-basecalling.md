@@ -34,7 +34,11 @@ source: Rmd
  - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
  - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
+<br>
+
 <img src="../fig/01-pod5-format.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+
+<br>
 
 [https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
 
@@ -47,8 +51,11 @@ The ONT software application `dorado` can be used to process POD5/FAST5 data and
 Previously this was outoput as FASTQ - a widely used format for storage of sequence data and associated base-level quality scores.  This
 same information is now stored in (unaligned) BAM format (BAM is a binary version of SAM format, which was created for storing aligment information, along with sequence data and quality scores for reads, but it can also be used to stored unaligned data: basecalls and quality scores).
 
+<br>
 
 <img src="../fig/01-nanopore-workflow.png" width="80%" style="display: block; margin: auto auto auto 0;" />
+
+<br>
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `dorado` basecaller).
  - Once the raw data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
@@ -70,10 +77,13 @@ Today we will be using `dorado` on the NeSI system to generate FASTQ data from a
 
 <img src="../fig/01-phred.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
+<br>
+
 Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
-
 <img src="../fig/01-phred2.png" width="50%" style="display: block; margin: auto auto auto 0;" />
+
+<br>
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
  - Quality score of 38 becomes 38+33=71: “G” 
@@ -321,7 +331,7 @@ We can ask dorado to download a specific model via:
 mkidr dorado-models
 dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
 ~~~
-{ :bash}
+{: .bash}
 
 `dorado` can use GPUs to speed up the basecalling process.
 
@@ -358,7 +368,7 @@ module load Dorado/0.4.3
 
 dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
 
-dorado basecaller  --device 'cuda:all' dorado-models/dna_r9.4.1_e8_fast@v3.4 pod5_pass/ > ecoli-pod5-pass-basecalls.bam
+dorado basecaller  --device 'cuda:all' dorado-models/dna_r9.4.1_e8_fast@v3.4 pod5_pass/ > bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .output}
 
@@ -394,7 +404,12 @@ mkdir bam-unaligned
 {: .bash}
 
 To submit the script, we use the `sbatch` command, and run it from the `~/obss_2023/nanopore/ecoli-data` directory. You can check 
-if you are in that directory with `pwd`.  If not: `cd ~/obss_2023/nanopore/ecoli-data`.
+if you are in that directory with `pwd`.  If not: 
+
+~~~
+`cd ~/obss_2023/nanopore/ecoli-data`.
+~~~
+{: .bash}
 
 To run the script:
 
@@ -451,7 +466,7 @@ Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam
 in the directory `~/obss_2023/nanopore/ecoli-data/bam-unaligned/`.
 
 ~~~
-ls -ltr bam-unaligned/
+ls -lh bam-unaligned/
 ~~~
 {: .bash}
 

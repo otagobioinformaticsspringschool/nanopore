@@ -40,7 +40,7 @@ Run NanoPlot on `.bam` file:
 ~~~
 NanoPlot -o nanoplot_fastmodel \
          -p ecoli_fastmodel_ \
-         --ubam ecoli-pod5-pass-basecalls.bam
+         --ubam bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
@@ -49,7 +49,7 @@ Command syntax:
 - `NanoPlot`: run the NanoPlot command (note that the capital N and P are required).
 - `-o nanoplot_fastmodel`: folder for output (`-o`) to be written.
 - `-p ecoli_fastmodel_`: prefix (`-p`) to be appended to start of each filename in the output folder.
-- `--ubam ecoli-pod5-pass-basecalls.bam`: the unaligned bam (`ubam`) file to process with NanoPlot.
+- `--ubam bam-unaligned/ecoli-pod5-pass-basecalls.bam`: the unaligned bam (`ubam`) file to process with NanoPlot.
 
 Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs:
 
@@ -149,7 +149,7 @@ Run FastQC on our data:
 #     FastQC allocates 250Mb per thread. Can't remember how 
 #     to specify more memory for java...
 
-fastqc -t 2 -o fastqc_fastmodel ecoli-pod5-pass-basecalls.bam
+fastqc -t 2 -o fastqc_fastmodel bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
@@ -158,7 +158,7 @@ Command syntax:
 - `fastqc`: run the `fastqc` command
 - `-t 2`: use two cpus (see my note about memory usage above) - the `-t` is for "threads".
 - `-o fastqc_fastmodel`: specify output folder.
-- `ecoli-pod5-pass-basecalls.bam`: data file to analyse.
+- `bam-unaligned/ecoli-pod5-pass-basecalls.bam`: data file to analyse.
 
 Check the output:
 

@@ -1,0 +1,159 @@
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal
+/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231127-10442-oawqgb.rb extconf.rb
+checking for __builtin_clz()... yes
+checking for __builtin_clzl()... yes
+checking for __builtin_clzll()... yes
+checking for float.h... yes
+checking for math.h... yes
+checking for stdbool.h... yes
+checking for stdlib.h... yes
+checking for x86intrin.h... yes
+checking for _lzcnt_u32() in x86intrin.h... no
+checking for _lzcnt_u64() in x86intrin.h... no
+checking for intrin.h... no
+checking for __lzcnt() in intrin.h... no
+checking for __lzcnt64() in intrin.h... no
+checking for _BitScanReverse() in intrin.h... no
+checking for _BitScanReverse64() in intrin.h... no
+checking for labs() in stdlib.h... yes
+checking for llabs() in stdlib.h... yes
+checking for finite() in math.h... yes
+checking for isfinite() in math.h... no
+checking for ruby/atomic.h... no
+checking for ruby/internal/has/builtin.h... no
+checking for ruby/internal/static_assert.h... no
+checking for rb_rational_num() in ruby.h... yes
+checking for rb_rational_den() in ruby.h... yes
+checking for rb_complex_real() in ruby.h... yes
+checking for rb_complex_imag() in ruby.h... yes
+checking for rb_opts_exception_p() in ruby.h... yes
+checking for rb_category_warn() in ruby.h... no
+checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... no
+creating Makefile
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal
+make "DESTDIR=" clean
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
+Makefile:177: warning: overriding recipe for target 'clean'
+ÐZü‘ÿU:177: warning: ignoring old recipe for target 'clean'
+Makefile:184: warning: overriding recipe for target 'distclean'
+ÐZü‘ÿU:184: warning: ignoring old recipe for target 'distclean'
+Makefile:192: warning: overriding recipe for target 'install-so'
+ÐZü‘ÿU:192: warning: ignoring old recipe for target 'install-so'
+Makefile:202: warning: overriding recipe for target 'pre-install-rb-default'
+ÐZü‘ÿU:202: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:204: warning: overriding recipe for target '.sitearchdir.time'
+ÐZü‘ÿU:204: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:214: warning: overriding recipe for target '.cc.o'
+ÐZü‘ÿU:214: warning: ignoring old recipe for target '.cc.o'
+Makefile:218: warning: overriding recipe for target '.cc.S'
+ÐZü‘ÿU:218: warning: ignoring old recipe for target '.cc.S'
+Makefile:222: warning: overriding recipe for target '.mm.o'
+ÐZü‘ÿU:222: warning: ignoring old recipe for target '.mm.o'
+Makefile:226: warning: overriding recipe for target '.mm.S'
+ÐZü‘ÿU:226: warning: ignoring old recipe for target '.mm.S'
+Makefile:230: warning: overriding recipe for target '.cxx.o'
+ÐZü‘ÿU:230: warning: ignoring old recipe for target '.cxx.o'
+Makefile:234: warning: overriding recipe for target '.cxx.S'
+ÐZü‘ÿU:234: warning: ignoring old recipe for target '.cxx.S'
+Makefile:238: warning: overriding recipe for target '.cpp.o'
+ÐZü‘ÿU:238: warning: ignoring old recipe for target '.cpp.o'
+Makefile:242: warning: overriding recipe for target '.cpp.S'
+ÐZü‘ÿU:242: warning: ignoring old recipe for target '.cpp.S'
+Makefile:246: warning: overriding recipe for target '.c.o'
+ÐZü‘ÿU:246: warning: ignoring old recipe for target '.c.o'
+Makefile:250: warning: overriding recipe for target '.c.S'
+ÐZü‘ÿU:250: warning: ignoring old recipe for target '.c.S'
+Makefile:254: warning: overriding recipe for target '.m.o'
+ÐZü‘ÿU:254: warning: ignoring old recipe for target '.m.o'
+Makefile:258: warning: overriding recipe for target '.m.S'
+ÐZü‘ÿU:258: warning: ignoring old recipe for target '.m.S'
+Makefile:262: warning: overriding recipe for target 'bigdecimal.so'
+ÐZü‘ÿU:262: warning: ignoring old recipe for target 'bigdecimal.so'
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal
+make "DESTDIR="
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
+Makefile:177: warning: overriding recipe for target 'clean'
+ÐÚãûU:177: warning: ignoring old recipe for target 'clean'
+Makefile:184: warning: overriding recipe for target 'distclean'
+ÐÚãûU:184: warning: ignoring old recipe for target 'distclean'
+Makefile:192: warning: overriding recipe for target 'install-so'
+ÐÚãûU:192: warning: ignoring old recipe for target 'install-so'
+Makefile:202: warning: overriding recipe for target 'pre-install-rb-default'
+ÐÚãûU:202: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:204: warning: overriding recipe for target '.sitearchdir.time'
+ÐÚãûU:204: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:214: warning: overriding recipe for target '.cc.o'
+ÐÚãûU:214: warning: ignoring old recipe for target '.cc.o'
+Makefile:218: warning: overriding recipe for target '.cc.S'
+ÐÚãûU:218: warning: ignoring old recipe for target '.cc.S'
+Makefile:222: warning: overriding recipe for target '.mm.o'
+ÐÚãûU:222: warning: ignoring old recipe for target '.mm.o'
+Makefile:226: warning: overriding recipe for target '.mm.S'
+ÐÚãûU:226: warning: ignoring old recipe for target '.mm.S'
+Makefile:230: warning: overriding recipe for target '.cxx.o'
+ÐÚãûU:230: warning: ignoring old recipe for target '.cxx.o'
+Makefile:234: warning: overriding recipe for target '.cxx.S'
+ÐÚãûU:234: warning: ignoring old recipe for target '.cxx.S'
+Makefile:238: warning: overriding recipe for target '.cpp.o'
+ÐÚãûU:238: warning: ignoring old recipe for target '.cpp.o'
+Makefile:242: warning: overriding recipe for target '.cpp.S'
+ÐÚãûU:242: warning: ignoring old recipe for target '.cpp.S'
+Makefile:246: warning: overriding recipe for target '.c.o'
+ÐÚãûU:246: warning: ignoring old recipe for target '.c.o'
+Makefile:250: warning: overriding recipe for target '.c.S'
+ÐÚãûU:250: warning: ignoring old recipe for target '.c.S'
+Makefile:254: warning: overriding recipe for target '.m.o'
+ÐÚãûU:254: warning: ignoring old recipe for target '.m.o'
+Makefile:258: warning: overriding recipe for target '.m.S'
+ÐÚãûU:258: warning: ignoring old recipe for target '.m.S'
+Makefile:262: warning: overriding recipe for target 'bigdecimal.so'
+ÐÚãûU:262: warning: ignoring old recipe for target 'bigdecimal.so'
+compiling bigdecimal.c
+compiling missing.c
+linking shared-object bigdecimal.so
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal
+make "DESTDIR=" install
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
+Makefile:177: warning: overriding recipe for target 'clean'
+Ðž¨ƒU:177: warning: ignoring old recipe for target 'clean'
+Makefile:184: warning: overriding recipe for target 'distclean'
+Ðž¨ƒU:184: warning: ignoring old recipe for target 'distclean'
+Makefile:192: warning: overriding recipe for target 'install-so'
+Ðž¨ƒU:192: warning: ignoring old recipe for target 'install-so'
+Makefile:202: warning: overriding recipe for target 'pre-install-rb-default'
+Ðž¨ƒU:202: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:204: warning: overriding recipe for target '.sitearchdir.time'
+Ðž¨ƒU:204: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:214: warning: overriding recipe for target '.cc.o'
+Ðž¨ƒU:214: warning: ignoring old recipe for target '.cc.o'
+Makefile:218: warning: overriding recipe for target '.cc.S'
+Ðž¨ƒU:218: warning: ignoring old recipe for target '.cc.S'
+Makefile:222: warning: overriding recipe for target '.mm.o'
+Ðž¨ƒU:222: warning: ignoring old recipe for target '.mm.o'
+Makefile:226: warning: overriding recipe for target '.mm.S'
+Ðž¨ƒU:226: warning: ignoring old recipe for target '.mm.S'
+Makefile:230: warning: overriding recipe for target '.cxx.o'
+Ðž¨ƒU:230: warning: ignoring old recipe for target '.cxx.o'
+Makefile:234: warning: overriding recipe for target '.cxx.S'
+Ðž¨ƒU:234: warning: ignoring old recipe for target '.cxx.S'
+Makefile:238: warning: overriding recipe for target '.cpp.o'
+Ðž¨ƒU:238: warning: ignoring old recipe for target '.cpp.o'
+Makefile:242: warning: overriding recipe for target '.cpp.S'
+Ðž¨ƒU:242: warning: ignoring old recipe for target '.cpp.S'
+Makefile:246: warning: overriding recipe for target '.c.o'
+Ðž¨ƒU:246: warning: ignoring old recipe for target '.c.o'
+Makefile:250: warning: overriding recipe for target '.c.S'
+Ðž¨ƒU:250: warning: ignoring old recipe for target '.c.S'
+Makefile:254: warning: overriding recipe for target '.m.o'
+Ðž¨ƒU:254: warning: ignoring old recipe for target '.m.o'
+Makefile:258: warning: overriding recipe for target '.m.S'
+Ðž¨ƒU:258: warning: ignoring old recipe for target '.m.S'
+Makefile:262: warning: overriding recipe for target 'bigdecimal.so'
+Ðž¨ƒU:262: warning: ignoring old recipe for target 'bigdecimal.so'
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20231127-10442-13ls1q8
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/bigdecimal-3.1.4/ext/bigdecimal'
