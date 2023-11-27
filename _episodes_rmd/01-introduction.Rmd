@@ -420,7 +420,7 @@ knitr::include_graphics("../fig/01-ont-duplex-q30.png")
 
 
 
-```{r, out.width="50%", fig.cap="a figure caption"}
+```{r, out.width="50%"}
 
 knitr::include_graphics("../fig/01-lc23.png")
 ```
