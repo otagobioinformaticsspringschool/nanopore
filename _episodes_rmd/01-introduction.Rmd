@@ -285,9 +285,9 @@ knitr::include_graphics("../fig/01-europe-lawsuit.png")
 
  
 
-### 1D$^2$ sequencing
+### 1D<sup>2</sup> sequencing
 
- - In 2017 ONT announced the new 1D$^2$ chemistry
+ - In 2017 ONT announced the new 1D<sup>2</sup> chemistry
  - Showed higher accuracy that 1D (and SAID it was better than 2D)
  - It didn't last long... 
 
@@ -337,6 +337,7 @@ knitr::include_graphics("../fig/01-r10.3-results.png")
 - The new "Q20+" products are now available  - moves to less than 1 error per 100 bases (a little more respectable, but still well below short-read technologies like Illumina).
 - Upgrade includes a return to the "2D" approach.
 
+<br>
 
 ```{r, out.width="50%"}
 knitr::include_graphics("../fig/01-lawsuit2020.png")
