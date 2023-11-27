@@ -34,10 +34,7 @@ source: Rmd
  - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
  - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
-<div class="figure" style="text-align: center">
-<img src="../fig/01-pod5-format.png" alt="plot of chunk unnamed-chunk-2" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-2</p>
-</div>
+<img src="../fig/01-pod5-format.png" width="50%" style="display: block; margin: auto;" />
 
 [https://pod5.nanoporetech.com/](https://pod5.nanoporetech.com/)
 
@@ -51,10 +48,7 @@ Previously this was outoput as FASTQ - a widely used format for storage of seque
 same information is now stored in (unaligned) BAM format (BAM is a binary version of SAM format, which was created for storing aligment information, along with sequence data and quality scores for reads, but it can also be used to stored unaligned data: basecalls and quality scores).
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-nanopore-workflow.png" alt="plot of chunk unnamed-chunk-3" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-3</p>
-</div>
+<img src="../fig/01-nanopore-workflow.png" width="80%" style="display: block; margin: auto auto auto 0;" />
 
  - ONT provides software (MinKNOW) for operating the MinION, and for generating the sequence data (e.g., the `dorado` basecaller).
  - Once the raw data have been converted to basecalls, we can use more familiar tools for quality assessment and analysis (e.g., FastQC).
@@ -74,18 +68,12 @@ Today we will be using `dorado` on the NeSI system to generate FASTQ data from a
 
 ### Assessing sequence quality: phred scores
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-phred.png" alt="plot of chunk unnamed-chunk-4" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-4</p>
-</div>
+<img src="../fig/01-phred.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 Ewing B, Green P. (1998): Base-calling of automated sequencer traces using phred. II. Error probabilities. Genome Res. 8(3):186-194.
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-phred2.png" alt="plot of chunk unnamed-chunk-5" width="50%" />
-<p class="caption">plot of chunk unnamed-chunk-5</p>
-</div>
+<img src="../fig/01-phred2.png" width="50%" style="display: block; margin: auto auto auto 0;" />
 
 Can use ASCII to represent quality scores by adding 33 to the phred score and converting to ASCII.
  - Quality score of 38 becomes 38+33=71: “G” 
@@ -93,10 +81,7 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 [http://en.wikipedia.org/wiki/Phred_quality_score](http://en.wikipedia.org/wiki/Phred_quality_score)
 
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-asciitable.png" alt="plot of chunk unnamed-chunk-6" width="80%" />
-<p class="caption">plot of chunk unnamed-chunk-6</p>
-</div>
+<img src="../fig/01-asciitable.png" width="80%" style="display: block; margin: auto auto auto 0;" />
 
  - The FASTQ format allows the storage of both sequence and quality information for each read.
  - This is a compact text-based format that has become the de facto standard for storing data from next generation sequencing experiments.
@@ -104,10 +89,7 @@ Can use ASCII to represent quality scores by adding 33 to the phred score and co
 
 FASTQ format:
 
-<div class="figure" style="text-align: left">
-<img src="../fig/01-fastq1.png" alt="plot of chunk unnamed-chunk-7" width="60%" />
-<p class="caption">plot of chunk unnamed-chunk-7</p>
-</div>
+<img src="../fig/01-fastq1.png" width="60%" style="display: block; margin: auto auto auto 0;" />
 
 http://en.wikipedia.org/wiki/FASTQ_format
 
