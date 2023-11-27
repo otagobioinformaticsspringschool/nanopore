@@ -16,6 +16,7 @@ source: Rmd
 ```{r, include=FALSE}
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
+knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning = FALSE, fig.alt = "", fig.cap = "")
 ```
 
 ## Software for quality assessment
