@@ -248,6 +248,7 @@ Note that is we had a `.fastq` (or `.fastq.gz`) file, then we could extract the 
 (note the slightly different syntax - file format and parameter names):
 
 ~~~
+# DON'T RUN THIS CODE - IT IS JUST AN EXAMPLE FOR PROCESSING FASTQ/FASTQ.GZ DATA
 bioawk -c fastx '{print $name,length($seq)}' ecoli-ecoli-pod5-pass-basecalls.fastq.gz | head
 ~~~
 {: .bash} 

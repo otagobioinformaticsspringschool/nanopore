@@ -74,10 +74,10 @@ mkdir bam-aligned
 
 We can use `dorado` again to align the reads to our reference genome (note, this can also be done as part of the basecalling process, but that means you're performing alignemnt prior to having done any QC checking).
 
-`dorado` uses the `minimap2` aligner (another software tool from ONT).  The syntac for performing alignemnt on basecalled data is:
+`dorado` uses the `minimap2` aligner (another software tool from ONT).  The syntax for performing alignemnt on basecalled data is (`-t 4` specifies four threads: faster):
 
 ~~~
-dorado aligner \
+dorado aligner -t 4 \
   genome/e-coli-k12-MG1655.fasta \
   bam-unaligned/ecoli-pod5-pass-basecalls.bam | \
   samtools sort -o bam-aligned/ecoli-pod5-pass-aligned-sort.bam 
@@ -129,7 +129,8 @@ mkdir bcf-files
 Generate a "pileup" file to enable variant calling (might take a little bit of time):
 
 ~~~
-bcftools mpileup -B -Q5 --max-BQ 30 -I \
+bcftools mpileup --threads 4 \
+   -B -Q5 --max-BQ 30 -I \
    -o bcf-files/ecoli-pass.bcf \
    -f genome/e-coli-k12-MG1655.fasta  \
    bam-aligned/ecoli-pod5-pass-aligned-sort.bam
