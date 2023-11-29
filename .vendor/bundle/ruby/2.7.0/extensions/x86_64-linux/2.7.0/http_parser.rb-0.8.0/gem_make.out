@@ -1,0 +1,130 @@
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231129-10210-2m6y8x.rb extconf.rb
+creating Makefile
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make "DESTDIR=" clean
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
+Makefile:176: warning: overriding recipe for target 'clean'
+pª³aœU:176: warning: ignoring old recipe for target 'clean'
+Makefile:183: warning: overriding recipe for target 'distclean'
+pª³aœU:183: warning: ignoring old recipe for target 'distclean'
+Makefile:191: warning: overriding recipe for target 'install-so'
+pª³aœU:191: warning: ignoring old recipe for target 'install-so'
+Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
+pª³aœU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
+pª³aœU:203: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:213: warning: overriding recipe for target '.cc.o'
+pª³aœU:213: warning: ignoring old recipe for target '.cc.o'
+Makefile:217: warning: overriding recipe for target '.cc.S'
+pª³aœU:217: warning: ignoring old recipe for target '.cc.S'
+Makefile:221: warning: overriding recipe for target '.mm.o'
+pª³aœU:221: warning: ignoring old recipe for target '.mm.o'
+Makefile:225: warning: overriding recipe for target '.mm.S'
+pª³aœU:225: warning: ignoring old recipe for target '.mm.S'
+Makefile:229: warning: overriding recipe for target '.cxx.o'
+pª³aœU:229: warning: ignoring old recipe for target '.cxx.o'
+Makefile:233: warning: overriding recipe for target '.cxx.S'
+pª³aœU:233: warning: ignoring old recipe for target '.cxx.S'
+Makefile:237: warning: overriding recipe for target '.cpp.o'
+pª³aœU:237: warning: ignoring old recipe for target '.cpp.o'
+Makefile:241: warning: overriding recipe for target '.cpp.S'
+pª³aœU:241: warning: ignoring old recipe for target '.cpp.S'
+Makefile:245: warning: overriding recipe for target '.c.o'
+pª³aœU:245: warning: ignoring old recipe for target '.c.o'
+Makefile:249: warning: overriding recipe for target '.c.S'
+pª³aœU:249: warning: ignoring old recipe for target '.c.S'
+Makefile:253: warning: overriding recipe for target '.m.o'
+pª³aœU:253: warning: ignoring old recipe for target '.m.o'
+Makefile:257: warning: overriding recipe for target '.m.S'
+pª³aœU:257: warning: ignoring old recipe for target '.m.S'
+Makefile:261: warning: overriding recipe for target 'ruby_http_parser.so'
+pª³aœU:261: warning: ignoring old recipe for target 'ruby_http_parser.so'
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make "DESTDIR="
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
+Makefile:176: warning: overriding recipe for target 'clean'
+pŠœ	óU:176: warning: ignoring old recipe for target 'clean'
+Makefile:183: warning: overriding recipe for target 'distclean'
+pŠœ	óU:183: warning: ignoring old recipe for target 'distclean'
+Makefile:191: warning: overriding recipe for target 'install-so'
+pŠœ	óU:191: warning: ignoring old recipe for target 'install-so'
+Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
+pŠœ	óU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
+pŠœ	óU:203: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:213: warning: overriding recipe for target '.cc.o'
+pŠœ	óU:213: warning: ignoring old recipe for target '.cc.o'
+Makefile:217: warning: overriding recipe for target '.cc.S'
+pŠœ	óU:217: warning: ignoring old recipe for target '.cc.S'
+Makefile:221: warning: overriding recipe for target '.mm.o'
+pŠœ	óU:221: warning: ignoring old recipe for target '.mm.o'
+Makefile:225: warning: overriding recipe for target '.mm.S'
+pŠœ	óU:225: warning: ignoring old recipe for target '.mm.S'
+Makefile:229: warning: overriding recipe for target '.cxx.o'
+pŠœ	óU:229: warning: ignoring old recipe for target '.cxx.o'
+Makefile:233: warning: overriding recipe for target '.cxx.S'
+pŠœ	óU:233: warning: ignoring old recipe for target '.cxx.S'
+Makefile:237: warning: overriding recipe for target '.cpp.o'
+pŠœ	óU:237: warning: ignoring old recipe for target '.cpp.o'
+Makefile:241: warning: overriding recipe for target '.cpp.S'
+pŠœ	óU:241: warning: ignoring old recipe for target '.cpp.S'
+Makefile:245: warning: overriding recipe for target '.c.o'
+pŠœ	óU:245: warning: ignoring old recipe for target '.c.o'
+Makefile:249: warning: overriding recipe for target '.c.S'
+pŠœ	óU:249: warning: ignoring old recipe for target '.c.S'
+Makefile:253: warning: overriding recipe for target '.m.o'
+pŠœ	óU:253: warning: ignoring old recipe for target '.m.o'
+Makefile:257: warning: overriding recipe for target '.m.S'
+pŠœ	óU:257: warning: ignoring old recipe for target '.m.S'
+Makefile:261: warning: overriding recipe for target 'ruby_http_parser.so'
+pŠœ	óU:261: warning: ignoring old recipe for target 'ruby_http_parser.so'
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.so
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
+
+current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
+make "DESTDIR=" install
+make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
+Makefile:176: warning: overriding recipe for target 'clean'
+p*<ÛU:176: warning: ignoring old recipe for target 'clean'
+Makefile:183: warning: overriding recipe for target 'distclean'
+p*<ÛU:183: warning: ignoring old recipe for target 'distclean'
+Makefile:191: warning: overriding recipe for target 'install-so'
+p*<ÛU:191: warning: ignoring old recipe for target 'install-so'
+Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
+p*<ÛU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
+Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
+p*<ÛU:203: warning: ignoring old recipe for target '.sitearchdir.time'
+Makefile:213: warning: overriding recipe for target '.cc.o'
+p*<ÛU:213: warning: ignoring old recipe for target '.cc.o'
+Makefile:217: warning: overriding recipe for target '.cc.S'
+p*<ÛU:217: warning: ignoring old recipe for target '.cc.S'
+Makefile:221: warning: overriding recipe for target '.mm.o'
+p*<ÛU:221: warning: ignoring old recipe for target '.mm.o'
+Makefile:225: warning: overriding recipe for target '.mm.S'
+p*<ÛU:225: warning: ignoring old recipe for target '.mm.S'
+Makefile:229: warning: overriding recipe for target '.cxx.o'
+p*<ÛU:229: warning: ignoring old recipe for target '.cxx.o'
+Makefile:233: warning: overriding recipe for target '.cxx.S'
+p*<ÛU:233: warning: ignoring old recipe for target '.cxx.S'
+Makefile:237: warning: overriding recipe for target '.cpp.o'
+p*<ÛU:237: warning: ignoring old recipe for target '.cpp.o'
+Makefile:241: warning: overriding recipe for target '.cpp.S'
+p*<ÛU:241: warning: ignoring old recipe for target '.cpp.S'
+Makefile:245: warning: overriding recipe for target '.c.o'
+p*<ÛU:245: warning: ignoring old recipe for target '.c.o'
+Makefile:249: warning: overriding recipe for target '.c.S'
+p*<ÛU:249: warning: ignoring old recipe for target '.c.S'
+Makefile:253: warning: overriding recipe for target '.m.o'
+p*<ÛU:253: warning: ignoring old recipe for target '.m.o'
+Makefile:257: warning: overriding recipe for target '.m.S'
+p*<ÛU:257: warning: ignoring old recipe for target '.m.S'
+Makefile:261: warning: overriding recipe for target 'ruby_http_parser.so'
+p*<ÛU:261: warning: ignoring old recipe for target 'ruby_http_parser.so'
+/usr/bin/install -c -m 0755 ruby_http_parser.so ./.gem.20231129-10210-2gzar9
+make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser'
