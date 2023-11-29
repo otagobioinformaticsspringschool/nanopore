@@ -328,7 +328,7 @@ dorado download --list
 We can ask dorado to download a specific model via:
 
 ~~~
-mkidr dorado-models
+mkdir dorado-models
 dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
 ~~~
 {: .bash}
@@ -407,7 +407,7 @@ To submit the script, we use the `sbatch` command, and run it from the `~/obss_2
 if you are in that directory with `pwd`.  If not: 
 
 ~~~
-`cd ~/obss_2023/nanopore/ecoli-data`.
+cd ~/obss_2023/nanopore/ecoli-data
 ~~~
 {: .bash}
 

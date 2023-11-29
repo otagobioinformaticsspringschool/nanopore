@@ -51,7 +51,7 @@ Command syntax:
 - `-p ecoli_fastmodel_`: prefix (`-p`) to be appended to start of each filename in the output folder.
 - `--ubam bam-unaligned/ecoli-pod5-pass-basecalls.bam`: the unaligned bam (`ubam`) file to process with NanoPlot.
 
-Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs:
+Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs (but it will still work):
 
 ~~~
 E::idx_find_and_load] Could not retrieve index file for 'ecoli-pod5-pass-basecalls.bam'
@@ -83,24 +83,6 @@ ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.html
 ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.png
 ecoli_fastmodel_Yield_By_Length.html
 ecoli_fastmodel_Yield_By_Length.png
-[michael.black@wbn001 ecoli-data]$ ls -1 nanoplot_fastmodel/
-ecoli_fastmodel_LengthvsQualityScatterPlot_dot.html
-ecoli_fastmodel_LengthvsQualityScatterPlot_dot.png
-ecoli_fastmodel_LengthvsQualityScatterPlot_kde.html
-ecoli_fastmodel_LengthvsQualityScatterPlot_kde.png
-ecoli_fastmodel_NanoPlot_20231126_0241.log
-ecoli_fastmodel_NanoPlot-report.html
-ecoli_fastmodel_NanoStats.txt
-ecoli_fastmodel_Non_weightedHistogramReadlength.html
-ecoli_fastmodel_Non_weightedHistogramReadlength.png
-ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.png
-ecoli_fastmodel_WeightedHistogramReadlength.html
-ecoli_fastmodel_WeightedHistogramReadlength.png
-ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.png
-ecoli_fastmodel_Yield_By_Length.html
-ecoli_fastmodel_Yield_By_Length.png
 ~~~
 {: .output}
 
@@ -113,20 +95,6 @@ To view this in your browser:
 3. The report should now be displayed in a new tab in your browser.
 
 ## FastQC
-
-To run the FastQC application on our FASTQ data, we need to create a *single* `.fastq.gz` file containing *all* our data (remember the data are currently spread across multiple `.fastq.gz` files in the `fastq_fastmodel` folder).
-
-~~~
-# Make a single .fastq.gz file:
-cat fastq_fastmodel/pass/*.gz > ecoli-pass.fastq.gz
-
-# Use zcat to decompress the data on-the-fly and stream it to wc to count the number of lines in the file
-zcat ecoli-pass.fastq.gz | wc -l 
-
-# Use bc to calculate the number of reads (remember: 4 lines per read):
-echo 56448/4 | bc
-~~~
-{: .bash}
 
 Load the FastQC module:
 
@@ -145,18 +113,14 @@ mkdir fastqc_fastmodel
 Run FastQC on our data:
 
 ~~~
-# NB: I get a java memory error if I don't use two threads
-#     FastQC allocates 250Mb per thread. Can't remember how 
-#     to specify more memory for java...
-
-fastqc -t 2 -o fastqc_fastmodel bam-unaligned/ecoli-pod5-pass-basecalls.bam
+fastqc -t 4 -o fastqc_fastmodel bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .bash}
 
 Command syntax:
 
 - `fastqc`: run the `fastqc` command
-- `-t 2`: use two cpus (see my note about memory usage above) - the `-t` is for "threads".
+- `-t 4`: use four cpus to make it go faster (the `-t` is for "threads").
 - `-o fastqc_fastmodel`: specify output folder.
 - `bam-unaligned/ecoli-pod5-pass-basecalls.bam`: data file to analyse.
 
@@ -179,7 +143,7 @@ As we did with the NanoPlot output, we can view the HTML report in the browser:
 2. Control-click (Mac) or right-click (Windows/Linux) on the "ecoli-pass_fastqc.html" file and choose "Open in New Browser Tab".
 3. The report should now be displayed in a new tab in your browser.
 
-## Bioawk
+## Bioawk (we might skip this one)
 
 FastQC and NanoPlot are great for producing pre-formatted reports that summarise read/run quality.  
 
@@ -194,6 +158,8 @@ module load bioawk
 ~~~
 {: .bash}
 
+To run `bioawk` (no inputs, so won't do anything useful):
+
 ~~~
 bioawk 
 ~~~
@@ -203,6 +169,8 @@ bioawk
 usage: bioawk [-F fs] [-v var=value] [-c fmt] [-tH] [-f progfile | 'prog'] [file ...]
 ~~~
 {: .output}
+
+View help info on "format" (`-c`):
 
 ~~~
 bioawk -c help
@@ -223,97 +191,133 @@ fastx:
 ~~~
 {: .output}
 
-Extract read name and length:
+Syntax is different depending on what type of data file you have.  Here we have an unaligned BAM file.
+
+Unfortunately bioawk doesn't work with BAM formatted data (which is a compressed vesion of SAM) - we need to convert our BAM to SAM...
+
+This can be done using SAMtools.
+
+Load SAMtools module:
 
 ~~~
-bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | head
+module load SAMtools
+~~~
+{: .bash}
+
+The `samtools view` command can be used to do the conversion. To output to the console:
+
+~~~
+samtools view bam-unaligned/ecoli-pod5-pass-basecalls.bam | more
+~~~
+{: .bash}
+
+We can redirect the outoput to create a SAM file:
+
+~~~
+samtools view bam-unaligned/ecoli-pod5-pass-basecalls.bam > ecoli-pod5-pass-basecalls.sam
+~~~
+{: .bash}
+
+For a SAM file (using the information from `bioawk --help`), if we're interested in each read's 
+name and length, we would query `qname` and `seq`.
+
+Extract read name and length using `bioawk`:
+
+~~~
+bioawk -c sam '{print $qname,length($seq)}' ecoli-pod5-pass-basecalls.sam | head
 ~~~
 {: .bash}
 
 ~~~
-04670db1-f5f2-41f6-a6bd-92f43f6d3968    4403
-0d91f59f-9fcd-4935-b062-8f05258816c5    12428
-0c6a1ddc-1098-472e-a219-6d5c336e9e1b    2996
-0e1306e1-785a-4307-8bbb-a5095f022306    4249
-101a659f-fb10-4a22-8174-3f659c6ce462    772
-106a9dc6-5e05-4c93-8ff1-569dc97426ca    6377
-0f90ec4c-6fc9-4592-8754-bf4fb800d115    2452
-11fffe54-669b-4fbf-be13-2236507aa8c9    8762
-13f7a628-acda-4f6e-927d-651cb62adf51    14868
-14a422e7-c54b-4a1a-9a64-a68ce69e4c5c    7185
+01b81395-0397-45c3-a62f-3184fafb8f4a    11129
+0202d7fc-f4f9-4242-8dac-5dcda36dcebc    4104
+028f0c75-29b5-4877-8f2f-c070a4563e70    1316
+0249f90e-2f03-4dc7-860b-5aba518ba5ec    4999
+02dba632-4671-43a0-840d-a7798f70cb79    8627
+035e2d3f-b6b8-45b7-9eb7-2973c02b6666    3282
+01207b3d-ded6-439a-97f6-2b3ccda77290    19269
+03186e67-e391-4898-9554-57f8cfb8a3d5    9462
+02944994-7ed1-47ce-ad53-59dba640995a    8858
+0491758b-dde6-4693-9304-fb3eacdb5f02    6586
 ~~~
 {: .output}
 
-Number of reads:
+Note that is we had a `.fastq` (or `.fastq.gz`) file, then we could extract the same information via 
+(note the slightly different syntax - file format and parameter names):
 
 ~~~
-bioawk -c fastx '{print $name,length($seq)}' ecoli-pass.fastq.gz | wc -l
+bioawk -c fastx '{print $name,length($seq)}' ecoli-ecoli-pod5-pass-basecalls.fastq.gz | head
+~~~
+{: .bash} 
+
+To count the number of reads, we can pipe the output to the `wc` command:
+
+~~~
+bioawk -c sam '{print $qname,length($seq)}' ecoli-pod5-pass-basecalls.sam | wc -l
 ~~~
 {: .bash}
 
 ~~~
-14112
+13220
 ~~~
 {: .output}
-
-NB: this SHOULD match what we calculated above.
 
 Total number of bases in first ten reads (I've stepped through the process to illustrate each component of the command):
 
 ~~~
-bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head 
+bioawk -c sam '{print length($seq)}' ecoli-pod5-pass-basecalls.sam | head
 ~~~
 {: .bash}
 
 ~~~
-4403
-12428
-2996
-4249
-772
-6377
-2452
-8762
-14868
-7185
+11129
+4104
+1316
+4999
+8627
+3282
+19269
+9462
+8858
+6586
 ~~~
 {: .output}
 
 ~~~
-bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ 
+bioawk -c sam '{print length($seq)}' ecoli-pod5-pass-basecalls.sam | head | paste -sd+ 
 ~~~
 {: .bash}
 
 ~~~
-4403+12428+2996+4249+772+6377+2452+8762+14868+7185
+11129+4104+1316+4999+8627+3282+19269+9462+8858+6586
 ~~~
 {: .output}
 
 ~~~
-bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | head | paste -sd+ | bc
+bioawk -c sam '{print length($seq)}' ecoli-pod5-pass-basecalls.sam | head | paste -sd+ | bc
 ~~~
 {: .bash}
 
 ~~~
-64492
+77632
 ~~~
 {: .output}
 
-So the first 10 reads comprise 64,492 bases.
+So the first 10 reads comprise 77,632 bases.
 
-Total number of bases in all reads 
+Total number of bases in all reads (remove the `head` command):
 
 ~~~
-bioawk -c fastx '{print length($seq)}' ecoli-pass.fastq.gz | paste -sd+ | bc
+bioawk -c sam '{print length($seq)}' ecoli-pod5-pass-basecalls.sam | paste -sd+ | bc
 ~~~
 {: .bash}
 
 ~~~
-144479297
+129866671
 ~~~
 {: .output}
 
-In total, the 14112 reads in our data set comprise 144,479,297 bases (144Mbp).
+In total, the 13,220 reads in our data set comprise 129,866,671 bases (130Mbp).
 
 
 Number of reads longer than 10000 bases
@@ -321,20 +325,20 @@ Number of reads longer than 10000 bases
 First create "yes/no" (1/0) information about whether each read has a length greater than 10,000 bases:
 
 ~~~
-bioawk -c fastx '{print (length($seq) > 10000)}' ecoli-pass.fastq.gz | head
+bioawk -c sam '{print (length($seq) > 10000)}' ecoli-pod5-pass-basecalls.sam | head
 ~~~
 {: .bash}
 
 ~~~
-0
 1
 0
 0
 0
 0
 0
-0
 1
+0
+0
 0
 ~~~
 {: .output}
@@ -342,14 +346,14 @@ bioawk -c fastx '{print (length($seq) > 10000)}' ecoli-pass.fastq.gz | head
 Now sum this up to find the total number of reads satisfying this condition:
 
 ~~~
-bioawk -c fastx '{print (length($seq) > 5000)}' ecoli-pass.fastq.gz | paste -sd+ | bc
+bioawk -c sam '{print (length($seq) > 10000)}' ecoli-pod5-pass-basecalls.sam | paste -sd+ | bc
 ~~~
 {: .bash}
 
 ~~~
-8700
+4527
 ~~~
 {: .output}
 
-So, of our 14,112 reads, 8700 of them are longer than 10,000 bases.
+So, of our 13,220 reads, 4527 of them are longer than 10,000 bases.
 
