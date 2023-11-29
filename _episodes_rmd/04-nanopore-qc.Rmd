@@ -53,7 +53,7 @@ Command syntax:
 - `-p ecoli_fastmodel_`: prefix (`-p`) to be appended to start of each filename in the output folder.
 - `--ubam bam-unaligned/ecoli-pod5-pass-basecalls.bam`: the unaligned bam (`ubam`) file to process with NanoPlot.
 
-Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs:
+Note that (for reasons we won't get into) NanoPlot will probably give you the following warning when it runs (but it will still work):
 
 ~~~
 E::idx_find_and_load] Could not retrieve index file for 'ecoli-pod5-pass-basecalls.bam'
@@ -68,24 +68,6 @@ ls -1 nanoplot_fastmodel/
 {: .bash}
 
 ~~~
-ecoli_fastmodel_LengthvsQualityScatterPlot_dot.html
-ecoli_fastmodel_LengthvsQualityScatterPlot_dot.png
-ecoli_fastmodel_LengthvsQualityScatterPlot_kde.html
-ecoli_fastmodel_LengthvsQualityScatterPlot_kde.png
-ecoli_fastmodel_NanoPlot_20231126_0241.log
-ecoli_fastmodel_NanoPlot-report.html
-ecoli_fastmodel_NanoStats.txt
-ecoli_fastmodel_Non_weightedHistogramReadlength.html
-ecoli_fastmodel_Non_weightedHistogramReadlength.png
-ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_Non_weightedLogTransformed_HistogramReadlength.png
-ecoli_fastmodel_WeightedHistogramReadlength.html
-ecoli_fastmodel_WeightedHistogramReadlength.png
-ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.html
-ecoli_fastmodel_WeightedLogTransformed_HistogramReadlength.png
-ecoli_fastmodel_Yield_By_Length.html
-ecoli_fastmodel_Yield_By_Length.png
-[michael.black@wbn001 ecoli-data]$ ls -1 nanoplot_fastmodel/
 ecoli_fastmodel_LengthvsQualityScatterPlot_dot.html
 ecoli_fastmodel_LengthvsQualityScatterPlot_dot.png
 ecoli_fastmodel_LengthvsQualityScatterPlot_kde.html
