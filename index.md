@@ -12,7 +12,7 @@ This lesson will introduce the Oxford Nanopore Technologies (ONT) sequencing pla
 
 > ## Prerequisites
 >
-> All pre-requisites are taken care of if you are using this lesson at the Otago Bioinformatics Spring School 2022.
+> All pre-requisites are taken care of if you are using this lesson at the Otago Bioinformatics Spring School 2023.
 >
 {: .prereq}
 
