@@ -537,7 +537,7 @@ Choose "New Launcher" from the file menu, and start an RStudio session.
 
 In R, you might need to set your working directory to be the `adaptive-sampling` directory:
 
-```{r, eval=FALSE, echo=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 setwd('~/obss_2023/nanopore/adaptive-sampling/')
 ```
 
@@ -545,7 +545,7 @@ setwd('~/obss_2023/nanopore/adaptive-sampling/')
 
 Load the `dplyr` and `ggplot2` packages:
 
-```{r}
+```{r, echo=TRUE}
 library(ggplot2)
 library(dplyr)
 ```

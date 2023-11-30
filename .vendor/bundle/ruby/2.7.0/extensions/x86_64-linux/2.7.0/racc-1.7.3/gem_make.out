@@ -1,129 +1,0 @@
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse
-/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231130-10185-1p42fvt.rb extconf.rb
-creating Makefile
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse
-make "DESTDIR=" clean
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
-Makefile:176: warning: overriding recipe for target 'clean'
-Pz„¾U:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-Pz„¾U:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-Pz„¾U:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-Pz„¾U:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.-.racc.time'
-Pz„¾U:203: warning: ignoring old recipe for target '.sitearchdir.-.racc.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-Pz„¾U:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-Pz„¾U:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-Pz„¾U:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-Pz„¾U:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-Pz„¾U:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-Pz„¾U:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-Pz„¾U:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-Pz„¾U:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-Pz„¾U:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-Pz„¾U:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-Pz„¾U:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-Pz„¾U:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'cparse.so'
-Pz„¾U:261: warning: ignoring old recipe for target 'cparse.so'
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse
-make "DESTDIR="
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
-Makefile:176: warning: overriding recipe for target 'clean'
-Pº6vkU:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-Pº6vkU:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-Pº6vkU:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-Pº6vkU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.-.racc.time'
-Pº6vkU:203: warning: ignoring old recipe for target '.sitearchdir.-.racc.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-Pº6vkU:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-Pº6vkU:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-Pº6vkU:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-Pº6vkU:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-Pº6vkU:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-Pº6vkU:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-Pº6vkU:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-Pº6vkU:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-Pº6vkU:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-Pº6vkU:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-Pº6vkU:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-Pº6vkU:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'cparse.so'
-Pº6vkU:261: warning: ignoring old recipe for target 'cparse.so'
-compiling cparse.c
-linking shared-object racc/cparse.so
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse
-make "DESTDIR=" install
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
-Makefile:176: warning: overriding recipe for target 'clean'
-Pš_ãnU:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-Pš_ãnU:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-Pš_ãnU:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-Pš_ãnU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.-.racc.time'
-Pš_ãnU:203: warning: ignoring old recipe for target '.sitearchdir.-.racc.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-Pš_ãnU:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-Pš_ãnU:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-Pš_ãnU:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-Pš_ãnU:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-Pš_ãnU:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-Pš_ãnU:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-Pš_ãnU:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-Pš_ãnU:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-Pš_ãnU:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-Pš_ãnU:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-Pš_ãnU:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-Pš_ãnU:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'cparse.so'
-Pš_ãnU:261: warning: ignoring old recipe for target 'cparse.so'
-/usr/bin/install -c -m 0755 cparse.so ./.gem.20231130-10185-pvlvmr/racc
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/racc-1.7.3/ext/racc/cparse'
