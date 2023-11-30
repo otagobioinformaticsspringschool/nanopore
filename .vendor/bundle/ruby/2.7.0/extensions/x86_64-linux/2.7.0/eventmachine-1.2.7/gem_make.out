@@ -1,130 +1,0 @@
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader
-/opt/hostedtoolcache/Ruby/2.7.8/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.8/x64/lib/ruby/2.7.0 -r ./siteconf20231130-10279-1idz4tp.rb extconf.rb
-creating Makefile
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader
-make "DESTDIR=" clean
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
-Makefile:176: warning: overriding recipe for target 'clean'
-pªlfU:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-pªlfU:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-pªlfU:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-pªlfU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-pªlfU:203: warning: ignoring old recipe for target '.sitearchdir.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-pªlfU:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-pªlfU:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-pªlfU:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-pªlfU:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-pªlfU:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-pªlfU:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-pªlfU:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-pªlfU:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-pªlfU:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-pªlfU:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-pªlfU:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-pªlfU:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'fastfilereaderext.so'
-pªlfU:261: warning: ignoring old recipe for target 'fastfilereaderext.so'
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader
-make "DESTDIR="
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
-Makefile:176: warning: overriding recipe for target 'clean'
-p|ÒU:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-p|ÒU:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-p|ÒU:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-p|ÒU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-p|ÒU:203: warning: ignoring old recipe for target '.sitearchdir.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-p|ÒU:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-p|ÒU:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-p|ÒU:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-p|ÒU:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-p|ÒU:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-p|ÒU:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-p|ÒU:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-p|ÒU:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-p|ÒU:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-p|ÒU:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-p|ÒU:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-p|ÒU:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'fastfilereaderext.so'
-p|ÒU:261: warning: ignoring old recipe for target 'fastfilereaderext.so'
-compiling mapper.cpp
-compiling rubymain.cpp
-linking shared-object fastfilereaderext.so
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
-
-current directory: /home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader
-make "DESTDIR=" install
-make[1]: Entering directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
-Makefile:176: warning: overriding recipe for target 'clean'
-pšUÛU:176: warning: ignoring old recipe for target 'clean'
-Makefile:183: warning: overriding recipe for target 'distclean'
-pšUÛU:183: warning: ignoring old recipe for target 'distclean'
-Makefile:191: warning: overriding recipe for target 'install-so'
-pšUÛU:191: warning: ignoring old recipe for target 'install-so'
-Makefile:201: warning: overriding recipe for target 'pre-install-rb-default'
-pšUÛU:201: warning: ignoring old recipe for target 'pre-install-rb-default'
-Makefile:203: warning: overriding recipe for target '.sitearchdir.time'
-pšUÛU:203: warning: ignoring old recipe for target '.sitearchdir.time'
-Makefile:213: warning: overriding recipe for target '.cc.o'
-pšUÛU:213: warning: ignoring old recipe for target '.cc.o'
-Makefile:217: warning: overriding recipe for target '.cc.S'
-pšUÛU:217: warning: ignoring old recipe for target '.cc.S'
-Makefile:221: warning: overriding recipe for target '.mm.o'
-pšUÛU:221: warning: ignoring old recipe for target '.mm.o'
-Makefile:225: warning: overriding recipe for target '.mm.S'
-pšUÛU:225: warning: ignoring old recipe for target '.mm.S'
-Makefile:229: warning: overriding recipe for target '.cxx.o'
-pšUÛU:229: warning: ignoring old recipe for target '.cxx.o'
-Makefile:233: warning: overriding recipe for target '.cxx.S'
-pšUÛU:233: warning: ignoring old recipe for target '.cxx.S'
-Makefile:237: warning: overriding recipe for target '.cpp.o'
-pšUÛU:237: warning: ignoring old recipe for target '.cpp.o'
-Makefile:241: warning: overriding recipe for target '.cpp.S'
-pšUÛU:241: warning: ignoring old recipe for target '.cpp.S'
-Makefile:245: warning: overriding recipe for target '.c.o'
-pšUÛU:245: warning: ignoring old recipe for target '.c.o'
-Makefile:249: warning: overriding recipe for target '.c.S'
-pšUÛU:249: warning: ignoring old recipe for target '.c.S'
-Makefile:253: warning: overriding recipe for target '.m.o'
-pšUÛU:253: warning: ignoring old recipe for target '.m.o'
-Makefile:257: warning: overriding recipe for target '.m.S'
-pšUÛU:257: warning: ignoring old recipe for target '.m.S'
-Makefile:261: warning: overriding recipe for target 'fastfilereaderext.so'
-pšUÛU:261: warning: ignoring old recipe for target 'fastfilereaderext.so'
-/usr/bin/install -c -m 0755 fastfilereaderext.so ./.gem.20231130-10279-17zkvb
-make[1]: Leaving directory '/home/runner/work/nanopore/nanopore/.vendor/bundle/ruby/2.7.0/gems/eventmachine-1.2.7/ext/fastfilereader'
