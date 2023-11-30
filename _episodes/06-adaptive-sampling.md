@@ -538,6 +538,11 @@ setwd('~/obss_2023/nanopore/adaptive-sampling/')
 Load the `dplyr` and `ggplot2` packages:
 
 
+~~~
+library(ggplot2)
+library(dplyr)
+~~~
+{: .language-r}
 
 Load the text file that we generated using `samtools bedcov`:
 
