@@ -98,6 +98,8 @@ the AS algorithm takes to make a decision about whether or not to reject a read.
 
 ### Adaptive sampling details
 
+**NOTE: the information below may now be out of date...**
+
 When adaptive sampling is enabled, an additional output file is created, providing information about every read that was processed.  
 It is stored in the `other_reports` folder within the run directory, and is in CSV format.  The naming convention is:
 
@@ -158,7 +160,17 @@ There are also a few additional things we can do to check how well the adaptive 
 Because there are so many short reads (i.e., < 1000 bases) it is actually quite difficult to see the effect of 
 adaptive sampling in this data set. To overcome this, we can remove these short reads from the data.
 
-To do this, we can filter the bam file:
+To do this, we can use SAMtools to filter the bam file.
+
+
+First, load the SAMtools module:
+
+~~~
+module load SAMtools
+~~~
+{: .bash}
+
+Then filter:
 
 ~~~
 samtools view -h bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort.bam | \
@@ -167,7 +179,7 @@ samtools view -h bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort.bam | \
 ~~~
 {: .bash}
 
-And then index it:
+And then index the new file:
 
 ~~~
 samtools index bam-files/yog-as-100kb-chunks-bed-SUP-pass-aligned-sort-LONG-1KB.bam
@@ -513,6 +525,15 @@ NZ_LS974444.1   1699999 1831756 2277969
 
 Choose "New Launcher" from the file menu, and start an RStudio session.
 
+In R, you might need to set your working directory to be the `adaptive-sampling` directory:
+
+
+~~~
+Error in setwd("~/obss_2023/nanopore/adaptive-sampling/"): cannot change working directory
+~~~
+{: .error}
+
+
 #### Genome-wide read-depth
 
 Load the `dplyr` and `ggplot2` packages:
@@ -591,7 +612,7 @@ ggplot(bedCov, aes(x=START, y=DEPTH)) +
 ~~~
 {: .language-r}
 
-<img src="../fig/rmd-06-unnamed-chunk-12-1.png" width="612" style="display: block; margin: auto auto auto 0;" />
+<img src="../fig/rmd-06-unnamed-chunk-13-1.png" width="612" style="display: block; margin: auto auto auto 0;" />
 
 #### Average read-depth in selected and non-selected regions
 
