@@ -1,7 +1,7 @@
 ---
 title: "Nanopore - Basecalling"
-teaching: 10
-exercises: 10
+teaching: 30
+exercises: 30
 questions:
 - "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:

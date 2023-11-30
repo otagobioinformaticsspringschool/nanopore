@@ -1,7 +1,7 @@
 ---
 title: "Nanopore - Variant Calling"
-teaching: 10
-exercises: 10
+teaching: 30
+exercises: 30
 questions:
 - "How can I use nanopore data for variant calling?"
 objectives:
