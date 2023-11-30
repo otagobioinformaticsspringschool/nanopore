@@ -3,7 +3,7 @@
 # Instead, please edit 01-introduction.md in _episodes_rmd/
 
 title: "Nanopore-based sequencing: introduction"
-teaching: 20
+teaching: 35
 exercises: 0
 questions:
 - "What is nanopore-based sequencing?"

@@ -4,7 +4,7 @@
 
 title: "Data Transfer"
 teaching: 10
-exercises: 10
+exercises: 0
 questions:
 - "How do I get data to and from NeSI?"
 objectives:
