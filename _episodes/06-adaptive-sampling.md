@@ -528,6 +528,10 @@ Choose "New Launcher" from the file menu, and start an RStudio session.
 In R, you might need to set your working directory to be the `adaptive-sampling` directory:
 
 
+~~~
+setwd('~/obss_2023/nanopore/adaptive-sampling/')
+~~~
+{: .language-r}
 
 #### Genome-wide read-depth
 
