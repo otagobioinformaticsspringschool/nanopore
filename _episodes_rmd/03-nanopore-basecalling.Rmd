@@ -152,29 +152,19 @@ cd ~/obss_2026/nanopore/bacteria-data/
 POD5 files from sequencing *E. coli* are available in the directory:
 
 ~~~
-pod5_pass
+pod5_files
 ~~~
 {: .output}
 
 ~~~
-ls -1 pod5_pass
+ls -1 pod5_files
 ~~~
 {: .bash}
 
 ~~~
-ecoli_pass_0.pod5
-ecoli_pass_10.pod5
-ecoli_pass_11.pod5
-ecoli_pass_12.pod5
-ecoli_pass_14.pod5
-ecoli_pass_15.pod5
-ecoli_pass_1.pod5
-ecoli_pass_2.pod5
-ecoli_pass_3.pod5
-ecoli_pass_4.pod5
-ecoli_pass_5.pod5
-ecoli_pass_6.pod5
-ecoli_pass_8.pod5
+ont-1.pod5
+ont-2.pod5
+ont-3.pod5
 ~~~
 {: .output}
 
@@ -197,37 +187,32 @@ module spider Dorado
 {: .bash}
 
 ~~~
-------------------------------------------------------------------------------
-  Dorado:
-------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  dorado: dorado/2.1.2-foss-2026-CUDA-13.2.1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     Description:
-      High-performance, easy-to-use, open source basecaller for Oxford
-      Nanopore reads.
-
-     Versions:
-        Dorado/0.2.1
-        Dorado/0.2.4
-        Dorado/0.3.0
-        Dorado/0.3.1
-        Dorado/0.3.2
-        Dorado/0.3.4-rc2
-        Dorado/0.3.4
-        Dorado/0.4.0
-        Dorado/0.4.1
-        Dorado/0.4.2
-        Dorado/0.4.3
-
-------------------------------------------------------------------------------
-  For detailed information about a specific "Dorado" module (including how to load the modules) use the module's full name.
-  For example:
-
-     $ module spider Dorado/0.4.3
-------------------------------------------------------------------------------
+      Dorado is a high-performance, easy-to-use, open source basecaller for Oxford Nanopore reads.
+     Other possible modules matches:
+        Dorado, slow5-dorado
+    This module can be loaded directly: module load dorado/2.1.2-foss-2026-CUDA-13.2.1
+    Help:
+      Description
+      ===========
+      Dorado is a high-performance, easy-to-use, open source basecaller for Oxford Nanopore reads.
+      
+      
+      More information
+      ================
+       - Homepage: https://github.com/nanoporetech/dorado
+      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  To find other possible module matches execute:
+      $ module -r spider '.*dorado.*'
 ~~~
 {: .output}
 
 ~~~
-module load Dorado/0.4.3
+module load dorado
 
 dorado --help
 ~~~
@@ -235,17 +220,20 @@ dorado --help
 
 ~~~
 Usage: dorado [options] subcommand
-
 Positional arguments:
 aligner
 basecaller
+correct
 demux
 download
 duplex
+polish
+smallvar
 summary
-
+trim
 Optional arguments:
 -h --help               shows help message and exits
+-l --licences           prints third party licences and exits
 -v --version            prints version information and exits
 -vv                     prints verbose version information and exits
 ~~~
@@ -255,9 +243,9 @@ Optional arguments:
 
 Information about using `dorado` on REANNZ can be found at:
 
-[https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado](https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado)
+[https://docs.nesi.org.nz/Software/Available_Applications/Dorado/](https://docs.nesi.org.nz/Software/Available_Applications/Dorado/)
 
-In order to use `dorado` to generate basecalls from POD5 of FAST5 data, we need to select a "model". 
+In order to use `dorado` to generate basecalls from POD5 or FAST5 data, we need to select a "model". 
 
 Each model has been trained to generate specific types of basecalls (i.e., unmodified DNA, RNA, modified DNA: 5mC, 5hmC, 6mA), for specific types of data (flowcell version: 9.4.1, 10.4.1; *plex: simplex, duplex; speed: 260bps, 400bps or 70bps/130bp for RNA), at differing levels of accuracy (FAST, HAC, SUP).
 
@@ -269,74 +257,167 @@ dorado download --list
 {: .bash}
 
 ~~~
-[2023-11-26 01:37:39.797] [info] > modification models
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v3.5.2_5mCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.0.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.1.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.797] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC@v2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v3.1
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC_5hmC@v1
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v3
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4_5mCG@v0.1
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4_5mCG_5hmCG@v0
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3_5mCG@v0.1
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3_5mCG_5hmCG@v0
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3_5mCG@v0.1
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3_5mCG_5hmCG@v0
-[2023-11-26 01:37:39.798] [info]  - rna004_130bps_sup@v3.0.1_m6A_DRACH@v1
-[2023-11-26 01:37:39.798] [info] > stereo models
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_4khz_stereo@v1.1
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.1
-[2023-11-26 01:37:39.798] [info] > simplex models
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_fast@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_hac@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_260bps_sup@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v3.5.2
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.0.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.1.0
-[2023-11-26 01:37:39.798] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_fast@v3.4
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_hac@v3.3
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.3
-[2023-11-26 01:37:39.798] [info]  - dna_r9.4.1_e8_sup@v3.6
-[2023-11-26 01:37:39.798] [info]  - rna002_70bps_fast@v3
-[2023-11-26 01:37:39.798] [info]  - rna002_70bps_hac@v3
-[2023-11-26 01:37:39.799] [info]  - rna004_130bps_fast@v3.0.1
-[2023-11-26 01:37:39.799] [info]  - rna004_130bps_hac@v3.0.1
-[2023-11-26 01:37:39.799] [info]  - rna004_130bps_sup@v3.0.1
+[2026-11-11 14:48:23.584] [info] Running: "download" "--list"
+[2026-11-11 14:48:23.584] [info] > variant models
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_smallvar@v1.0
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_smallvar@v1.0
+[2026-11-11 14:48:23.584] [info] > polish models
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_polish_rl
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_polish_rl_mv
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_polish_rl
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_polish_rl_mv
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_polish_rl
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_polish_rl_mv
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_polish_rl
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_polish_rl_mv
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_polish_rl
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_polish_rl_mv
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_polish_bacterial_methylation_v5.0.0
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0_polish
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_polish
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0_polish
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0_polish
+[2026-11-11 14:48:23.584] [info] > correction models
+[2026-11-11 14:48:23.584] [info]  - herro-v1.1
+[2026-11-11 14:48:23.584] [info] > modification models
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mCG_5hmCG@v3.1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_6mA@v3
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0_6mA@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0_6mA@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0_6mA@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0_6mA@v2
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_4mC_5mC@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_4mC_5mC@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_4mC_5mC@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mC_5hmC@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mC_5hmC@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mC_5hmC@v2.0.1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mC_5hmC@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_5mCG_5hmCG@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mCG_5hmCG@v2.0.1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_5mCG_5hmCG@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_6mA@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_6mA@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_6mA@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0_6mA@v3
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_4mC_5mC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_5mC_5hmC@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_5mC_5hmC@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_5mCG_5hmCG@v2
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0_6mA@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_4mC_5mC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_5mC_5hmC@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_5mCG_5hmCG@v1
+[2026-11-11 14:48:23.585] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0_6mA@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v3.0.1_m6A_DRACH@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.0.0_m6A@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.0.0_m6A@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.0.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.0.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.0.0_pseU@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.0.0_pseU@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.1.0_m5C@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.1.0_m5C@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.1.0_inosine_m6A@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.1.0_inosine_m6A@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.1.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.1.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_hac@v5.1.0_pseU@v1
+[2026-11-11 14:48:23.585] [info]  - rna004_130bps_sup@v5.1.0_pseU@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.2.0_2OmeG@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.2.0_m5C@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.2.0_m5C_2OmeC@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.2.0_inosine_m6A@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.2.0_inosine_m6A_2OmeA@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.2.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.2.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.2.0_pseU@v1
+[2026-11-11 14:48:23.584] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0_4mC_5mC@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.2.0_pseU_2OmeU@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.3.0_2OmeG@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.3.0_m5C@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.3.0_m5C_2OmeC@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.3.0_inosine_m6A@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.3.0_inosine_m6A_2OmeA@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.3.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.3.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v5.3.0_pseU@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v5.3.0_pseU_2OmeU@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_sup@v6.0.0_2OmeG@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_hac@v6.0.0_m5C@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_sup@v6.0.0_m5C_2OmeC@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_hac@v6.0.0_inosine_m6A@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_sup@v6.0.0_inosine_m6A_2OmeA@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_hac@v6.0.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_sup@v6.0.0_m6A_DRACH@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_hac@v6.0.0_pseU@v1
+[2026-11-11 14:48:23.586] [info]  - rna004_sup@v6.0.0_pseU_2OmeU@v1
+[2026-11-11 14:48:23.586] [info] > stereo models
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.1
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.2
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.3
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.4
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_5khz_stereo@v1.5
+[2026-11-11 14:48:23.586] [info] > simplex models
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_fast@v4.3.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_hac@v4.3.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_sup@v4.3.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_fast@v5.0.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.0.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.0.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_apk_sup@v5.0.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_fast@v5.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_hac@v5.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_sup@v5.2.0
+[2026-11-11 14:48:23.586] [info]  - dna_r10.4.1_e8.2_400bps_hac@v6.0.0
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_fast@v3.0.1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_hac@v3.0.1
+[2026-11-11 14:48:23.586] [info]  - rna004_130bps_sup@v3.0.1
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_fast@v5.0.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_hac@v5.0.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_sup@v5.0.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_fast@v5.1.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_hac@v5.1.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_sup@v5.1.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_fast@v5.2.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_hac@v5.2.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_sup@v5.2.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_fast@v5.3.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_hac@v5.3.0
+[2026-11-11 14:48:23.587] [info]  - rna004_130bps_sup@v5.3.0
+[2026-11-11 14:48:23.587] [info]  - rna004_fast@v6.0.0
+[2026-11-11 14:48:23.587] [info]  - rna004_hac@v6.0.0
+[2026-11-11 14:48:23.587] [info]  - rna004_sup@v6.0.0
 ~~~
 {: .output}
 
@@ -344,13 +425,13 @@ We can ask dorado to download a specific model via:
 
 ~~~
 mkdir dorado-models
-dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
+dorado download --model dna_r10.4.1_e8.2_400bps_fast@v5.2.0 --directory dorado-models/
 ~~~
 {: .bash}
 
 `dorado` can use GPUs to speed up the basecalling process.
 
-On REANNZ, we can access the A100 GPUs by submitting a job to the cluster using a slurm script.
+On REANNZ, we can access the GPUs by submitting a job to the cluster using a slurm script.
 
 The slurm script we will use can be found at:
 
@@ -379,11 +460,11 @@ more scripts/dorado_fastmodel.sl
 #SBATCH --gpus-per-node A100-1g.5gb:1
 
 module purge
-module load Dorado/0.4.3
+module load dorado
 
-dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
+dorado download --model dna_r10.4.1_e8.2_400bps_fast@v5.2.0 --directory dorado-models/
 
-dorado basecaller  --device 'cuda:all' dorado-models/dna_r9.4.1_e8_fast@v3.4 pod5_pass/ > bam-unaligned/ecoli-pod5-pass-basecalls.bam
+dorado basecaller  --device 'cuda:all' dorado-models/dna_r10.4.1_e8.2_400bps_fast@v5.2.0 pod5_files/ > bam-unaligned/ecoli-pod5-pass-basecalls.bam
 ~~~
 {: .output}
 
