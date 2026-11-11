@@ -6,7 +6,7 @@ questions:
 - "How do you perform offline (i.e., non-live) basecalling for ONT data?"
 objectives:
 - "Understand POD5/FASTQ format."
-- "Use dorado on NeSI to generate basecalled data from POD5 or FAST5 output files."   
+- "Use dorado on REANNZ HPC to generate basecalled data from POD5 or FAST5 output files."   
 keypoints:
 - "POD5/FAST5 data can be converted to BAM or FASTQ via the dorado software."
 - "dorado has different models (FAST, HAC and SUP) that provide increasing basecall accuracy (and take increasing amounts of computation)."
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning
 ### FAST5 / HDF5 data
 
  - Each pore produces a HUGE amount of data - very roughly, 1Gbp of sequence data requires 1GB of storage (e.g., as gzipped fastq), but to generate 1Gbp of sequence requires 10GB of electrical trace data, so potentially up to 500GB of files for a 72 hour MinION run.
- - (Until recently) the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
+ - Until around 2022 the electrical trace data was saved as “.fast5”, which utilises the HDF5 file format:
 
 “Hierarchical Data Format (HDF) is a set of file formats (HDF4, HDF5) designed to store and organize large amounts of data. Originally developed at the National Center for Supercomputing Applications, it is supported by The HDF Group, a non-profit corporation whose mission is to ensure continued development of HDF5 technologies and the continued accessibility of data stored in HDF.”
 
@@ -31,9 +31,9 @@ knitr::opts_chunk$set(fig.align = "left", echo = FALSE, message = FALSE, warning
  
 ### POD5 format
 
- - Over the past year (or so) ONT have introduced the POD5 format for storing data.
+ - Since (roughly) 2022 ONT have used the POD5 format for storing data.
  - This is a more efficient file format (e.g., faster read and write, smaller) than FAST5.
- - New ONT tools (e.g., the dorado basecaller) can process POD5 data.
+ - ONT tools (e.g., the dorado basecaller) can process POD5 data.
  - ONT offers tools (online and Python-based) for converting between FAST5 and POD5:
 
 <br>
@@ -52,8 +52,9 @@ knitr::include_graphics("../fig/01-pod5-format.png")
 In order to analyse the data from a sequencing run, the POD5/FAST5 "squiggle" data needs to be converted to base calls.
 The ONT software application `dorado` can be used to process POD5/FAST5 data and generate basecalls and quality information.
 
-Previously this was outoput as FASTQ - a widely used format for storage of sequence data and associated base-level quality scores.  This
-same information is now stored in (unaligned) BAM format (BAM is a binary version of SAM format, which was created for storing aligment information, along with sequence data and quality scores for reads, but it can also be used to stored unaligned data: basecalls and quality scores).
+Previously this was output as FASTQ - a widely used format for storage of sequence data and associated base-level quality scores.  This
+same information is now stored in (unaligned) BAM format (BAM is a binary version of SAM format, which was created for storing aligment 
+information, along with sequence data and quality scores for reads, but it can also be used to stored unaligned data: basecalls and quality scores).
 
 <br>
 
@@ -72,7 +73,7 @@ The current version of the `dorado` software can be downloaded from GitHub:
 
 [https://github.com/nanoporetech/dorado](https://github.com/nanoporetech/dorado)
 
-Today we will be using `dorado` on the NeSI system to generate FASTQ data from a set of POD5 files.
+Today we will be using `dorado` on the REANNZ HPC system to generate FASTQ data from a set of POD5 files.
 
 
 
@@ -137,14 +138,14 @@ BAM is a binary (compressed) version of the text-based SAM format (warning, not 
 For this part of the workshop we are working at:
 
 ~~~
-~/obss_2023/nanopore/ecoli-data/
+~/obss_2026/nanopore/bacteria-data/
 ~~~
 {: .output}
 
 Let's change to that directory now:
 
 ~~~
-cd ~/obss_2023/nanopore/ecoli-data/
+cd ~/obss_2026/nanopore/bacteria-data/
 ~~~
 {: .bash}
 
@@ -421,7 +422,7 @@ To submit the script, we use the `sbatch` command, and run it from the `~/obss_2
 if you are in that directory with `pwd`.  If not: 
 
 ~~~
-cd ~/obss_2023/nanopore/ecoli-data
+cd ~/obss_2026/nanopore/bacteria-data/
 ~~~
 {: .bash}
 
@@ -477,7 +478,7 @@ Use "Control-c" to exit (it's okay, it won't kill the job).
 The job should take a few minutes to run.
 
 Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam` will have been created 
-in the directory `~/obss_2023/nanopore/ecoli-data/bam-unaligned/`.
+in the directory `~/obss_2026/nanopore/bacteria-data/bam-unaligned/`.
 
 ~~~
 ls -lh bam-unaligned/
