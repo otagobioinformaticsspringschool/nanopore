@@ -499,7 +499,7 @@ mkdir bam-unaligned
 ~~~
 {: .bash}
 
-To submit the script, we use the `sbatch` command, and run it from the `~/obss_2023/nanopore/ecoli-data` directory. You can check 
+To submit the script, we use the `sbatch` command, and run it from the `~/obss_2026/nanopore/bacteria-data` directory. You can check 
 if you are in that directory with `pwd`.  If not: 
 
 ~~~
