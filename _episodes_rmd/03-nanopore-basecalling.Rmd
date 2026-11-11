@@ -133,7 +133,7 @@ BAM is a binary (compressed) version of the text-based SAM format (warning, not 
 [https://samtools.github.io/hts-specs/SAMv1.pdf](https://samtools.github.io/hts-specs/SAMv1.pdf)
 
 
-## E coli data set on NeSI
+## Bacterial data set on REANNZ
 
 For this part of the workshop we are working at:
 
@@ -189,7 +189,7 @@ ecoli_pass_8.pod5
     - high accuracy mode (HAC: slower) and super-high accuracy mode (SUP: even slower) can improve basecalls post-sequencing
  - Output is unaligned BAM format.
 
-On NeSI:
+On REANNZ:
 
 ~~~
 module spider Dorado
@@ -251,9 +251,9 @@ Optional arguments:
 ~~~
 {: .output}
 
-### Using `dorado` on NeSI
+### Using `dorado` on REANNZ
 
-Information about using `dorado` on NeSI can be found at:
+Information about using `dorado` on REANNZ can be found at:
 
 [https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado](https://support.nesi.org.nz/hc/en-gb/articles/6623692647951-Dorado)
 
@@ -350,7 +350,7 @@ dorado download --model dna_r9.4.1_e8_fast@v3.4 --directory dorado-models/
 
 `dorado` can use GPUs to speed up the basecalling process.
 
-On NeSI, we can access the A100 GPUs by submitting a job to the cluster using a slurm script.
+On REANNZ, we can access the A100 GPUs by submitting a job to the cluster using a slurm script.
 
 The slurm script we will use can be found at:
 
