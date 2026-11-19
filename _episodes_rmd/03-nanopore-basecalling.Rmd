@@ -138,14 +138,14 @@ BAM is a binary (compressed) version of the text-based SAM format (warning, not 
 For this part of the workshop we are working at:
 
 ~~~
-~/obss_2026/nanopore/bacteria-data/
+~/obss_2026/nanopore/bacterial-data/
 ~~~
 {: .output}
 
 Let's change to that directory now:
 
 ~~~
-cd ~/obss_2026/nanopore/bacteria-data/
+cd ~/obss_2026/nanopore/bacterial-data/
 ~~~
 {: .bash}
 
@@ -503,7 +503,7 @@ To submit the script, we use the `sbatch` command, and run it from the `~/obss_2
 if you are in that directory with `pwd`.  If not: 
 
 ~~~
-cd ~/obss_2026/nanopore/bacteria-data/
+cd ~/obss_2026/nanopore/bacterial-data/
 ~~~
 {: .bash}
 
@@ -559,7 +559,7 @@ Use "Control-c" to exit (it's okay, it won't kill the job).
 The job should take a few minutes to run.
 
 Once the job has completed successfully, the file `ecoli-pod5-pass-basecalls.bam` will have been created 
-in the directory `~/obss_2026/nanopore/bacteria-data/bam-unaligned/`.
+in the directory `~/obss_2026/nanopore/bacterial-data/bam-unaligned/`.
 
 ~~~
 ls -lh bam-unaligned/
